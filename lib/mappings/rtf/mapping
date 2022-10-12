@@ -1,0 +1,678 @@
+% qwertz to RTF replacement file
+
+% DANGER DANGER Will Robinson!  This is a barely converted version of
+% the Latex mapping file -- many of the mappings which my test documents
+% do not use have not been converted from their original LaTeX version!
+
+% Original macros, possibly with new definitions:
+
+<qwertz>	% RTF header is added by rtf2rtf
+</qwertz>	"}"
+
+<article>	% RTF header is added by rtf2rtf
+</article>	"}"
+
+<report>	% RTF header is added by rtf2rtf
+</report>	"}"
+
+<book>		% RTF header is added by rtf2rtf
+</book>		"}"
+
+
+<notes>		% RTF header is added by rtf2rtf
+</notes>
+
+<dina4> 	+
+</dina4>
+
+% Manual Pages are expected to be formatted using nroff (or groff), unless
+% they are included  as sections of other qwertz documents.
+
+<manpage>	+
+</manpage> 	+
+
+<titlepag>
+</titlepag>	+
+
+<title>		+	"<@@title>"
+</title>
+
+<subtitle>
+</subtitle>
+
+<author>	+	"<@@par>\n{\\b "
+</author>		"}" +
+
+<name>
+</name>
+
+<and>
+</and>
+
+<thanks>
+</thanks>
+
+<inst>
+</inst>
+
+<date>		+	"<@@par>\n{ "
+</date>			"}" +
+
+<newline>		"\\\\ "
+</newline>
+
+<label>		+	"<@@label>[ID]"
+</label>	+
+
+<header>	+
+</header>
+
+<lhead>
+</lhead>
+
+<rhead>
+</rhead>
+
+<comment>		"{\\i "
+</comment>		"}"
+
+% Hacked by mdw to use linuxdoc-sgml \abstract{...}
+<abstract>	+	"\\par\\par" +
+</abstract>		"\\par\\par\\pard\\plain" +
+<appendix>	+ "<@@appendix>" +
+</appendix>
+
+<toc>
+</toc>
+
+<lof>
+</lof>
+
+<lot>
+</lot>
+
+<chapt>		+	"<@@chapt>"
+</chapt>
+
+<sect>		+	"<@@sect>"
+</sect>
+
+<sect1>		+	"<@@ssect>"
+</sect1>
+
+<sect2>
+</sect2>
+
+<sect3>
+</sect3>
+
+<sect4>
+</sect4>
+
+<heading>		"<@@head>"
+</heading>		"\n"
+
+<p>
+% Must be kept in sync with the NEWPAR macro in RTF2RTF
+</p>		+ "<@@par>" +
+
+<itemize> 	+	"<@@indent+>" +
+</itemize> 	+	"<@@indent->" +
+
+<enum> 		+	"<@@indent+>" +
+</enum> 	+	"<@@indent->" +
+
+<list> 		+	"<@@indent+>" +
+</list> 	+	"<@@indent->" +
+
+<descrip> 	+	"<@@indent+>\n<@@indent+>\n<@@indent+>" +
+</descrip> 	+	"<@@indent->\n<@@indent->\n<@@indent->" +
+
+% Font numbers are defined in the RTF header emitted by rtf2rtf.
+% f3 is Symbol font - B7 is a bullet
+<item>		+	"<@@par>\n<@@indent>\n\\fi-200{\\f3\\\'B7} "
+</item>
+
+<tag>		+	"<@@par>\n<@@indent>\n\\fi-1000"
+</tag> 		+	"\\line\n"
+
+<cite>			"\\cite{[ID]"
+</cite>			"}"
+
+<ncite>			"\\cite\[[NOTE]\]{[ID]"
+</ncite>		"}"
+
+<idx>	                "\\idx{"
+</idx>                  "}"
+
+<cdx>			"\\cdx{"
+</cdx>			"}"
+
+% The idea here is to automatically insert soft hyphens after every slash in
+% the filename, so long filenames will break naturally.  The url{} macro is
+% a kluge but it works,
+<file>			"\\url{"
+</file>			"}"
+
+<footnote>		"{\\footnote"
+</footnote>		"}"
+
+<sq>			"``"
+</sq>			"''"
+
+<lq>		+	"\\begin{quotation}\n"	+
+</lq>		+	"\n\\end{quotation}\n\n"	+
+
+<em>		 	"{\\i "
+</em>			"}"
+
+<bf>			"{\\b "
+</bf>			"}"
+
+<it>			"{\\i "
+</it>			"}"
+
+<sf>			"{"
+</sf>			"}"
+
+<sl>			"{\\i "
+</sl>			"}"
+
+<rm>                    "{"
+</rm>                   "}"
+
+<tt>			"{\\f1 "
+</tt>			"}"
+
+% Added by mdw
+<cparam>		""
+</cparam>		""
+
+<ref>			"{\\uldb [NAME]}{\\v [ID]}"
+</ref>
+
+<pageref>		"{\\uldb [NAME]}{\\v [ID]}"
+</pageref>
+
+%url added by HG
+<url>			"\\url{[NAME]}"
+</url>
+
+<htmlurl>		"\\url{[NAME]}"
+</htmlurl>
+
+<x>
+</x>
+
+<mc>
+</mc>
+
+<biblio>	+	"\\bibliographystyle{[STYLE]}\n"
+			"\\bibliography{[FILES]}" +
+</biblio>
+
+% <macro>		+	"\\macro{[ID]}{\\qw[ID]}"
+% </macro>
+
+% <main>		+	"\\macro{qwmain}{\\qwmain}"
+% </main>
+
+<code>		+	"\n<@@nofill>\n{\\f1 "
+</code>			"}\n<@@endnofill>" +
+
+<verb>		+	"\n<@@nofill>\n{\\f1 "
+</verb>			"}\n<@@endnofill>" +
+
+<tscreen>	+	"\n<@@nofill>\n{\\f1 "
+</tscreen>		"}\n<@@endnofill>" +
+
+<quote> +       "\\begin{quotation}"    +
+</quote>        +       "\\end{quotation}"      +
+
+% theorems and such
+
+<def>		+	"\\begin{definition}"
+</def>		+	"\\end{definition}\n\n" 	+
+
+<prop>		+	"\\begin{proposition}"	+
+</prop>		+	"\\end{proposition}"	+
+
+<lemma>		+	"\\begin{lemma}"
+</lemma>	+	"\\end{lemma}\n\n"	+
+
+<coroll>	+	"\\begin{corollary}"
+</coroll>	+	"\\end{corollary}\n\n"	+
+
+<proof>		+	"\n{\\noindent{\\bf Proof.}  "	+
+</proof>	+	"}"
+
+<theorem>	+	"\\begin{theorem}"
+</theorem>	+	"\\end{theorem}\n\n"	+
+
+<thtag>			"\["
+</thtag>		"\]"			+
+
+% mathematics
+
+<f>
+</f>
+
+<dm>
+</dm>
+
+<eq>
+</eq>
+
+<fr>
+</fr>
+
+<nu>			"{"
+</nu>			"}"
+
+<de>			"{"
+</de>			"}"
+
+<lim>
+</lim>
+
+<op>
+</op>
+
+<ll>			"_{"
+</ll>			"}"
+
+<ul>			"^{"
+</ul>			"}"
+
+<opd>
+</opd>
+
+<pr>			"\\prod"
+</pr>
+
+<in>			"\\int"
+</in>
+
+<sum>			"\\sum"
+</sum>
+
+<root>			"\\sqrt\[[n]\]{"
+</root>			"}"
+
+<ar>		+	"\\begin{array}{[ca]}"	+
+</ar>		+	"\\end{array}"		+
+
+<arr>                   " \\\\ " +
+</arr>
+
+<arc>                   " & "
+</arc>
+
+
+<sup>			"^{"
+</sup>			"}"
+
+<inf>			"_{"
+</inf>			"}"
+
+<unl>			"\\underline{"
+</unl>			"}"
+
+<ovl>			"\\overline{"
+</ovl>			"}"
+
+<rf>			"\\mbox{\\tt "
+</rf>			"}"
+
+<v>			"\\vec{"
+</v>			"}"
+
+<fi>			"{\\cal "
+</fi>			"}"
+
+<phr>			"{\\rm "
+</phr>			"}"
+
+<tu>			"\\\\ \n"
+</tu>
+
+% figures
+
+<figure>
+</figure>
+
+<image>		+ 	"<@@par>\n\\qc\\{bmc [FILE].bmp\\}\\par\\pard" +
+</image>
+
+<inimage>	+ 	"\\{bmc [FILE].bmp\\}" +
+</inimage>
+
+<eps>
+</eps>
+
+
+<ph>		+	"\\vspace{[VSPACE]}\n\\par"	+
+</ph>
+
+<caption>	+	"<@@par>\n\\qc "
+</caption>		"<@@par>\n\\pard" +
+
+% tables
+
+<table>
+</table>
+
+% HACK HACK HACK: I can think of no way short of postprocessing the
+% translated rtf to translate the "ca" to the
+% proper number of \\cellx's nor to determine how wide they should be,
+% so I've hardcoded a max of 9 columns all of equal width.  Blech.
+
+<tabular>	+	"\\cellx2000\n"
+			"\\cellx4000\n"
+			"\\cellx6000\n"
+			"\\cellx8000\n"
+			"\\cellx10000\n"
+			"\\cellx12000\n"
+			"\\cellx14000\n"
+			"\\cellx16000\n"
+			"\\cellx18000\n"
+			"\\intbl\n" +
+</tabular>	+	"\\cell\\row\\pard\n<@@indent>" +
+
+<rowsep> 	+	"\\cell\\row\\intbl "		+
+</rowsep>
+
+<colsep>	+	"\\cell" +
+</colsep>
+
+<hline>		+	"\\hline"	+
+</hline>
+
+% slides
+
+<slides>    + "\\documentstyle\[qwertz,dina4,xlatin1,[OPTS]\]{article}\n"
+			"\\input{epsf.tex}\n"
+			"\\def\\title#1{\n"
+			"\\begin{center}\n"
+ 			"\\bf\\LARGE\n"
+			"#1\n"
+			"\\end{center}\n"
+			"\\bigskip\n"
+			"}\n"
+			"\\begin{document}"		+
+</slides>	+ 	"\\end{document}"		+
+
+<slide>
+</slide>	+	"\\newpage"		+
+
+% letters
+
+
+<letter> +  "\\documentstyle\[qwertz,dina4,xlatin1,[OPTS]\]{letter}\n"
+			"\\input{epsf.tex} \n"
+			"\\newfont{\\gmd}{gmdlogo} \n"
+			"\\font\\agb=pagk at 13truept\n"
+			"\\font\\helv=phvr at 7.4truept\n"
+			"\\parindent 0pt \n"
+			"\\parskip 5pt plus 1pt minus 2pt \n"
+			"\\addtolength{\\oddsidemargin}{-4.0mm} \n"
+			"\\addtolength{\\evensidemargin}{-4.0mm} \n"
+			"\\setlength{\\unitlength}{ 1.0mm } \n"
+
+			% initial values for optional elements in the
+			% letter head
+
+			"\\def\\semail{} \n"
+			"\\def\\remail{} \n"
+			"\\def\\sphone{} \n"
+			"\\def\\rphone{} \n"
+			"\\def\\sref{} \n"
+			"\\def\\rref{} \n"
+			"\\def\\rdate{} \n"
+			"\\def\\subj{} \n"
+
+			% switch for distinguishing between context of
+			% sender and receiver's address
+
+			"\\newif\\ifsender \n"
+			"\\newif\\ifsubj \n"
+			"\\subjfalse \n"  	% assume no subject
+
+			"\\newif\\ifcc \n"	% for cc field
+			"\\ccfalse \n"
+
+			"\\newif\\ifsaddress\n"
+			"\\saddressfalse\n"
+			"\\newif\\ifraddress\n"
+			"\\raddressfalse\n"
+
+			"\\newif\\iffax\n"
+			"\\faxfalse\n"
+
+"\\def\\letterhead{\n"
+"\\begin{picture}(178,54) \n"
+"\\put(0,50){\\agb GESELLSCHAFT F\\\"{U}R MATHEMATIK UND \n"
+"DATENVERARBEITUNG MBH } \n"
+
+"\\put(147,50){\\gmd g} \n "
+
+"\\put(0,40){\\helv GMD, Postfach 1316, Schlo{\\ss} Birlinghoven,  \n "
+"D-53757 Sankt Augustin 1} \n "
+
+"\\put(97,40){\\parbox\[b\]{10cm} \n"
+"{\\helv\\raggedright \n"
+"\\baselineskip=9pt plus 2pt \n"
+"Telefon (0 22 41) 14-0 \\\\ \n"
+"Telefax (0 22 41) 14 26 18, -28 89}}\n"
+
+"\\put(0,210){\\makebox(0,0)\[bl\]{\\today}} \n "
+
+% letter specific information
+
+% from
+
+% name and e-mail
+
+"\\put(0,44){\\sname\\ \\semail} \n"
+
+% phone
+
+"\\put(128,44){-\\sphone} \n"
+
+% To, name and address
+
+"\\put(0,30){\\parbox\[t\]{9.5cm} \n"
+"{\\rname \\\\\n"
+"\\ifraddress\\raddress\\fi}}\n"
+
+% subject
+
+"\\ifsubj{\\put(0,0){\\subj}}\\fi\n"
+
+% sref
+
+% "\\put(70,15){\\sref} \n"
+
+% rref
+
+% "\\put(0,15){\\rref} \n"
+
+% rdate
+
+% "\\put(32,15){\\rdate} \n"
+
+"\\end{picture} \n"
+"}\n"	% end of letterhead definition
+
+</letter>	+	"\\end{document}"	+
+
+<telefax> +	"\\documentstyle\[[OPTS],qwertz,dina4,xlatin1\]{article}\n"
+			"\\def\\faxlength{[LENGTH]}\n"
+
+			% initial values for optional elements in the
+			% letter head
+
+			"\\def\\semail{} \n"
+			"\\def\\remail{} \n"
+			"\\def\\sphone{} \n"
+			"\\def\\rphone{} \n"
+			"\\def\\rfax{} \n"
+			"\\def\\sfax{} \n"
+			"\\def\\subj{} \n"
+
+			% switch for distinguishing between context of
+			% sender and receiver's address
+
+			"\\newif\\ifsender \n"
+			"\\newif\\ifsubj \n"
+			"\\subjfalse \n"  	% assume no subject
+
+			"\\newif\\ifcc \n"	% for cc field
+			"\\ccfalse \n"
+
+			"\\newif\\ifsaddress\n"
+			"\\saddressfalse\n"
+			"\\newif\\ifraddress\n"
+			"\\raddressfalse\n"
+
+			"\\newif\\iffax\n"
+			"\\faxtrue\n"
+
+"\\def\\letterhead{\n"
+"\\newfont{\\gmd}{gmdlogo}\n"
+"\\setlength{\\parindent}{0pt}\n"
+
+"\\parbox\[b\]{\\textwidth}{Gesellschaft f\\\"{u}r\n"
+"Mathematik und Datenverarbeitung mbH \\\\\n"
+"Schlo{\\ss} Birlinghoven \\\\\n"
+"D-53757 St.~Augustin \\\\\n"
+"Telefax: +49--2241--142618, "
+"+49--2241--142889}\\makebox\[0pt\]\[r\]{\\gmd e}\n"
+
+"\\begin{center}\n"
+"~ \\\\\n"
+"\\LARGE TELEFAX\n"
+"\\\\ ~\n"
+"\\end{center}\n"
+
+"\\framebox\[\\textwidth\]{\\parbox{0.9\\textwidth}\%\n"
+"{\n"
+"Von/From: \\sname\n"
+"\\\\\n"
+"Datum/Date: \\today\n"
+"}}\n"
+
+"\\framebox\[\\textwidth\]{\\parbox{0.9\\textwidth}\%\n"
+"{\n"
+"An/To: \\rname\n"
+"\\\\\n"
+"Telefax: \\rfax\n"
+"\\\\\n"
+"Firma/Company: \\raddress\n"
+"}}\n"
+
+"\\framebox\[\\textwidth\]{\\parbox{0.9\\textwidth}\%\n"
+"{\n"
+"Anzahl der gesendeten Seiten (inkl. dieses Deckblatts)/ \\\\\n"
+"Number of pages (including this cover sheet): \\faxlength\n"
+"}}\n"
+
+"\\framebox\[\\textwidth\]{\\parbox{0.9\\textwidth}\%\n"
+"{\\setlength{\\parskip}{0.5\\baselineskip}\n"
+"Bemerkungen/Comments: \\\\\n"
+"\\subj\n"
+"\\vspace{60pt}}}\n"
+"}\n"		% end of letterhead definition for fax messages
+
+</telefax>	+	"\\end{document}"	+
+
+<opening>	+  	"\\begin{document}\n"
+			"\\pagestyle{empty}\n"
+			"\\letterhead\n"
+
+"\\iffax\\newpage\n"
+"\\else{\\ifsubj\\vspace{0.5cm}\\fi}\n"
+"\\fi\n\\par" 	+
+
+</opening>	+ 	"\n\n\\vspace{0.6cm}\n\\par"	+
+
+
+<from>		+	"\\sendertrue\n"
+			"\\def\\sname{"
+</from>			"}"	+
+
+
+<to>		+	"\\senderfalse\n"
+			"\\def\\rname{"
+</to>			"}"	+
+
+% first end definition of name
+
+<address>		"\\def\\address{"
+</address>		"}\n"
+			"\\ifsender{\\global\\saddresstrue\n"
+			"\\global\\def\\saddress{\\address}}\n"
+			"\\else{\\global\\raddresstrue\n"
+			"\\global\\def\\raddress{\\address}}\n"
+			"\\fi"	+
+
+<email>		+	"\\def\\email{"
+</email>		"}\n"
+			"\\ifsender\\edef\\semail{(\\email)} \n"
+			"	\\else\\edef\\remail{\\email} \n"
+			"\\fi"	+
+
+<phone>		+	"\\def\\phone{"
+</phone>		"}\n"
+			"\\ifsender\\edef\\sphone{\\phone} \n"
+			"	\\else\\edef\\rphone{\\phone} \n"
+			"\\fi"	+
+
+
+<fax>		+	"\\def\\fax{"
+</fax>			"}\n"
+			"\\ifsender\\edef\\sfax{\\fax} \n"
+			"\\else{\\global\\edef\\rfax{\\fax}\n"
+			"\\newwrite\\faxnum\n"
+			"\\immediate\\openout\\faxnum=.fax=num\n"
+			"\\immediate\\write\\faxnum{\\rfax}\n"
+			"\\immediate\\closeout\\faxnum}\n"
+			"\\fi"	 +
+
+<subject>	+	"\\subjtrue\n"
+			"\\def\\subj{"
+</subject>		"}"	+
+
+
+<sref>		+	"\\newcommand{\\sref}{"
+</sref>			"}"	+
+
+<rref>		+	"\\newcommand{\\rref}{"
+</rref>			"}"	+
+
+<rdate>		+	"\\def\\rdate}{"
+</rdate>		"}"	+
+
+<closing>	+	"\\vspace{1cm} \n\\par\n"
+			"\\parbox\[t\]{\\textwidth} "
+			"{"
+</closing>	+	"}\\vspace{2cm}\n\\par\n"
+			"\\sname \n"
+			"\\ifcc{\\vspace{0.5cm}\n\\par\n"
+			"cc:\\ \\ \\parbox\[t\]{14cm}{\n"
+			"\\cc}\\fi\n" +
+
+<cc>		+	"\\cctrue\n"
+			"\\def\\cc{"
+</cc>			"}"	+
+
+<encl>		+	"\\vspace{0.5cm}\n\\par\n"
+			"encl:\\ \\ \\parbox\[t\]{14cm}{"
+</encl>			"}\n\n"	+
+
+<ps>		+	"\\vspace{0.5cm}\n\\par"	+
+</ps>
+
+
+% end of RTF replacement file
+

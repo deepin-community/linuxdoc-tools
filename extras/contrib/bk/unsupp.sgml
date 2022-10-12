@@ -1,0 +1,192 @@
+<!DOCTYPE linuxdoc
+         PUBLIC "-//LinuxDoc//DTD LinuxDoc 97//EN" >
+<!-- ================================================= -->
+<!--
+
+    $Id: unsupp.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This an SGML file for testing QWERTZ features
+    currently unsupported, but hopefully available
+    again at a later time. Do not use the elements
+    herein, as they are not officially supported.
+
+    $Log: unsupp.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:57  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:19:08  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments: the elements herein are based on the
+    QWERTZ manual and DTD. Do not add elements here
+    that do not originate from QWERTZ, but are
+    intended as generic SGML-Tools elements, for
+    future releases (see propose.sgml).
+
+                                                       -->
+<!-- ================================================= -->
+
+<article>
+
+<!-- Document header (required) -->
+
+<title>Unsupported QWERTZ
+<author>b. kreimeier
+<date>May 1997
+
+<!-- Abstract (optional) -->
+
+<abstract>
+This lists all unsupported elements that have not been
+removed from former Linuxdoc DTD's, and have thus crept into
+Linux HOWTO's and other documents. The purpose of this file
+is to verify status against the backend, and to provide
+a reference to discuss with elements will be put back
+into SAGML-Tools unmodified.
+</abstract>
+
+
+<!-- Table of contents (optional) -->
+<toc>
+
+<!-- Begin the document -->
+<sect>HOWTO's
+<p>
+The following has been compiled by Graham Swallow:
+<verb>
+  NFS-Root.sgml.gz
+  nsgmls:<OSFD>0:233:10:E: element "IT" undefined
+
+  Mail2News.sgml.gz
+  nsgmls:<OSFD>0:259:24:E: element "NEWLINE" undefined
+
+  Remote-Boot.sgml.gz
+  nsgmls:<OSFD>0:638:18:E: element "SF" undefined
+
+  Diskless.sgml.gz
+  nsgmls:<OSFD>0:51:32:E: element "FOOTNOTE" undefined
+
+  IP-Masquerade.sgml.gz
+  nsgmls:<OSFD>0:207:1:E: general entity "nl" not defined and no default entity
+
+  Large-Disk.sgml.gz
+  nsgmls:<OSFD>0:69:22:E: element "IT" undefined
+
+  HTML-Validation.sgml.gz  (cute :)
+  nsgmls:<OSFD>0:80:25:E: element "IT" undefined
+  nsgmls:<OSFD>0:123:5:E: element "LIST" undefined
+
+  Commercial-HOWTO.sgml.gz
+  nsgmls:<OSFD>0:218:56:E: general entity "nl" not defined and no default entity
+
+  Tips-HOWTO.sgml.gz
+  nsgmls:<OSFD>0:24:30:E: element "IT" undefined
+
+  Distribution-HOWTO.sgml.gz
+  nsgmls:<OSFD>0:199:23:E: element "NEWLINE" undefined
+  nsgmls:<OSFD>0:440:77:E: general entity "nl" not defined and no default entity
+
+  INFO-SHEET.sgml.gz
+  nsgmls:<OSFD>0:355:42:E: element "IT" undefined
+
+  Serial-HOWTO.sgml.gz
+  nsgmls:<OSFD>0:47:62:E: element "NEWLINE" undefined
+
+  ISP-Hookup-HOWTO.sgml.gz
+  nsgmls:<OSFD>0:56:3:E: element "IT" undefined
+
+  Slovenian-HOWTO.sgml.gz
+  nsgmls:<OSFD>0:34:45:E: general entity "nl" not defined and no default entity
+
+  Busmouse-HOWTO.sgml.gz
+  nsgmls:<OSFD>0:15:24:E: general entity "nl" not defined and no default entity
+
+  Spanish-HOWTO.sgml.gz
+  nsgmls:<OSFD>0:188:49:E: non SGML character number 150
+
+  PPP-HOWTO.sgml.gz
+  nsgmls:<OSFD>0:167:23:E: element "NEWLINE" undefined
+
+  Bootdisk-HOWTO.sgml.gz
+  nsgmls:<OSFD>0:604:9:E: element "FOOTNOTE" undefined
+  nsgmls:<OSFD>0:1137:16:E: element "IT" undefined
+
+  Access-HOWTO.sgml.gz
+  nsgmls:<OSFD>0:320:43:E: element "SL" undefined
+
+  Kernel-HOWTO.sgml.gz
+  nsgmls:<OSFD>0:27:40:E: element "IT" undefined
+
+  Cyrillic-HOWTO.sgml.gz
+  nsgmls:<OSFD>0:96:3:E: element "IT" undefined
+
+  SCSI-Programming-HOWTO.sgml.gz
+  nsgmls:<OSFD>0:1015:9:E: element "APPENDIX" undefined
+
+  UPS-HOWTO.sgml.gz
+  nsgmls:<OSFD>0:534:6:E: element "TABLE" undefined
+  nsgmls:<OSFD>0:535:12:E: there is no attribute "CA"
+  nsgmls:<OSFD>0:535:29:E: element "TABULAR" undefined
+  nsgmls:<OSFD>0:538:6:E: element "HLINE" undefined
+  nsgmls:<OSFD>0:565:8:E: element "CAPTION" undefined
+
+  Term-HOWTO.sgml.gz
+  nsgmls:<OSFD>0:44:50:E: element "IT" undefined
+  nsgmls:<OSFD>0:1215:17:E: element "F" undefined
+
+  Keyboard-HOWTO.sgml.gz
+  nsgmls:<OSFD>0:862:27:E: element "IT" undefined
+
+  Hardware-HOWTO.sgml.gz
+  nsgmls:<OSFD>0:46:23:E: element "NEWLINE" undefined
+  nsgmls:<OSFD>0:1065:12:E: there is no attribute "CA"
+  nsgmls:<OSFD>0:1065:19:E: element "TABULAR" undefined
+</verb>
+
+<sect>Recommended Replacements
+<p>
+<descrip>
+<tag/FOOTNOTE/  use brackets. Backend support status?
+<tag/APPENDIX/  use SECT. Backend support status?
+<tag/TABLE, CA, TABULAR, HLINE, CAPTION/
+                table support subject to change? Backend support?
+                Workaround?
+
+<tag/LIST/      purpose? Backend support status. ITEMIZE?
+
+<tag/F/         purpose? Backend support status? Workaround?
+
+<tag/NEWLINE/   support?
+<tag/nl/        depends on NEWLINE, I guess
+
+<tag/IT/        would be EM, but do we want to support EM?
+<tag/SF/        see IT
+<tag/SL/        see IT
+
+<tag/?/         non SGML character number 150. More of these?
+</descrip>
+
+<sect>Tests
+<p>
+<sect1>IT, SL, SF
+
+<sect1>List
+<sect1>Table
+<sect1>Footnote
+<sect1>Appendix
+
+<!-- End document -->
+</article>
+<!-- ================================================= -->
+<!-- end of unsupp.sgml                                -->
+<!--
+     Local Variables:
+     mode: sgml
+     End:                                              -->
+<!-- ================================================= -->

@@ -1,0 +1,13 @@
+[cir   ]	\(ci
+[vellip]	:
+[hellip]	\&.\&.\&.
+[hairsp]	\|
+[mdash ]	\(em
+[ndash ]	\(en
+[bull  ]	\(bu
+[emsp  ]	\ \ 
+[ensp  ]	\ 
+[thinsp]	\|
+[tex   ]	TeX
+[latex ]	LaTeX
+[latexe]	LaTeX2e

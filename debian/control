@@ -1,0 +1,98 @@
+Source: linuxdoc-tools
+Maintainer: Debian XML/SGML Group <debian-xml-sgml-pkgs@lists.alioth.debian.org>
+Uploaders: Agustin Martin Domingo <agmartin@debian.org>
+Section: text
+Priority: optional
+Build-Depends: debhelper-compat (= 13),
+               dpkg-dev (>= 1.16.1.1),
+               perl,
+               flex,
+               libfl-dev,
+               gawk | mawk,
+               opensp,
+               texinfo,
+               groff,
+               texlive-binaries,
+               texlive-latex-recommended,
+               texlive-fonts-recommended
+Standards-Version: 4.5.0
+Vcs-Browser: https://salsa.debian.org/xml-sgml-team/linuxdoc-tools
+Vcs-Git: https://salsa.debian.org/xml-sgml-team/linuxdoc-tools.git
+Homepage: https://gitlab.com/agmartin/linuxdoc-tools
+
+Package: linuxdoc-tools
+Architecture: any
+Multi-Arch: foreign
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         ${perl:Depends},
+         opensp,
+         sgml-data,
+         gawk | mawk
+Suggests: texinfo,
+          info-browser,
+          groff,
+          texlive-latex-recommended,
+          linuxdoc-tools-text,
+          linuxdoc-tools-latex,
+          linuxdoc-tools-info
+Breaks: linuxdoc-sgml,
+        sgml-tools,
+        linuxdoc-tools-text (<< 0.9.20),
+        linuxdoc-tools-info (<< 0.9.20),
+        linuxdoc-tools-latex (<< 0.9.20)
+Provides: linuxdoc-sgml
+Replaces: linuxdoc-sgml,
+          sgml-tools
+Description: convert LinuxDoc SGML source into other formats
+ LinuxDoc sgml is a highly configurable text format for writing
+ documentation, something like html only it's simpler and can be
+ converted to various other formats, including html for websites.
+ You write a LinuxDoc document using any text editor such as vim.
+ Then you use linuxdoc-tools to convert it to html, rtf, plain-text
+ (install linuxdoc-tools-text), info (install linuxdoc-tools-info),
+ LaTeX, dvi or postscript (install linuxdoc-tools-latex). The
+ sgmltools-lite package can convert LinuxDoc to DocBook format.
+ .
+ LinuxDoc can automatically create a table of contents.  It's easier to
+ write and read than DocBook since it allows one to omit most closing
+ tags while paragraphs are separated by just blank lines.
+
+Package: linuxdoc-tools-text
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends},
+         linuxdoc-tools,
+         groff
+Breaks: linuxdoc-tools (<< 0.9.20)
+Description: Text output facility of LinuxDoc-Tools
+ LinuxDoc-Tools is a SGML converter for the LinuxDoc DTD only.
+ This is a dependency package to provide the required dependencies
+ for text conversion facility of LinuxDoc-Tools.
+ See the description of linuxdoc-tools package for more detail.
+
+Package: linuxdoc-tools-latex
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends},
+         linuxdoc-tools,
+         texlive-latex-recommended
+Breaks: linuxdoc-tools (<< 0.9.20)
+Description: LaTeX/PS/PDF output facility of LinuxDoc-Tools
+ LinuxDoc-Tools is a SGML converter for the LinuxDoc DTD only.
+ This is a dependency package to provide the required dependencies
+ for LaTeX/PS/PDF conversion facility of LinuxDoc-Tools.
+ See the description of linuxdoc-tools package for more detail.
+
+Package: linuxdoc-tools-info
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends},
+         linuxdoc-tools,
+         texinfo
+Breaks: linuxdoc-tools (<< 0.9.20)
+Description: Info output facility of LinuxDoc-Tools
+ LinuxDoc-Tools is a SGML converter for the LinuxDoc DTD only.
+ This is a dependency package to provide the required dependencies
+ for info conversion facility of LinuxDoc-Tools.
+ See the description of linuxdoc-tools package for more detail.

@@ -1,0 +1,56 @@
+<!doctype linuxdoctr system>
+
+<!--
+  Here's an SGML example file for the tr variant, containing only
+  what is different in it. If you look for a real example file, look at file
+  example.sgml in this directory.
+-->
+
+<article>
+
+<!-- Title information -->
+
+<title>Quick Example for Linuxdoctr DTD SGML source</title>
+<author>
+<name>Joe Author First <tt/&lt;joe@author@first/&gt;</name>
+<and>
+<name>Joe Author Second <tt/&lt;joe@author@second/&gt;</name>
+</author>
+<date>2009/03/18</date>
+<trans>
+Translated by Joe Test Translator <tt/&lt;joe@test@translator/&gt;
+</trans>
+<tdate>
+2009/04/10
+</tdate>
+<abstract>
+This document is a minimal example of the differences introduced for the
+Linuxdoctr DTD SGML. This contains only what is different in it. If you look for
+a real example file, look at file example.sgml in this directory.
+</abstract>
+
+<!-- Table of contents -->
+<toc>
+
+<!-- Begin the document -->
+
+<sect>
+ <heading>Introduction</heading>
+
+ <p>
+ This document is a minimal example of the differences introduced for the
+ Linuxdoctr DTD SGML. This contains only what is different in it. If you look for
+ a real example file, look at file example.sgml in this directory.
+
+ <sect1>Tags introduced by the Linuxdoctr DTD
+ <p>
+ <descrip>
+ <tag/trans/ Translator name
+ <tag/tdate/ Translation date
+ </descrip>
+ Both must be placed after <tt/&lt;author/&gt; and <tt/&lt;date/&gt; tags
+ </sect1>
+
+</sect>
+
+</article>

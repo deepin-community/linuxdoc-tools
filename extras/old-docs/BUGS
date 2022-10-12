@@ -1,0 +1,34 @@
+$Id: BUGS,v 1.1.1.1 2001/05/24 15:57:41 sano Exp $
+
+Encoding:
+- Bug (somebody reported it)
+* Worked on (somebody took ownership)
+! Testing (it's in the source tree, test it!)
++ Completed (testing went fine)
+? Long-standing (is this still a bug ?)
+
+============================================
+? fix -man so it'll work for latin1, too
+
+- <tscreen><verb> doesn't keep indentation with sgml2txt (reported by
+  Martin Michlmayr <tbm@cyrius.com> on 09-Feb-1997).
+
+  (CdG - tscreen and verb are being replaced in sgmltool.dtd)
+
+- (UW) sgml2txt produces a lot of
+  "general entity .. not defined and no default entity"
+  "warning: numeric expression expected (got `T')",
+  "warning: `[' not defined", "escape character ignored before `T'",
+  "warning: indent cannot be negative", "can't find special character `AN'",
+  "normal or special character expected (got a space)",
+  "warning: `..' not defined"
+  Despite of that errors the exit code is 0 (zero).
+
+  (ESR - I can't reproduce this with 0.99.19 on any of my four HOWTOs.
+  Perhaps it's gone away?)
+
+- (UW) sgml2info produces several error messages:
+	Making info file `manual.info' from `/tmp/sgmltmp.manual3318.4'.
+	/tmp/sgmltmp.manual3318.4:11: Misplaced `{'.
+  With the source line "Why Not Just Use {\LaTeX}?" I guess the braces are not
+  handled properly.

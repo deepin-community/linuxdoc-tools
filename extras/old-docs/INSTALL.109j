@@ -1,0 +1,17 @@
+INSTALL NOTE for 106j
+
+Please extract original and patch by root.
+
+ # tar zxvf sgml-tools-1.0.9.tar.gz
+
+and apply a patch.
+
+ # patch -p1 < sgml-tools-1.0.9j.diff
+
+and configure and make same as original, like as below.
+
+ # ./configure
+ # make
+ # make install
+
+Tetsu ONO <ono@jf.gee.kyoto-u.ac.jp>  Tue Nov 17 16:46:57 JST 1998

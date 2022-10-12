@@ -1,0 +1,135 @@
+<!-- ================================================= -->
+<!--
+
+    $Id: refs.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This is refs.sgml, distributed with SGML-Tools.
+    It checks for handling of cross references and
+    hypertext links.
+
+    $Log: refs.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:57  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:18:59  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments: none.
+                                                       -->
+<!-- ================================================= -->
+<!DOCTYPE sgmltool
+         PUBLIC "-//SGML-Tools//DTD SGML-Tools v0.9//EN"
+ [
+   <!ENTITY   AuthMail       "bk@gamers.org" >
+   <!ENTITY   AuthHome       "http://www.gamers.org/bk/" >
+ ]>
+<!-- ================================================= -->
+
+<article>
+
+<title>TEST: Cross-References and Hypertext Links
+<author>b. kreimeier
+<date>May 1997
+
+<abstract>
+This document should demonstrate the use within-text
+cross references to anchors explicitely or implicitely
+created. In addition, Hypertext links are introduced.
+</abstract>
+
+<toc>
+
+<sect>Cross References
+<p>
+We distinguish
+<a id="xref">cross-references</a>
+and the <xref idref="href">hypertext links</xref>
+discussed <xref idref="href">below</xref>.
+Cross references are introduced using the
+<c><xref></c> element, which marks a small line
+of text to be rendered with a reference - either
+a hidden one (a link embedded within the HTML text)
+or an explicit one (in Postscript or ASCII output,
+which is not interactive). The unique property of
+cross-references is that they will always be valid
+and available within a consistent text, something
+that could be verified with appropriate tools. The
+validating parser does not check for duplicate
+or missing anchors.
+<p>
+The former <c><ref><c> and <c><label></c> elements are
+deprecated. The optional <k>name</k> attribute
+used to circumvent <c>groff</c> based ASCII backend
+deficiencies has been discarded. The
+QWERTZ <c><pageref></c> attribute has been discarded
+as well - the lvel of detail used in the rendering
+of references will be handled by the backend.
+
+<sect>Anchors
+<p>
+Anchors are introdcued using the <c><a></c>
+element. Again, a small piece of text is marked as
+the actual anchor. Anchors should be added automatically
+to all elements that require an <k>ID</k> attribute
+anyway.
+Theoretically speaking, any element identified by markup
+should require and get an <k>id</k> attribute: figures,
+tables, quotations and code example paragraphs, sections.
+In addition, you could mark certain words or
+sentences as anchor explicitely.
+
+<sect>Hypertext Links
+<p>
+Now for <a id="href">hypertext links</a> which
+are quite different from <xref idref="xref"> ordinary
+cross references</xref>, we use the <c><href></c>
+element. It has exactly the same structure as the
+<c><xref></c> element, but is rendered differently.
+Sophisticated backends might compile bookmarks and
+reference them in way similar to citations and
+bibliographies.
+<p>
+SGML does treat hypertext links differently. Technically
+speaking, the attribute type should not be <k>CDATA</k>, but
+<k>ID</k> and <k>IDREF</k> for anchors and links,
+respectively. This seems to omit
+all upper/lower case differences, and does not allow
+for using entities, though, so we stick to <k>CDATA</k>.
+<p>
+It is recommended to define URL's and e-mail addresses
+as entities. That way, relocation to different sites
+as well as updating external links is a lot easier.
+In addition, duplicates of the same information
+are avoided. For example, a hyperlink to
+<href idref="&AuthHome;" >my home site</href>
+would be rendered verbose in LaTeX.
+<href idref="&AuthHome;" >&AuthHome;</href>, written in SGML
+by referring twice to the same entity. The same way
+verbose e-mail anchors are handled: mail to
+<href idref="mailto:&AuthMail;" >Bernd Kreimeier &lt;&AuthMail;&gt;</href>.
+It is the writer's job to decide whether he just wants a
+link or a verbose bookmark including link within the text.
+It might be worth introducing specific element types like
+<c><mailref></c>, but this has not been decided yet.
+<p>
+The formerly used <c><url></c> and <c><htmlurl></c>
+elements with optional <k>name</k> attribute are
+deprecated and have been replaced.
+
+
+
+</article>
+
+<!-- ================================================= -->
+<!-- end of refs.sgml                                  -->
+<!--
+     Local Variables:
+     mode: sgml
+     End:                                              -->
+<!-- ================================================= -->

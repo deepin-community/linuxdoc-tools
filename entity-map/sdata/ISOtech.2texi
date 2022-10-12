@@ -1,0 +1,62 @@
+[aleph ]	N
+[and   ]	^
+[ang90 ]	@{ang90@}
+[angsph]	@{angsph@}
+[ap    ]	@{ap@}
+[becaus]	@{becaus@}
+[bottom]	@{bottom@}
+[cap   ]	@{cap@}
+[cong  ]	@{cong@}
+[conint]	@{conint@}
+[cup   ]	U
+[equiv ]	@{equiv@}
+[exist ]	@{exist@}
+[forall]	@{forall@}
+[fnof  ]	@{fnof@}
+[ge    ]	>=
+[iff   ]	iff.
+[infin ]	@{infin@}
+[int   ]	@{int@}
+[isin  ]	@{isin@}
+[lang  ]	<
+[lArr  ]	<=
+[le    ]	<=
+[minus ]	-
+[mnplus]	-/+
+[nabla ]	@{nabla@}
+[ne    ]	!=
+[ni    ]	@{ni@}
+[or    ]	V
+[par   ]	||
+[part  ]	@{part@}
+[permil]	@{permil@}
+[perp  ]	@{perp@}
+[prime ]	'
+[Prime ]	"
+[prop  ]	@{prop@}
+[radic ]	@{radic@}
+[rang  ]	>
+[rArr  ]	=>
+[sim   ]	C
+[sime  ]	C=
+[square]	@{square@}
+[sub   ]	@{sub@}
+[sube  ]	@{sube@}
+[sup   ]	@{sup@}
+[supe  ]	@{supe@}
+[there4]	@{there4@}
+[Verbar]	||
+[angst ]	A
+[bernou]	B
+[compfn]	o
+[Dot   ]	@{Dot@}
+[DotDot]	@{DotDot@}
+[hamilt]	H
+[lagran]	L
+[lowast]	*
+[notin ]	@{notin@}
+[order ]	@{order@}
+[phmmat]	M
+[tdot  ]	@{tdot@}
+[tprime]	@{tprime@}
+[wedgeq]	@{wedgeq@}

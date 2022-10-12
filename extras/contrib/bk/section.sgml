@@ -1,0 +1,74 @@
+<!DOCTYPE linuxdoc
+         PUBLIC "-//LinuxDoc//DTD LinuxDoc 97//EN" >
+<!-- ================================================= -->
+<!--
+
+    $Id: section.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This is section.sgml, distributed with SGML-Tools.
+    It serves as test file for sectioning text.
+
+    $Log: section.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:57  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:19:01  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments: none.
+
+                                                       -->
+<!-- ================================================= -->
+
+
+<article>
+
+<title>TEST: Sectioning
+<author>b. kreimeier
+
+<toc>
+
+<sect>Top Level Section
+<p>
+This is top level section in articles. Books have an
+addition layer, chapter, which is currently not
+supported.
+
+<sect1>Level 1 Section
+<sect2>Level 2 Section
+<sect3>Level 3 Section
+<p>
+You will note Level 3 sections do not make it into the
+Table Of Contents.
+
+<sect4>Level 4 Section
+<p>
+You will note that this cannot be separated from
+Level 3 in LaTeX. Dunno about HTML.
+
+<sect2>Level 2 Section
+<sect3>Level 3 Section
+<sect3>Level 3 Section
+<sect>Top Level Section
+<sect1>Level 1 Section
+<sect1>Level 1 Section
+<sect2>Level 2 Section
+<sect2>Level 2 Section
+<sect3>Level 3 Section
+
+
+</article>
+
+<!-- ================================================= -->
+<!-- end of section.sgml                                -->
+<!--
+     Local Variables:
+     mode: sgml
+     End:                                              -->
+<!-- ================================================= -->

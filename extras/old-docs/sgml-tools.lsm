@@ -1,0 +1,16 @@
+Title:		SGML-Tools
+Version:	1.0.3
+Entered-date:	23NOV97
+Description:	SGML documentation tools. Create plain text (with groff),
+                DVI or PostScript (with LaTeX), HTML, GNU info, LyX,
+	        and RTF, output from a single SGML source file.
+Keywords:       doc,HOWTO,text,formatting,SGML,LaTeX,groff,HTML,info,LyX,RTF
+Author: 	Matt Welsh <mdw@sunsite.unc.edu>
+Maintained-by:	Cees de Groot <cg@pobox.com>
+Primary-site:	sunsite.unc.edu /pub/Linux/utils/text
+                1.0M sgml-tools-1.0.0.tar.gz
+		10k  sgml-tools-1.0.0.lsm
+Platforms:	Perl5.004 or later; LaTeX and/or Groff for their respective
+                backends.
+Copying-policy:	Public Domain.
+End

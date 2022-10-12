@@ -1,0 +1,17 @@
+%
+% This is math.etex, a demostration of the
+%  way SGML-Tools handle mathematical expressions.
+% We rely on LaTeX as the most sophisticated
+%  formula processor available, decline on
+%  structured markup for formulas, and propose
+%  automatic conversion of Encapsulated LaTeX
+%  to GIF for other backends.
+% ASCII art replacements will have to be created
+%  manually, as long as nobody writes a translator
+%  from LaTeX math expressions to ASCII.
+% Comment: be careful with comments for
+%  inlined formulas, leave no blank lines
+%
+S(z) = -\cos( \frac{\pi}{2} z^2 ) \sum_{n=0}^\infty
+       \frac{ (-1)^n \pi^{2n+1} }{ 1 \cdot 3 \cdots (4n+3) } z^{4n+3}
+% Beware of trailing blank lines for inlines.

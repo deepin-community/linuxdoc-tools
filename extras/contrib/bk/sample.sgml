@@ -1,0 +1,61 @@
+<!DOCTYPE linuxdoc
+         PUBLIC "-//LinuxDoc//DTD LinuxDoc 97//EN" >
+<!-- ================================================= -->
+<!--
+
+    $Id: sample.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This is sample.sgml, distributed with SGML-Tools.
+    You could use this with emacs/autoinsert, or as a
+    suggestion on how to structure SGML files for Emacs,
+    CVS and SGML-Tools.
+
+    $Log: sample.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:57  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:19:00  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments: CVS markers above. Emacs mode is selected
+    with statement at the bottom, as  -*- sgml -*- with
+    SGML comments in the first line of a document will
+    not work.
+
+-->
+<!-- ================================================= -->
+
+
+<article>
+
+<!-- Document header (required) -->
+
+<title>
+<author>N.N.
+<date>
+
+<!-- Abstract (optional) -->
+
+<abstract>
+</abstract>
+
+<!-- Table of contents (optional) -->
+<toc>
+
+<!-- Begin the document -->
+
+<!-- End document -->
+</article>
+<!-- ================================================= -->
+<!-- end of sample.sgml                                -->
+<!--
+     Local Variables:
+     mode: sgml
+     End:                                              -->
+<!-- ================================================= -->

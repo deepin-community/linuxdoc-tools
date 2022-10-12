@@ -1,0 +1,48 @@
+.\" Process this file with
+.\" groff -man -Tascii sgml2info.1
+.\"
+.TH SGML2INFO 1 "16 May 2000"
+.SH NAME
+sgml2info \- create GNU info output from a LinuxDoc DTD SGML source file
+.SH SYNOPSIS
+.B sgml2info [generic-option...]
+.IR file [.sgml]
+.SH DESCRIPTION
+.B sgml2info
+is an old and obsoleted form of the info converter command
+of LinuxDoc-Tools.  It is recommended to switch the new form
+.B linuxdoc -B info
+now.
+This converts a LinuxDoc DTD SGML source file to GNU info format.
+Output will appear in
+.I file.info
+where
+.I file
+is the name of the SGML source file.
+.LP
+The attribute/value pair "output=info" is set for conditionals.
+.SH OPTIONS
+.B sgml2info
+accepts all the generic options described in
+.BR linuxdoc (1).
+.IP file
+specifies the SGML source file, named either
+.I file
+or
+.I file.sgml
+.SH FILES
+Many files and executables in $LINUXDOCLIB are used.
+.SH AUTHOR
+Originally written by
+Christian Schwarz <schwarz@monet.m.isar.de>,
+Greg Hankins <greg.hankins@cc.gatech.edu>,
+Cees de Groot <cg@cdegroot.com>.
+Currently maintained by Taketoshi Sano <sano@debian.org> for Linuxdoc-Tools.
+.SH "SEE ALSO"
+.BR linuxdoc (1),
+.BR sgml2html (1),
+.BR sgml2latex (1),
+.BR sgml2lyx (1),
+.BR sgml2rtf (1),
+.BR sgml2txt (1),
+.BR sgmlcheck (1).

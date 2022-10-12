@@ -1,0 +1,176 @@
+#!/usr/bin/perl
+
+# --header-------------------------------------------------
+#
+# sgml2index - (c) 1996 by Fabrizio Polacco <fpolacco@megabaud.fi>
+#
+# This program is under GPL License and is intended to be distributed
+# with the package linuxdoc-sgml.
+#
+# --history------------------------------------------------
+# ver.1.2 - 3 May 1996 - Fabrizio Polacco
+#	+ Now works also with perl 4.036
+#	+ Added -D flag for the link dir
+#	+ fixed a bug to exit after printing of usage.
+#
+# ver.1.1 - 24 April 1996 - Fabrizio Polacco
+#	+ fixed a bug on link to filename
+#	  (empty if dir-name not "sgml")
+#
+# ver.1.0 - 21 April 1996 - Fabrizio Polacco
+#	+ built from scratch using perl 5.002
+#
+# --to-do--------------------------------------------------
+# + eliminate all the errors (in English) in comments :-)
+# + add a man page (maybe in "pod" format?)
+# + check if each sgml starts declaring
+#   <!doctype linuxdoc system> (ignore-case)
+# + add a flag to use only sgml files with
+#   <article>|<book>|report>|<manpage> tag declarator.
+# + check the output in formats other than html (ps, dvi ...)
+#   changing the link from <htmlurl to <url will be used from -info- ?
+#
+# --description--------------------------------------------
+# This utility reads every .sgml file that is in the current directory;
+# (or the directory supplyed with the -d flag)
+# for each file it memorizes the contents of the element titlepag:
+#	<title> +<subtitle>,
+#	<author> +<name> -<thanks> +<inst>,
+#	<date>,
+#	<abstract>,
+# until it encounters one of these tags:
+#	<header>,
+#	<toc>,
+#	<lof>,
+#	<lot>,
+#	<p>,
+#	<chapt>,
+#	<sect>.
+#
+# then it prints the information in the following default format:
+#	<!-- built %sysdate% -->
+#	<itemize>	|	<descrip>	( if -2 )
+#	..... (for each sgml file)
+#	<item>		|	<tag>		( if -2 )
+#		<htmlurl url="%link-dir%%filename%.html"
+#			name="%title%">
+#	<newline>	|	</tag>		( if -2 )
+#		%author%
+#	<newline>
+#		%date%
+#	<newline>
+#		%abstract%
+#	.....
+#	</itemize>	|	</descrip>	( if -2 )
+# ---------------------------------------------------------
+
+require 'getopts.pl';
+&Getopts('D:d:2h') || &usage(0);	# accept some flag
+$opt_d = '.' if ! defined $opt_d;	# default current dir (.)
+			# adds slash at the end of URL, if needed
+$opt_D .= "/" if ( defined $opt_D && substr( $opt_D, -1, 1) ne "/");
+&usage(0) if $opt_h;
+
+sub usage
+{
+	print "usage: $0 [-h] [-2] [-d <sgml-dir>] [-D <link-dir>]\n";
+	print <<EOF;
+Builds an sgml list of <titlepag> infos from linuxdoc-sgml files.
+
+Options:
+
+-h		prints this message
+-2		use alternate format
+-d sgml-dir	search sgml files in <dir> instead than . (current dir)
+-D link-dir	path-dir or full URL for the html files pointed to
+
+EOF
+	exit(0);
+}
+
+($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isd) = localtime(time);
+
+$first_time = 1;
+foreach( `ls $opt_d/*.sgml` )
+{
+	m@/([-0-9A-Za-z_.]*).sgml@;
+	$filename = $1;		# filename without path and extension
+	$SGML = $_;		# full pathname
+
+	undef $tag;
+	undef $remark;
+	undef %data;
+
+	open( SGML) || die "Cannot open file $SGML.\n";	# maybe should only warn?
+	SCAN: while(<SGML>)
+	{
+		# adds a space around every tag (for splitting purposes)
+		$_ =~ s/</ </;
+		$_ =~ s/>/> /;
+		$_ =~ s/--[ 	]*>/-->/;	# it seems that comment could end with --> or -- >
+		@_ = split;
+		foreach(@_)
+		{
+			 $remark = 1		 if ( m,^<!--, ); # starts comment
+			($remark = 0)	&&  next if ( m,-->$, );  # ends comment
+			next if $remark;
+
+			# what if sgml accept uppercase ?
+			($tag = "TITL")	&& next if ( m,<title>, );	# title starts after
+					   next if ( m,<subtitle>, );	# accept in title
+					   next if ( m,</subtitle>, );	# accept in title
+			(undef $tag)	&& next if ( m,</title>, );	# title is finished
+			($tag = "AUTH")	&& next if ( m,<author>, );	# author starts after
+					   next if ( m,<name>, );	# accept in author
+					   next if ( m,</name>, );	# accept in author
+			(undef $tag)	&& next if ( m,<thanks>, );	# discard in author
+			($tag = "AUTH")	&& next if ( m,</thanks>, );	# discard in author
+					   next if ( m,<inst>, );	# accept in author
+					   next if ( m,</inst>, );	# accept in author
+			(undef $tag)	&& next if ( m,</author>, );	# author is finished
+			($tag = "DATE")	&& next if ( m,<date>, );	# date starts after
+			(undef $tag)	&& next if ( m,</date>, );	# date is finished
+			($tag = "ABST")	&& next if ( m,<abstract>, );	# abstract starts after
+			(undef $tag)	&& next if ( m,</abstract>, );	# abstract is finished
+
+			# next file when reached one of these
+			last SCAN if ( m,<header>, );
+			last SCAN if ( m,<toc>, );
+			last SCAN if ( m,<lof>, );
+			last SCAN if ( m,<lot>, );
+			last SCAN if ( m,<p>, );
+			last SCAN if ( m,<chapt>, );
+			last SCAN if ( m,<sect>, );
+
+			# add the word
+			$data{$tag} .= "$_ " if defined $tag;
+		}
+	}
+	# put some default values
+	$data{"TITL"} = "$filename"		if ! defined $data{"TITL"};
+	$data{"AUTH"} = "?? no author ??"	if ! defined $data{"AUTH"};
+	$data{"DATE"} = "?? no date ??"		if ! defined $data{"DATE"};
+###	$data{"ABST"} = "?? no abstract ??"	if ! defined $data{"ABST"};
+
+	if ( $first_time )
+	{
+		printf( "<!-- built %d.%d.%d %d:%d:%d -->\n"
+			, $year+1900, $mon+1, $mday, $hour, $min, $sec);
+		printf( "<%s>\n\n", ($opt_2 ? "descrip" : "itemize"));
+		$first_time = 0;
+	}
+	printf( "<%s>\n", ($opt_2 ? "tag" : "item"));
+	print "\t<htmlurl url=", '"', $opt_D.$filename,".html", '"', "\n";
+	print "\t\tname=", '"', $data{"TITL"}, '"', ">\n";
+	printf( "<%s>\n", ($opt_2 ? "/tag" : "newline"));
+	print "\t", $data{"AUTH"}, "\n";
+	print "<newline>\n";
+	print "\t", $data{"DATE"}, "\n";
+	if ( defined $data{"ABST"} )
+	{
+		print "<newline>\n";
+		print "\t", $data{"ABST"}, "\n";
+	}
+	print "\n";
+}
+printf( "</%s>\n\n", ($opt_2 ? "descrip" : "itemize")) if ! $first_time;

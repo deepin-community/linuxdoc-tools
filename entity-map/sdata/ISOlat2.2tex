@@ -1,0 +1,121 @@
+[abreve]	\u a
+[Abreve]	\u A
+[amacr ]	\=a
+[Amacr ]	\=A
+[aogon ]	\{aogon\}
+[Aogon ]	\{Aogon\}
+[cacute]	\'c
+[Cacute]	\'C
+[ccaron]	\{ccaron\}
+[Ccaron]	\{Ccaron\}
+[ccirc ]	\^c
+[Ccirc ]	\^C
+[cdot  ]	\.c
+[Cdot  ]	\.C
+[dcaron]	\{dcaron\}
+[Dcaron]	\{Dcaron\}
+[dstrok]	\{dstrok\}
+[Dstrok]	\{Dstrok\}
+[ecaron]	\{ecaron\}
+[Ecaron]	\{Ecaron\}
+[edot  ]	\.e
+[Edot  ]	\.E
+[emacr ]	\=e
+[Emacr ]	\=E
+[eogon ]	\{eogon\}
+[Eogon ]	\{Eogon\}
+[gacute]	\'g
+[gbreve]	\u g
+[Gbreve]	\u G
+[Gcedil]	\c G
+[gcirc ]	\^g
+[Gcirc ]	\^G
+[gdot  ]	\.g
+[Gdot  ]	\.G
+[hcirc ]	\^h
+[Hcirc ]	\^H
+[hstrok]	\{hstrok\}
+[Hstrok]	\{Hstrok\}
+[Idot  ]	\.I
+[Imacr ]	\=I
+[imacr ]	\=\i{}
+[ijlig ]	ij
+[IJlig ]	IJ
+[inodot]	\i{}
+[iogon ]	\{iogon\}
+[Iogon ]	\{Iogon\}
+[itilde]	\~\i{}
+[Itilde]	\~I
+[jcirc ]	\^\j{}
+[Jcirc ]	\^J
+[kcedil]	\c k
+[Kcedil]	\c K
+[kgreen]	\{kgreen\}
+[lacute]	\'l
+[Lacute]	\'L
+[lcaron]	\{lcaron\}
+[Lcaron]	\{Lcaron\}
+[lcedil]	\c l
+[Lcedil]	\c L
+[lmidot]	\{lmidot\}
+[Lmidot]	\{Lmidot\}
+[lstrok]	\{lstrok\}
+[Lstrok]	\{Lstrok\}
+[nacute]	\'n
+[Nacute]	\'N
+[eng   ]	\{eng\}
+[ENG   ]	\{ENG\}
+[napos ]	\{napos\}
+[ncaron]	\{ncaron\}
+[Ncaron]	\{Ncaron\}
+[ncedil]	\c n
+[Ncedil]	\c N
+[odblac]	\{odblac\}
+[Odblac]	\{Odblac\}
+[Omacr ]	\=O
+[omacr ]	\=o
+[oelig ]	\oe{}
+[OElig ]	\OE{}
+[racute]	\'r
+[Racute]	\'R
+[rcaron]	\{rcaron\}
+[Rcaron]	\{Rcaron\}
+[rcedil]	\c r
+[Rcedil]	\c R
+[sacute]	\'s
+[Sacute]	\'S
+[scaron]	\{scaron\}
+[Scaron]	\{Scaron\}
+[scedil]	\c s
+[Scedil]	\c S
+[scirc ]	\^s
+[Scirc ]	\^S
+[tcaron]	\{tcaron\}
+[Tcaron]	\{Tcaron\}
+[tcedil]	\c t
+[Tcedil]	\c T
+[tstrok]	\{tstrok\}
+[Tstrok]	\{Tstrok\}
+[ubreve]	\u u
+[Ubreve]	\u U
+[udblac]	\{udblac\}
+[Udblac]	\{Udblac\}
+[umacr ]	\=u
+[Umacr ]	\=U
+[uogon ]	\{uogon\}
+[Uogon ]	\{Uogon\}
+[uring ]	\accent23u
+[Uring ]	\accent23U
+[utilde]	\~u
+[Utilde]	\~U
+[wcirc ]	\^w
+[Wcirc ]	\^W
+[ycirc ]	\^y
+[Ycirc ]	\^Y
+[Yuml  ]	\"Y
+[zacute]	\'z
+[Zacute]	\'Z
+[zcaron]	\{zcaron\}
+[Zcaron]	\{Zcaron\}
+[zdot  ]	\.z
+[Zdot  ]	\.Z

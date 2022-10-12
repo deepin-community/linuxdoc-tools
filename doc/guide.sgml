@@ -1,0 +1,1055 @@
+<!-- This is the LinuxDoc-Tools User's Guide.
+     This is originally written by Matt Welsh and updated by many people.
+     See guide.txt or guide.ps for formatted output.
+-->
+
+<!doctype linuxdoc system>
+
+<article>
+
+<title>LinuxDoc-Tools User's Guide
+<author>
+  <name>written by Matt Welsh as the LinuxDoc-SGML User's Guide.</name>
+  <and>
+    <name>Updated by Greg Hankins, and rewritten by Eric S. Raymond
+          for SGML-Tools.</name>
+  <and>
+    <name>Updated and renamed by Taketoshi Sano, for LinuxDoc-Tools</name>
+</author>
+<date>$Date: 2002/03/18 13:39:10 $ ($Revision: 1.2 $)
+<abstract>
+This document is a user's guide to the LinuxDoc-Tools formatting system,
+a SGML-based system which allows you to produce a variety of output
+formats.  You can create plain text output (ASCII, ISO-8859-1, and EUC-JP),
+DVI, PostScript, PDF, HTML, GNU info, LyX, and RTF output from a single
+document source file.  LinuxDoc-Tools is a new branch from SGML-Tools 1.0.9,
+and an descendant of the original LinuxDoc-SGML.
+</abstract>
+
+<toc>
+
+<sect>Introduction
+<p>
+This document is the user's guide to the LinuxDoc-Tools document
+processing system.  LinuxDoc-Tools is a suite of programs to help
+you write source documents that can be rendered as plain text,
+hypertext, or LaTeX files.  It contains what you need to know to
+set up LinuxDoc-Tools and write documents using it.
+See <tt/example.sgml/ for an example of an LinuxDoc DTD SGML document
+that you can use as a model for your own documents.
+The ``LinuxDoc'' means the name of a specific SGML DTD here.
+</p>
+<sect1>What's the DTD ?
+<p>
+The DTD specifies the names of ``elements'' within the document.
+An element is just a bit of structure; like a section, a subsection,
+a paragraph, or even something smaller like <em/emphasized text/.
+You may know the HTML has their own DTD.</p>
+<p>
+Don't be confusing.  SGML is <em/not/ a text-formatting system.
+SGML itself is used only to specify the document structure.  There are
+no text-formatting facilities or ``macros'' intrinsic to SGML itself.
+All of those things are defined within the DTD.
+You can't use SGML without a DTD; a DTD defines what SGML does.
+For more Detail, please refer the later section of this document
+ (<ref id="sgml" name="How LinuxDoc-Tools Works">).
+</p>
+
+<sect1>History of the LinuxDoc
+<p>
+The LinuxDoc DTD is created by Matt Welsh as the core part of his
+Linuxdoc-SGML document processing system.  This DTD is based heavily
+on the QWERTZ DTD by Tom Gordon, <tt/thomas.gordon@gmd.de/.
+The target of the QWERTZ DTD is to provide the simple way to create
+LaTeX source for document publishing.  Matt Welsh took and shaped it
+into Linuxdoc-SGML because he needed it to produce a lot of Linux
+Documentations.  It can convert a single source of documentation into
+various output formats such as plain text, html, and PS.  No work for
+synchronization between various output formatted documents are needed.
+</p>
+<p>
+The Linuxdoc-SGML system had been maintained for years by Matt Welsh
+and many others, but it has some limitations.  Then Cees de Groot came
+and created the new system using perl.  The new system is called as
+``SGML-Tools''.  The perl based version for LinuxDoc had been maintained
+for a year, then totally new system using the original python scripts
+and some stylesheets with the jade has been released.  This system is
+called as ``SGML-Tools 2.0'' and it does not use the LinuxDoc DTD as
+the main DTD, but uses the new standard one, the DocBook DTD.
+Now ``SGML-Tools 2.0'' becomes ``SGMLtools-Lite'' and is distributed
+from <url url="http://sgmltools-lite.sourceforge.net/">.
+</p>
+<p>
+Recently, the DocBook DTD is the standard DTD for the technical
+software documentation, and used by many project such as GNOME and
+KDE, as well as many professional authors and commercial publishers.
+But some people in the LDP, and users of the various LinuxDoc SGML
+documents, still needs the support of the tools for the LinuxDoc.
+This ``LinuxDoc-Tools'' is created for those people.  If you need
+the tools for the LinuxDoc DTD, then you may wish to use this.  But
+remember, the LinuxDoc DTD is not the standard way now even in the
+Linux world.  If you can, try the DocBook DTD.  It is the standard,
+and full-featured way of writing the documentations.</p>
+
+<sect>Installation
+<sect1>Where to get the linuxdoc-tools sources
+<p>
+<itemize>
+  <item>
+    You can get the source archive of the Linuxdoc-Tools from the page:
+    <url url="https://packages.debian.org/source/unstable/linuxdoc-tools/">.
+
+    The name of the archive will be something like
+    <tt/linuxdoc-tools_x.y.z.orig.tar.gz/.
+  <item>
+    Linuxdoc-Tools git repository can currently be reached at
+    <url url="https://gitlab.com/agmartin/linuxdoc-tools">.
+
+    It contains an issue tracker to report problems.
+</itemize>
+</p>
+
+<sect1>What LinuxDoc-Tools Needs
+<p>
+LinuxDoc-Tools depends on the usage of sgml parser from Jade or OpenJade
+(nsgmls or onsgmls). You have to install either of them to use this.
+</p>
+<p>
+The source archive of the linuxdoc-tools contains the tools and data
+that you need to write SGML documents and convert them to groff, LaTeX,
+PostScript, HTML, GNU info, LyX, and RTF.  In addition to this package,
+you will need some additional tools for generating formatted output.
+<enum>
+  <item>
+    <tt/groff/.
+    You <em/need/ version 1.08 or greater.
+    You can get this from <url url="https://www.gnu.org/software/groff">.
+    You will need <tt/groff/ to produce plain text from your SGML documents.
+    <tt/nroff/ will <em/not/ work!
+    You can find the version of your <tt/groff/ from
+    <tt>groff -v < /dev/null</tt>.
+  <item>
+    TeX and LaTeX.
+    This is available more or less everywhere; you should have no
+    problem getting it and installing it (there is a Linux binary
+    distribution on <tt/sunsite.unc.edu/).
+    Of course, you only need TeX/LaTeX if you want to format your SGML
+    documents with LaTeX.
+    So, installing TeX/LaTeX is optional.
+    If you need PDF output, then you need pdfLaTeX also.
+  <item>
+    <tt/flex/.
+    (<tt/lex/ will probably not work).
+    You can get flex from <url url="http://flex.sourceforge.net/">.
+  <item>
+    The GNU info tools, for formatting and viewing info files.
+    These are available on
+    <url url="https://www.gnu.org/software/texinfo/">.
+  <item>
+    LyX (a quasi-WYSIWYG interface to LaTeX, with SGML layouts), is
+    available on
+    <url url="https://www.lyx.org/">.
+</enum>
+
+<sect1>Installing The Software
+<p>
+The steps needed to install and configure the LinuxDoc-Tools are:
+
+<enum>
+<item>First, unpack the tar file of the source archive somewhere.
+This will create the directory <tt/linuxdoc-tools-x.y.z/.
+It doesn't matter where you unpack this file; just don't move things
+around within the extracted source tree.
+
+<item>Read the <tt/INSTALL/ file - it has detailed installation instructions.
+Follow them.  If all went well, you should be ready to use the system
+immediately once you have done so.
+</enum>
+
+<sect>Writing Documents With LinuxDoc-Tools
+<p>
+For the most part, writing documents using LinuxDoc-Tools is very
+simple, and rather like writing HTML.  However, there are some caveats to
+watch out for.  In this section we'll give an introduction on writing
+SGML documents.  See the file <tt/example.sgml/ for a SGML example
+document (and tutorial) which you can use as a model when writing your
+own documents.  Here we're just going to discuss the various features
+of LinuxDoc-Tools, but the source is not very readable as an example.  Instead,
+print out the source (as well as the formatted output) for
+<tt/example.sgml/ so you have a real live case to refer to.
+
+<sect1>Basic Concepts
+<p>
+Looking at the source of the example document, you'll notice right off
+that there are a number of ``tags'' marked within angle brackets
+(<tt>&lt;</tt> and <tt/&gt;</tt>).  A tag simply specifies the beginning or end
+of an element, where an element is something like a section, a paragraph,
+a phrase of italicized text, an item in a list, and so on.  Using a tag
+is like using an HTML tag, or a LaTeX command such as <tt>&bsol;item</tt> or
+<tt>&bsol;section{...}</tt>.
+
+As a simple example, to produce <bf>this boldfaced text</bf>, you would type
+<tscreen><verb>
+As a simple example, to produce <bf>this boldfaced text&etago;bf>, ...
+</verb></tscreen>
+in the source.  <tt>&lt;bf></tt> begins the region of bold text, and
+<tt>&etago;bf></tt> ends it.  Alternately, you can use the abbreviated form
+<tscreen><verb>
+As a simple example, to produce <bf/this boldfaced text/, ...
+</verb></tscreen>
+which encloses the bold text within slashes.  (Of course, you'll need to
+use the long form if the enclosed text contains slashes, such as the
+case with Unix filenames).
+
+There are other things to watch out with respect to special characters
+(that's why you'll notice all of these bizarre-looking ampersand
+expressions if you look at the source; I'll talk about those shortly).
+
+In some cases, the end-tag for a particular element is optional.  For
+example, to begin a section, you use the <tt>&lt;sect></tt> tag,
+however, the end-tag for the section (which could appear at the end of
+the section body itself, not just after the name of the section!)
+is optional and implied when you start another section of the same depth.
+In general you needn't worry about these details; just follow the model
+used in the tutorial (<tt/example.sgml/).
+
+<sect1>Special Characters
+<p>
+Obviously, the angle brackets are themselves special characters in the
+SGML source.  There are others to watch out for.  For example, let's say
+that you wanted to type an expression with angle brackets around it,
+as so: <tt>&lt;foo&gt;</tt>.  In order to get the left angle bracket, you
+must use the <tt>&amp;lt;</tt> element, which is a ``macro'' that expands
+to the actual left-bracket character.  Therefore, in the source, I typed
+<tscreen><verb>
+angle brackets around it, as so: <tt>&ero;lt;foo&ero;gt;&etago;tt>.
+</verb></tscreen>
+Generally, anything beginning with an ampersand is a special
+character.  For example, there's <tt/&amp;percnt;/ to produce
+&percnt;, <tt/&amp;verbar;/ to produce &verbar;, and so on.  For every
+special character that might otherwise confuse LinuxDoc-Tools if typed by
+itself, there is an ampersand "entity" to represent it.  The most
+commonly used are:
+<itemize>
+<item>Use <tt>&amp;amp;</tt> for the ampersand (&amp;),
+<item>Use <tt>&amp;lt;</tt> for a left bracket (&lt;),
+<item>Use <tt>&amp;gt;</tt> for a right bracket (&gt),
+<item>Use <tt>&amp;etago;</tt> for a left bracket with a slash
+(<tt>&etago;</tt>)
+<item>Use <tt>&amp;dollar;</tt> for a dollar sign (&dollar;),
+<item>Use <tt>&amp;num;</tt> for a hash (&num;),
+<item>Use <tt>&amp;percnt;</tt> for a percent (&percnt;),
+<item>Use <tt>&amp;tilde;</tt> for a tilde (&tilde;),
+<item>Use <tt>``</tt> and <tt>''</tt> for quotes, or use
+   <tt>&amp;dquot;</tt> for &dquot;.
+<item>Use <tt>&amp;shy;</tt> for a soft hyphen (that is, an indication
+   that this is a good place to break a word for horizontal justification).
+</itemize>
+<p>
+Here is a complete list of the entities recognized by 0.1.  Note
+that not all back-ends will be able to make anything useful from every
+entity -- if you see parantheses with nothing between them in the
+list, it means that the back-end that generated what you're looking at
+has no replacement for the entity.  The ``common'' ones listed above
+are pretty reliable.
+
+<descrip>
+<tag>&amp;half;   (&half;)</tag>vertical 1/2 fraction
+<tag>&amp;frac12; (&frac12;)</tag>typeset 1/2 fraction
+<tag>&amp;frac14; (&frac14;)</tag>typeset 1/4 fraction
+<tag>&amp;frac34; (&frac34;)</tag>typeset 3/4 fraction
+<tag>&amp;frac18; (&frac18;)</tag>typeset 1/8 fraction
+<tag>&amp;frac38; (&frac38;)</tag>typeset 3/8 fraction
+<tag>&amp;frac58; (&frac58;)</tag>typeset 5/8 fraction
+<tag>&amp;frac78; (&frac78;)</tag>typeset 7/8 fraction
+<tag>&amp;sup1;   (&sup1;)</tag>superscript 1
+<tag>&amp;sup2;   (&sup2;)</tag>superscript 2
+<tag>&amp;sup3;   (&sup3;)</tag>superscript 3
+<tag>&amp;plus;   (&plus;)</tag>plus sign
+<tag>&amp;plusmn; (&plusmn;)</tag>plus-or-minus sign
+<tag>&amp;lt;     (&lt;)</tag>less-than sign
+<tag>&amp;equals; (&equals;)</tag>equals sign
+<tag>&amp;gt;     (&gt;)</tag>greater-than sign
+<tag>&amp;divide; (&divide;)</tag>division sign
+<tag>&amp;times;  (&times;)</tag>multiplication sign
+<tag>&amp;curren; (&curren;)</tag>currency symbol
+<tag>&amp;pound;  (&pound;)</tag>symbol for ``pounds''
+<tag>&amp;dollar; (&dollar;)</tag>dollar sign
+<tag>&amp;cent;   (&cent;)</tag>cent sign
+<tag>&amp;yen;    (&yen;)</tag>yen sign
+<tag>&amp;num;    (&num;)</tag>number or hash sign
+<tag>&amp;percnt; (&percnt;)</tag>percent sign
+<tag>&amp;amp;    (&amp;)</tag>ampersand
+<tag>&amp;ast;    (&ast;)</tag>asterisk
+<tag>&amp;commat; (&commat;)</tag>commercial-at sign
+<tag>&amp;lsqb;   (&lsqb;)</tag>left square bracket
+<tag>&amp;bsol;   (&bsol;)</tag>backslash
+<tag>&amp;rsqb;   (&rsqb;)</tag>right square bracket
+<tag>&amp;lcub;   (&lcub;)</tag>left curly brace
+<tag>&amp;horbar; (&horbar;)</tag>horizontal bar
+<tag>&amp;verbar; (&verbar;)</tag>vertical bar
+<tag>&amp;rcub;   (&rcub;)</tag>right curly brace
+<tag>&amp;micro;  (&micro;)</tag>greek mu (micro prefix)
+<tag>&amp;ohm;    (&ohm;)</tag>greek capital omega (Ohm sign)
+<tag>&amp;deg;    (&deg;)</tag>small superscript circle sign (degree sign)
+<tag>&amp;ordm;   (&ordm;)</tag>masculine ordinal
+<tag>&amp;ordf;   (&ordf;)</tag>feminine ordinal
+<tag>&amp;sect;   (&sect;)</tag>section sign
+<tag>&amp;para;   (&para;)</tag>paragraph sign
+<tag>&amp;middot; (&middot;)</tag>centered dot
+<tag>&amp;larr;   (&larr;)</tag>left arrow
+<tag>&amp;rarr;   (&rarr;)</tag>right arrow
+<tag>&amp;uarr;   (&uarr;)</tag>up arrow
+<tag>&amp;darr;   (&darr;)</tag>down arrow
+<tag>&amp;copy;   (&copy;)</tag>copyright
+<tag>&amp;reg;    (&reg;)</tag>r-in-circle marl
+<tag>&amp;trade;  (&trade;)</tag>trademark sign
+<tag>&amp;brvbar; (&brvbar;)</tag>broken vertical bar
+<tag>&amp;not;    (&not;)</tag>logical-negation sign
+<tag>&amp;sung;   (&sung;)</tag>sung-note sign
+<tag>&amp;excl;   (&excl;)</tag>exclamation point
+<tag>&amp;iexcl;  (&iexcl;)</tag>inverted exclamation point
+<tag>&amp;quot;   (&quot;)</tag>double quote
+<tag>&amp;apos;   (&apos;)</tag>apostrophe (single quote)
+<tag>&amp;lpar;   (&lpar;)</tag>left parenthesis
+<tag>&amp;rpar;   (&rpar;)</tag>right parenthesis
+<tag>&amp;comma;  (&comma;)</tag>comma
+<tag>&amp;lowbar; (&lowbar;)</tag>under-bar
+<tag>&amp;hyphen; (&hyphen;)</tag>hyphen
+<tag>&amp;period; (&period;)</tag>period
+<tag>&amp;sol;    (&sol;)</tag>solidus
+<tag>&amp;colon;  (&colon;)</tag>colon
+<tag>&amp;semi;   (&semi;)</tag>semicolon
+<tag>&amp;quest;  (&quest;)</tag>question mark
+<tag>&amp;iquest; (&iquest;)</tag>interrobang
+<tag>&amp;laquo;  (&laquo;)</tag>left guillemot
+<tag>&amp;raquo;  (&raquo;)</tag>right guillemot
+<tag>&amp;lsquo;  (&lsquo;)</tag>left single quote
+<tag>&amp;rsquo;  (&rsquo;)</tag>right single quote
+<tag>&amp;ldquo;  (&ldquo;)</tag>left double quote
+<tag>&amp;rdquo;  (&rdquo;)</tag>right double quote
+<tag>&amp;nbsp;   (&nbsp;)</tag>non-breaking space
+<tag>&amp;shy;    (&shy;)</tag>soft hyphen
+</descrip>
+
+<sect1>Verbatim and Code Environments
+<p>
+While we're on the subject of special characters, we might as well mention
+the verbatim ``environment'' used for including literal text in the output
+(with spaces and indentation preserved, and so on).  The
+<tt>verb</tt> element is used for this; it looks like the following:
+<tscreen><verb>
+<verb>
+ Some literal text to include as example output.
+&etago;verb>
+</verb></tscreen>
+The <tt>verb</tt> environment doesn't allow you to use <em/everything/
+within it literally.  Specifically, you must do the following within
+<tt/verb/ environments.
+<itemize>
+<item>Use <tt>&amp;ero;</tt> to get an ampersand,
+<item>Use <tt>&amp;etago;</tt> to get <tt>&etago;</tt>,
+<item>Don't use <tt>&bsol;end{verbatim}</tt> within a <tt>verb</tt>
+environment, as this is what LaTeX uses to end the <tt>verbatim</tt>
+environment.  (In the future, it should be possible to hide the underlying
+text formatter entirely, but the parser doesn't support this feature yet.)
+</itemize>
+The <tt>code</tt> environment is much just like the <tt/verb/ environment,
+except that horizontal rules are added to the surrounding text, as so:
+<code>
+Here is an example code environment.
+</code>
+
+You should use the <tt/tscreen/ environment around any <tt/verb/ environments,
+as so:
+<tscreen><verb>
+<tscreen><verb>
+Here is some example text.
+&etago;verb>&etago;tscreen>
+</verb></tscreen>
+<tt/tscreen/ is an environment that simply indents the text and sets the
+sets the default font to <tt/tt/.  This makes examples look much nicer, both
+in the LaTeX and plain text versions.  You can use <tt/tscreen/
+without <tt/verb/, however, if you use any special characters in your
+example you'll need to use both of them.  <tt/tscreen/ does nothing to
+special characters.  See <tt/example.sgml/ for examples.
+
+The <tt/quote/ environment is like <tt/tscreen/, except that it does
+not set the default font to <tt/tt/.  So, you can use <tt/quote/ for
+non-computer-interaction quotes, as in:
+<tscreen><verb>
+<quote>
+Here is some text to be indented, as in a quote.
+&etago;quote>
+</verb></tscreen>
+which will generate:
+<quote>
+Here is some text to be indented, as in a quote.
+</quote>
+
+<sect1>Overall Document Structure
+<p>
+Before we get too in-depth with details, we're going to describe the
+overall structure of an LinuxDoc-Tools document.  Look at
+<tt/example.sgml/ for a good example of how a document is set up.
+
+<sect2>The Preamble
+<p>
+In the document ``preamble'' you set up things such as the title
+information and document style:
+<tscreen><verb>
+<!doctype linuxdoc system>
+
+<article>
+
+<title>Linux Foo HOWTO
+<author>Norbert Ebersol, <tt/norb@baz.com/
+<date>v1.0, 9 March 1994
+<abstract>
+This document describes how to use the <tt/foo/ tools to frobnicate
+bar libraries, using the <tt/xyzzy/ relinker.
+&etago;abstract>
+
+<toc>
+</verb></tscreen>
+
+The elements should go more or less in this order.  The first line
+tells the SGML parser to use the linuxdoc DTD.  We'll explain that in
+the later section on <ref id="sgml" name="How LinuxDoc-Tools Works">; for
+now just treat it as a bit of necessary magic.  The
+<tt>&lt;article></tt> tag forces the document to use the ``article''
+document style.
+
+The <tt/title/, <tt/author/, and <tt/date/ tags should be obvious; in the
+<tt>date</tt> tag include the version number and last modification time of
+the document.
+
+The <tt/abstract/ tag sets up the text to be printed at the top of the
+document, <em/before/ the table of contents.  If you're not going to
+include a table of contents (the <tt/toc/ tag), you probably don't
+need an <tt/abstract/.
+
+<sect2>Sectioning And Paragraphs
+<p>
+After the preamble, you're ready to dive into the document.  The following
+sectioning commands are available:
+<itemize>
+<item><tt/sect/: For top-level sections (i.e.  1, 2, and so on.)
+<item><tt/sect1/: For second-level subsections (i.e.  1.1, 1.2, and so on.)
+<item><tt/sect2/: For third-level subsubsections.
+<item><tt/sect3/: For fourth-level subsubsubsections.
+<item><tt/sect4/: For fifth-level subsubsubsubsections.
+</itemize>
+These are roughly equivalent to their LaTeX counterparts <tt/section/,
+<tt/subsection/, and so on.
+
+After the <tt/sect/ (or <tt/sect1/, <tt/sect2/, etc.) tag comes the
+name of the section.  For example, at the top of this document, after
+the preamble, comes the tag:
+<tscreen><verb>
+<sect>Introduction
+</verb></tscreen>
+And at the beginning of this section (Sectioning and paragraphs), there
+is the tag:
+<tscreen><verb>
+<sect2>Sectioning And Paragraphs
+</verb></tscreen>
+After the section tag, you begin the body of the section.  However, you
+must start the body with a <tt>&lt;p></tt> tag, as so:
+<tscreen><verb>
+<sect>Introduction
+<p>
+This is a user's guide to the LinuxDoc-Tools document processing...
+</verb></tscreen>
+This is to tell the parser that you're done with the section title
+and are ready to begin the body.  Thereafter, new paragraphs are started
+with a blank line (just as you would do in TeX).  For example,
+<tscreen><verb>
+Here is the end of the first paragraph.
+
+And we start a new paragraph here.
+</verb></tscreen>
+There is no reason to use <tt>&lt;p></tt> tags at the beginning of
+every paragraph; only at the beginning of the first paragraph after
+a sectioning command.
+
+<sect2>Ending The Document
+<p>
+At the end of the document, you must use the tag:
+<tscreen><verb>
+&etago;article>
+</verb></tscreen>
+
+to tell the parser that you're done with the <tt/article/ element (which
+embodies the entire document).
+</sect2>
+
+<sect1>Internal Cross-References<label id="cross-ref">
+<p>
+Now we're going to move onto other features of the system.
+Cross-references are easy.  For example, if you want to make a
+cross-reference to a certain section, you need to label that section
+as so:
+<tscreen><verb>
+<sect1>Introduction<label id="sec-intro">
+</verb></tscreen>
+You can then refer to that section somewhere in the text using the
+expression:
+<tscreen><verb>
+See section <ref id="sec-intro" name="Introduction"> for an introduction.
+</verb></tscreen>
+This will replace the <tt/ref/ tag with the section number labeled
+as <tt/sec-intro/.  The <tt/name/ argument to <tt/ref/ is necessary for
+groff and HTML translations.  The groff macro set used by LinuxDoc-Tools
+does not currently support cross-references, and it's often nice to refer
+to a section by name instead of number.
+
+For example, this section is <ref id="cross-ref" name="Cross-References">.
+
+Some back-ends may get upset about special characters in reference labels.
+In particular, latex2e chokes on underscores (though the latex back end
+used in older versions of this package didn't).  Hyphens are safe.
+
+<sect1>Web References
+<p>
+There is also a <tt/url/ element for Universal Resource Locators, or
+URLs, used on the World Wide Web.  This element should be used to refer
+to other documents, files available for FTP, and so forth.  For
+example,
+<tscreen><verb>
+You can get the Linux HOWTO documents from
+<url url="http://sunsite.unc.edu/mdw/HOWTO/"
+   name="The Linux HOWTO INDEX">.
+</verb></tscreen>
+The <tt/url/ argument specifies the actual URL itself.  A link to the
+URL in question will be automatically added to the HTML document.
+The optional <tt/name/ argument specifies the text that should be anchored to
+the URL (for HTML conversion) or named as the description of the
+URL (for LaTeX and groff).  If no <tt/name/ argument is given, the
+URL itself will be used.
+
+A useful variant of this is <tt/htmlurl/, which suppresses rendering of
+the URL part in every context except HTML.  What this is useful for
+is things like a person's email addresses; you can write
+<tscreen><verb>
+<htmlurl url="mailto:esr@snark.thyrsus.com"
+      name="esr@snark.thyrsus.com">
+</verb></tscreen>
+and get ``esr@snark.thyrsus.com'' in text output rather than the
+duplicative ``esr@snark.thyrsus.com &lt;mailto:esr@snark.thyrsus.com&gt;''
+but still have a proper URL in HTML documents.
+
+<sect1>Fonts
+<p>
+Essentially, the same fonts supported by LaTeX are supported
+by LinuxDoc-Tools.  Note, however, that the conversion to
+plain text (through <tt/groff/) does away with the font
+information.  So, you should use fonts
+as for the benefit of the conversion to LaTeX,
+but don't depend on the fonts to get a point across in the plain
+text version.
+
+In particular, the <tt/tt/ tag described above can be used to
+get constant-width ``typewriter'' font which should be used for
+all e-mail addresses, machine names, filenames, and so on.
+Example:
+<tscreen><verb>
+Here is some <tt>typewriter text&etago;tt> to be included in the document.
+</verb></tscreen>
+Equivalently:
+<tscreen><verb>
+Here is some <tt/typewriter text/ to be included in the document.
+</verb></tscreen>
+Remember that you can only use this abbreviated form if the enclosed
+text doesn't contain slashes.
+
+Other fonts can be achieved with <tt/bf/ for <bf/boldface/ and <tt/em/
+for <em/italics/.  Several other fonts are supported as well, but
+we don't suggest you use them, because we'll be converting these
+documents to other formats such as HTML which may not support them.
+Boldface, typewriter, and italics should be all that you need.
+
+<sect1>Lists
+<p>
+There are various kinds of supported lists.  They are:
+<itemize>
+<item><tt/itemize/ for bulleted lists such as this one.
+<item><tt/enum/ for numbered lists.
+<item><tt/descrip/ for ``descriptive'' lists.
+</itemize>
+Each item in an <tt/itemize/ or <tt/enum/ list must be marked
+with an <tt/item/ tag.  Items in a <tt/descrip/ are marked with <tt/tag/.
+For example,
+<tscreen><verb>
+<itemize>
+<item>Here is an item.
+<item>Here is a second item.
+&etago;itemize>
+</verb></tscreen>
+Looks like this:
+<itemize>
+<item>Here is an item.
+<item>Here is a second item.
+</itemize>
+Or, for an <tt/enum/,
+<tscreen><verb>
+<enum>
+<item>Here is the first item.
+<item>Here is the second item.
+&etago;enum>
+</verb></tscreen>
+You get the idea.  Lists can be nested as well; see the example document
+for details.
+
+A <tt/descrip/ list is slightly different, and slightly ugly, but
+you might want to use it for some situations:
+<tscreen><verb>
+<descrip>
+<tag/Gnats./ Annoying little bugs that fly into your cooling fan.
+<tag/Gnus./ Annoying little bugs that run on your CPU.
+&etago;descrip>
+</verb></tscreen>
+ends up looking like:
+<descrip>
+<tag/Gnats./ Annoying little bugs that fly into your cooling fan.
+<tag/Gnus./ Annoying little bugs that run on your CPU.
+</descrip>
+
+<sect1>Conditionalization
+<p>
+The overall goal of LinuxDoc-tools is to be able to produce from one set
+of masters output that is semantically equivalent on all back ends.
+Nevertheless, it is sometimes useful to be able to produce a document
+in slightly different variants depending on back end and version.
+LinuxDoc-Tools supports this through the &lt;#if&gt; and &lt;#unless&gt;
+bracketing tags.
+
+These tags allow you to selectively include and uninclude portions of
+an SGML master in your output, depending on filter options set by your
+driver.  Each tag may include a set of attribute/value pairs.  The
+most common are ``output'' and ``version'' (though you are not
+restricted to these) so a typical example might look like this:
+<tscreen><verb>
+Some &lt;#if output=latex2e version=drlinux&gt;conditional&lt;/#if&gt; text.
+</verb></tscreen>
+Everything from this &lt;#if&gt; tag to the following &lt;/#if&gt; would
+be considered conditional, and would not be included in the document
+if either the filter option ``output'' were set to something that
+doesn't match ``latex2e'' or the filter option ``version'' were set
+to something that doesn't match ``drlinux''.  The double negative is
+deliberate; if no ``output'' or ``version'' filter options are set,
+the conditional text will be included.
+
+Filter options are set in one of two ways.  Your format driver sets
+the ``output'' option to the name of the back end it uses; thus, in
+particular, ``<tt>linuxdoc -B latex</tt>'' sets
+``output=latex2e'',  Or you may set an attribute-value pair with
+the ``-D'' option of your format driver.  Thus, if the above tag were
+part of a file a file named ``foo.sgml'', then formatting with either
+<tscreen><verb>
+% linuxdoc -B latex -D version=drlinux foo.sgml
+</verb></tscreen>
+or
+<tscreen><verb>
+% linuxdoc -B latex foo.sgml
+</verb></tscreen>
+would include the ``conditional'' part, but neither
+<tscreen><verb>
+% linuxdoc -B html -D version=drlinux foo.sgml
+</verb></tscreen>
+nor
+<tscreen><verb>
+% linuxdoc -B latex -D private=book foo.sgml
+</verb></tscreen>
+would do so.
+
+So that you can have conditionals depending on one or more of several
+values matching, values support a simple alternation syntax using
+``|''.  Thus you could write:
+<tscreen><verb>
+Some &lt;#if output="latex2e|html" version=drlinux&gt;conditional&lt;/#if&gt; text.
+</verb></tscreen>
+and formatting with either ``-B latex'' or ``-B html'' will include the
+``conditional'' text (but formatting with, say, ``-B txt'' will not).
+
+The &lt;#unless&gt; tag is the exact inverse of &lt;#if&gt;; it
+includes when &lt;#if&gt;; would exclude, and vice-versa.
+
+Note that these tags are implemented by a preprocessor which runs
+before the SGML parser ever sees the document.  Thus they are
+completely independent of the document structure, are not in the DTD,
+and usage errors won't be caught by the parser.  You can seriously
+confuse yourself by conditionalizing sections that contain unbalanced
+bracketing tags.
+
+The preprocessor implementation also means that standalone SGML
+parsers will choke on LinuxDoc-Tools documents that contain conditionals.
+However, you can validity-check them with ``<tt>linuxdoc -B check</tt>''.
+
+Also note that in order not to mess up the source line numbers in
+parser error messages, the preprocessor doesn't actually throw
+away everything when it omits a conditionalized section.  It still
+passes through any newlines.  This leads to behavior that may
+suprise you if you use &lt;if&gt; or &lt;unless&gt; within a
+&lt;verb&gt; environment, or any other kind of bracket that changes
+SGML's normal processing of whitespace.
+
+These tags are called ``#if'' and ``#unless'' (rather than ``if'' and
+``unless'') to remind you that they are implemented by a preprocessor
+and you need to be a bit careful about how you use them.
+
+<sect1>Index generation
+<p>
+To support automated generation of indexes for book publication of
+SGML masters, LinuxDoc-Tools supports the &lt;idx&gt; and &lt;cdx&gt;
+tags.  These are bracketing tags which cause the text between them to
+be saved as an index entry, pointing to the page number on which it
+occurs in the formatted document.  They are ignored by all backends
+except LaTeX, which uses them to build a .ind file suitable for
+processing by the TeX utility makeindex.
+
+The two tags behave identically, except that &lt;idx&gt; sets the
+entry in a normal font and &lt;cdx&gt; in a constant-width one.
+
+If you want to add an index entry that shouldn't appear in the text
+itself, use the &lt;nidx&gt; and &lt;ncdx&gt; tags.
+
+<sect1>Controlling justification
+<p>
+In order to get proper justification and filling of paragraphs in
+typeset output, LinuxDoc-Tools includes the &amp;shy; entity.  This
+becomes an optional or `soft' hyphen in back ends like latex2e
+for which this is neaningful.
+
+The bracketing tag &lt;file&gt; can be used to surround filenames in
+running text.  It effectively inserts soft hyphens after each slash in
+the filename.
+
+One of the advantages of using the &lt;url&gt; and &lt;htmlurl&gt;
+tags is that they do likewise for long URLs.
+
+<sect>Formatting SGML Documents
+<p>
+Let's say you have the SGML document <tt/foo.sgml/, which you want to format.
+Here is a general overview of formatting the document for different output.
+For a complete list of options, consult the man pages.
+
+<sect1>Checking SGML Syntax
+<p>
+If you just want to capture your errors from the SGML conversion,
+use the ``<tt>linuxdoc -B check</tt>''.  For example.
+
+<tscreen><verb>
+% linuxdoc -B check foo.sgml
+</verb></tscreen>
+
+If you see no output from this check run other than the
+``Processing...'' message, that's good.  It means there were no errors.
+
+<sect1>Creating Plain Text Output
+<p>
+If you want to produce plain text, use the command:
+<tscreen><verb>
+% linuxdoc -B txt foo.sgml
+</verb></tscreen>
+<p>
+You can also create groff source for man pages, which can be formatted with
+<tt/groff -man/.  To do this, do the following:
+<tscreen><verb>
+% linuxdoc -B txt --man foo.sgml
+</verb></tscreen>
+
+<sect1>Creating LaTeX, DVI, PostScript or PDF Output
+<p>
+To create a LaTeX documents from the SGML source file, simply run:
+<tscreen><verb>
+% linuxdoc -B latex foo.sgml
+</verb></tscreen>
+
+<p>
+If you want to produce PostScript output (via <tt/dvips/), use the
+``<tt>-o</tt>'' option:
+<tscreen><verb>
+% linuxdoc -B latex --output=ps foo.sgml
+</verb></tscreen>
+
+<p>
+Or you can produce a DVI file:
+<tscreen><verb>
+% linuxdoc -B latex --output=dvi foo.sgml
+</verb></tscreen>
+
+<p>
+Also, you can produce a PDF file:
+<tscreen><verb>
+% linuxdoc -B latex --output=pdf foo.sgml
+</verb></tscreen>
+
+
+<sect1>Creating HTML Output
+<p>
+If you want to produce HTML output, do this:
+<tscreen><verb>
+% linuxdoc -B html --imagebuttons foo.sgml
+</verb></tscreen>
+<p>
+This will produce <tt>foo.html</tt>, as well as <tt>foo-1.html</tt>,
+<tt/foo-2.html/, and so on -- one file for each section of the
+document.  Run your WWW browser on <tt>foo.html</tt>, which is the top
+level file.  You must make sure that all of the HTML files generated
+from your document are all installed in the directory, as they
+reference each other with local URLs.
+<p>
+The ``<tt>--imagebuttons</tt>'' option tells html backend driver
+to use graphic arrows as navigation buttons.  The names of these
+icons are ``next.png'', ``prev.png'', and ``toc.png'', and
+the LinuxDoc-Tools system supplies appropriate PNGs in its library
+directory.
+<p>
+If you use ``<tt>linuxdoc -B html</tt>'' without the ``<tt>-img</tt>''
+flag, HTML documents will by default have the English labels
+``Previous'', ``Next'', and ``Table of Contents'' for navigation.
+If you specify one of the accepted language codes in
+a ``<tt>--language</tt>'' option, however, the labels will be given
+in that language.
+
+<sect1>Creating GNU Info Output
+<p>
+If you want to format your file for the GNU info browser, just run the
+following command:
+<tscreen><verb>
+% linuxdoc -B info foo.sgml
+</verb></tscreen>
+
+<sect1>Creating LyX Output
+<p>
+For LyX output, use the the command:
+<tscreen><verb>
+% linuxdoc -B lyx foo.sgml
+</verb></tscreen>
+
+<sect1>Creating RTF Output
+<p>
+If you want to produce RTF output, run the command:
+<tscreen><verb>
+% linuxdoc -B rtf foo.sgml
+</verb></tscreen>
+<p>
+This will produce <tt>foo.rtf</tt>, as well as <tt>foo-1.rtf</tt>,
+<tt/foo-2.rtf/, and so on; one file for each section of the document.
+
+<sect>Internationalization Support
+<p>
+The ISO 8859-1 (latin1) character set may be used for international characters
+in plain text, LaTeX, HTML, LyX, and RTF output (GNU info support for
+ISO 8859-1 may be possible in the future).  To use this feature, give the
+formatting scripts the ``<tt>--charset=latin</tt>'' flag, for example:
+<tscreen><verb>
+% linuxdoc -B txt --charset=latin foo.sgml
+</verb></tscreen>
+You also can use ISO 8859-1 characters in the SGML source, they will
+automatically be translated to the proper escape codes for the corresponding
+output format.
+</p>
+<p>
+Currently, EUC-JP (ujis) character set is partially supported.
+Source SGML file using this character set can be converted
+in plain text, HTML, and LaTeX. Other output formats are not
+tested fully.
+</p>
+
+<sect>How LinuxDoc-Tools Works<label id="sgml">
+<p>
+Technically, the tags and conventions we've explored in previous
+sections of this use's guide are what is called a <em>markup
+language</em> -- a way to embed formatting information in a document
+so that programs can do useful things with it.  HTML, Tex, and Unix
+manual-page macros are well-known examples of markup languages.
+
+<sect1>Overview of SGML
+<p>
+LinuxDoc-Tools uses a way of describing markup languages called SGML
+ (Standard Generalized Markup Language).  SGML itself doesn't describe
+a markup language; rather, it's a language for writing specifications
+for markup languages.  The reason SGML is useful is that an SGML markup
+specification for a language can be used to generate programs that
+``know'' that language with much less effort (and a much lower bugginess
+rate!) than if they had to be coded by hand.
+
+In SGML jargon, a markup language specification is called a ``DTD''
+(Document Type Definition).  A DTD allows you to specify the
+<em/structure/ of a kind of document; that is, what parts, in what
+order, make up a document of that kind.  Given a DTD, an SGML parser
+can check a document for correctness.  An SGML-parser/DTD combination
+can also make it easy to write programs that translate that structure
+into another markup language -- and this is exactly how LinuxDoc-Tools
+actually works.
+
+LinuxDoc-Tools provides a SGML DTD called ``linuxdoc'' and a set of
+``replacement files'' which convert the linuxdoc documents to groff,
+LaTeX, HTML, GNU info, LyX, and RTF source.  This is why the example
+document has a magic cookie at the top of it that says ``linuxdoc system'';
+that is how one tells an SGML parser what DTD to use.
+
+Actually, LinuxDoc-Tools provides a couple of closely related DTDs.  But
+the ones other than linuxdoc are still experimental, and you probably
+do not want to try working with them unless you are an LinuxDoc-Tools guru.
+
+If you are an SGML guru, you may find it interesting to know that the
+LinuxDoc-Tools DTDs are based heavily on the QWERTZ DTD by Tom Gordon,
+<tt/thomas.gordon@gmd.de/.
+
+If you are not an SGML guru, you may not know that HTML (the markup
+language used on the World Wide Web) is itself defined by a DTD.
+
+<sect1>How SGML Works
+<p>
+An SGML DTD like linuxdoc specifies the names of ``elements'' within a
+document type.  An element is just a bit of structure; like a
+section, a subsection, a paragraph, or even something smaller like
+<em/emphasized text/.
+
+Unlike in LaTeX, however, these elements are not in any way intrinsic to
+SGML itself.  The linuxdoc DTD happens to define elements that look a
+lot like their LaTeX counterparts---you have sections, subsections,
+verbatim ``environments'', and so forth.  However, using SGML you can
+define any kind of structure for the document that you like.  In a
+way, SGML is like low-level TeX, while the linuxdoc DTD is like LaTeX.
+
+Don't be confused by this analogy.  SGML is <em/not/ a text-formatting system.
+There is no ``SGML formatter'' per se.  SGML source is <em/only/ converted
+to other formats for processing.  Furthermore, SGML itself is used only to
+specify the document structure.  There are no text-formatting facilities or
+``macros'' intrinsic to SGML itself.  All of those things are defined within
+the DTD.  You can't use SGML without a DTD, a DTD defines what SGML does.
+
+<sect1>What Happens When LinuxDoc-Tools Processes A Document
+<p>
+Here's how processing a document with LinuxDoc-Tools works.  First, you
+need a DTD, which sets up the structure of the document.  A small
+portion of the normal (linuxdoc) DTD looks like this:
+
+<tscreen><verb>
+<!element article - -
+    (titlepag, header?,
+     toc?, lof?, lot?, p*, sect*,
+     (appendix, sect+)?, biblio?) +(footnote)>
+</verb></tscreen>
+
+This part sets up the overall structure for an ``article'', which is like
+a ``documentstyle'' within LaTeX.  The article consists of a titlepage
+(<tt/titlepag/), an optional header (<tt/header/), an optional table of
+contents (<tt/toc/), optional lists of figures (<tt/lof/) and tables
+(<tt/lot/), any number of paragraphs (<tt/p/), any number of top-level
+sections (<tt/sect/), optional appendices (<tt/appendix/), an optional
+bibliography (<tt/biblio/) and footnotes (<tt/footnote/).
+
+As you can see, the DTD doesn't say anything about how the document should
+be formatted or what it should look like.  It just defines what parts make
+up the document.  Elsewhere in the DTD the structure of the
+<tt/titlepag/, <tt/header/, <tt/sect/, and other elements are defined.
+
+You don't need to know anything about the syntax of the DTD in order
+to write documents.  We're just presenting it here so you know what it
+looks like and what it does.  You <em/do/ need to be familiar with the
+document <em/structure/ that the DTD defines.  If not, you might
+violate the structure when attempting to write a document, and be very
+confused about the resulting error messages.
+
+The next step is to write a document using the structure defined by
+the DTD.  Again, the linuxdoc DTD makes documents look a lot like
+LaTeX or HTML -- it's very easy to follow.  In SGML jargon a single
+document written using a particular DTD is known as an ``instance'' of
+that DTD.
+
+In order to translate the SGML source into another format (such as LaTeX
+or groff) for processing, the SGML source (the document that you wrote)
+is <em/parsed/ along with the DTD by the SGML <em/parser/. LinuxDoc-Tools
+uses the <tt/onsgmls/ parser in OpenJade, or <tt/nsgmls/ parser in Jade.
+The former is the successor of the latter. <tt/sgmls/ parser was written
+by James Clark, <tt/jjc@jclark.com/, who also happens to be the author
+of <tt/groff/.  We're in good hands.
+The parser (<tt/onsgmls/ or <tt/nsgmls/) simply picks through your document
+and verifies that it follows the structure set forth by the DTD.
+It also spits out a more explicit form of your document, with all
+ ``macros'' and elements expanded, which is understood by <tt/sgmlsasp/,
+the next part of the process.
+
+<tt/sgmlsasp/ is responsible for converting the output of <tt/sgmls/ to
+another format (such as LaTeX).  It does this using <em/replacement files/,
+which describe how to convert elements in the original SGML document into
+corresponding source in the ``target'' format (such as LaTeX or groff).
+
+For example, part of the replacement file for LaTeX looks like:
+<tscreen><verb>
+<itemize>    +    "\\begin&lcub;itemize&rcub;   +
+&etago;itemize>   +    "\\end&lcub;itemize&rcub;    +
+</verb></tscreen>
+Which says that whenever you begin an <tt/itemize/ element in the
+SGML source, it should be replaced with
+<tscreen><verb>
+\begin&lcub;itemize&rcub;
+</verb></tscreen>
+in the LaTeX source.  (As I said, elements in the DTD
+are very similar to their LaTeX counterparts).
+
+So, to convert the SGML to another format, all you have to do is write
+a new replacement file for that format that gives the appropriate
+analogies to the SGML elements in that new format.  In practice, it's not
+that simple---for example, if you're trying to convert to a format that
+isn't structured at all like your DTD, you're going to have trouble.  In
+any case, it's much easier to do than writing individual parsers and
+translators for many kinds of output formats; SGML provides a generalized
+system for converting one source to many formats.
+
+Once <tt/sgmlsasp/ has completed its work, you have LaTeX source which
+corresponds to your original SGML document, which you can format using
+LaTeX as you normally would.
+
+<sect1>Further Information
+<p>
+	<itemize>
+	<item>The QWERTZ User's Guide is available from
+	<tt><htmlurl url="ftp://ftp.cs.cornell.edu/pub/mdw/SGML"
+	name="ftp://ftp.cs.cornell.edu/pub/mdw/SGML"></tt>.
+	QWERTZ (and hence, LinuxDoc-Tools) supports many features such as
+	mathematical formulae, tables, figures, and so forth.
+	If you'd like to write general
+	documentation in SGML, I suggest using the original QWERTZ DTD instead
+	of the hacked-up linuxdoc DTD, which I've modified for use
+	particularly by the Linux HOWTOs and other such documentation.
+
+	<item>Tom Gordon's original QWERTZ tools can be found at
+	<tt><htmlurl url="ftp://ftp.gmd.de/GMD/sgml"
+	name="ftp://ftp.gmd.de/GMD/sgml"></tt>.
+
+	<item>More information on SGML can be found at the following WWW
+	pages:
+	<enum>
+	<item><tt><url url="http://www.w3.org/hypertext/WWW/MarkUp/SGML/"
+	name="SGML and the Web"></tt>
+	<item><tt><url url="http://www.sil.org/sgml/sgml.html"
+	name="SGML Web Page"></tt>
+	<item><tt><url url="http://www.yahoo.com/Computers&lowbar;and&lowbar;Internet/Software/Data&lowbar;Formats/SGML" name="Yahoo's SGML Page"></tt>
+	</enum>
+
+	<item>James Clark's <tt/sgmls/ parser, and it's successor <tt/nsgmls/
+	and other tools can be found at
+	<tt><htmlurl url="ftp://ftp.jclark.com" name="ftp://ftp.jclark.com">
+	</tt> and at <tt><url url="http://www.jclark.com"
+	name="James Clark's WWW Page"></tt>.
+
+	<item>The emacs psgml package can be found at
+	<tt><htmlurl url="ftp://ftp.lysator.liu.se/pub/sgml"
+	name="ftp://ftp.lysator.liu.se/pub/sgml"></tt>.  This package
+	provides a lot of SGML functionality.
+
+	<item>More information on <tt/LyX/ can be found at the
+	<tt><url url="http://wsiserv.informatik.uni-tuebingen.de/&tilde;ettrich/"
+	name="LyX WWW Page"></tt>.  <tt/LyX/ is a high-level word processor
+	frontend to LaTeX.  Quasi-WYSIWYG interface, many LaTeX styles and
+	layouts automatically generated.  Speeds up learning LaTeX and makes
+	complicated layouts easy and intuitive.
+
+	</itemize>
+</article>

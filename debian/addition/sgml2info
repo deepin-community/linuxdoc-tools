@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if which makeinfo > /dev/null 2>&1; then
+    exec /usr/bin/linuxdoc --backend=info "$@"
+else
+    echo "Please install makeinfo to use LinuxDoc DTD SGML Info Conversion"
+    exit 1
+fi

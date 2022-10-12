@@ -1,0 +1,7 @@
+This directory contains all kinds of unsupported things, mostly because
+they broke somewhere along the way and nobody cared to fix them. It is
+mostly meant as a ``Fundgrube'' for people wanting to write enhancements
+etcetera - sniff around, maybe you'll find something useful.
+
+rep/	Old replacement files for various formats.
+

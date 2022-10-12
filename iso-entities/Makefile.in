@@ -1,0 +1,89 @@
+#
+# Copyright (C) 1996 Ken MacLeod
+#
+# See the file COPYING for distribution terms.#
+#
+# DESTDIR modifications by Agustin Martin <agmartin@debian.org>
+# ---------------------------------------------------------------------------
+
+SHELL        = /bin/sh
+
+PACKAGE      = @PACKAGE@
+VERSION      = @VERSION@
+
+prefix       = @prefix@
+exec_prefix  = @exec_prefix@
+
+datadir      = @datadir@
+docdir       = @docdir@
+sgmldir      = @sgmldir@
+isoentdir    = @isoentdir@
+
+srcdir       = @srcdir@
+VPATH        = @srcdir@
+
+@SET_MAKE@
+
+INSTALL      = @INSTALL@
+INSTALL_DATA = @INSTALL_DATA@
+SED          = @SED@
+PERL5        = @PERL5@
+
+DOCS = \
+  COPYING \
+  README
+
+# Now real destination dirs, honouring $(DESTDIR)
+doc_ddir     = $(DESTDIR)@docdir@
+isoent_ddir  = $(DESTDIR)@isoentdir@
+sgml_ddir    = $(DESTDIR)@sgmldir@
+
+.SUFFIXES:
+.SUFFIXES: .pl .sgml
+
+all:
+
+install: all installdirs
+	${INSTALL_DATA} iso-entities.cat ${isoent_ddir}/iso-entities.cat
+	for ii in `cd entities; find . -type f`; do \
+	  ${INSTALL_DATA} entities/$$ii ${isoent_ddir}/$$ii; \
+	done
+
+installdirs:
+	for ii in ${sgml_ddir} ${isoent_ddir}; do \
+	  ./config/install-sh -d $$ii; \
+	done
+
+installdoc:
+	./config/install-sh -d ${doc_ddir}
+	for ii in ${DOCS}; do \
+	  ${INSTALL_DATA} $$ii ${doc_ddir}/$$ii; \
+	done
+
+check:
+	@echo "no checks available"
+
+clean:
+	${RM} make-dist MANIFEST.bak
+	${RM} *~
+
+realclean: clean
+
+distclean: clean
+	${RM} config.cache config.log config.status
+
+maintainerclean: distclean
+	${RM} Makefile configure
+
+dist: distclean make-dist
+	cd ${srcdir}; ./make-dist
+
+SEDPL= \
+  -e's;\@PACKAGE\@;${PACKAGE};' \
+  -e's;\@VERSION\@;${VERSION};' \
+  -e's;\@PERL5\@;${PERL5};'
+
+.pl:
+	${RM} $@
+	${SED} ${SEDPL} <$< >$@ || (${RM} $@; exit 1)
+	chmod +x $@

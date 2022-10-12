@@ -1,0 +1,48 @@
+<!doctype sgmltool system >
+<!-- ================================================= -->
+<!--
+
+    $Id: sub.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This is sub.sgml, distributed with SGML-Tools.
+    It is a SUBDOC to the subdoc.sgml example,
+    but it can be verified separately.
+
+    $Log: sub.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:57  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:19:05  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments: none.
+
+                                                       -->
+<!-- ================================================= -->
+
+<p>
+Here you see that you could include an entire, DTD
+compliant document as a SUBDOC of another, that could
+as well be validated separately. You might as well
+need a simple wrapper around providing the header and
+trailer of a valid document. According to the
+<q>Handbook</q>, each SUBDOC document could have a
+different document type, specificed by the
+respective <k>doctype</k> statement. With SGML-Tools,
+this will still be limited to supported DTD's. It does
+not work properly anyway.
+
+
+<!-- ================================================= -->
+<!-- end of sub.sgml                                   -->
+<!--
+     Local Variables:
+     mode: sgml
+     End:                                              -->
+<!-- ================================================= -->

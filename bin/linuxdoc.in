@@ -1,0 +1,45 @@
+#!@PERL@ @PERLWARN@
+#
+#   linuxdoc.in
+#
+#   LinuxDoc-Tools driver. Calls all other LinuxDoc-Tools components,
+#   contains configuration information, etcetera.
+# -------------------------------------------------------------------
+
+package main;
+
+use 5.006;
+use strict;
+
+use lib "@pkgdatadir@";
+use lib "@perl5libdir@";
+
+use LinuxDocTools::Utils qw{ldt_which};
+
+our $prefix             = "@prefix@";
+our $isoentities_prefix = "@isoentities_prefix@";
+our $DataDir            = "@pkgdatadir@";
+our $AuxBinDir          = "@auxbindir@";
+
+our $progs   = {
+  "SGMLSASP"   => ldt_which("sgmlsasp"),
+  "NSGMLS"     => ldt_which("nsgmls","onsgmls"),
+  "GROFF"      => ldt_which("groff"),
+  "GROFFMACRO" => "@GROFFMACRO@",
+#  "NKF" => "@NKF@"
+};
+
+require LinuxDocTools;
+&LinuxDocTools::init;
+
+my @FileList = LinuxDocTools::process_options ($0, @ARGV);
+
+foreach my $curfile (@FileList) {
+  &LinuxDocTools::process_file ($curfile);
+}
+
+exit 0;
+
+# Local Variables:
+#  mode: perl
+# End:

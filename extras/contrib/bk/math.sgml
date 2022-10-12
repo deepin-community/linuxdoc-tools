@@ -1,0 +1,157 @@
+<!DOCTYPE sgmltool
+         PUBLIC "-//SGML-Tools//DTD SGML-Tools v0.9//EN" >
+<!-- ================================================= -->
+<!--
+
+    $Id: math.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This is math.sgml, distributed with SGML-Tools.
+    Is describes the proposed workaround to handle
+    math elements in a portable yet SGML-compliant
+    way.
+
+    $Log: math.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:57  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:18:52  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments: none.
+
+                                                       -->
+<!-- ================================================= -->
+
+
+<article>
+
+<title>TEST: Formulas and Equations
+<author>b. kreimeier
+<date>May 1997
+
+<sect>Formula and Inlined Expressions
+<p>
+Any mathematical expression could be inlined like
+an image, e.g. <f id="f"> is an example for
+using <c><f></c> elements. Basically, you will have
+to make sure the proper format needed
+by a particular backend is needed. This is simple
+for LaTeX, in fact, we recommend using LaTeX language
+to describe and create formulas. For HTML, you could
+rely on tools from the <c>latex2html</c> package to
+create GIF images, or create the images manually.
+Finally, ASCII backends will need manually created
+replacement files - as a last resort, you could
+include the LaTeX source.
+<p>
+An entire formula, introduced by the <c><formula></c>
+element, contains one or more expressions, given by
+a sequence of <c><exp></c> elements. Formula will
+be assigned numbers, if the backend supports
+enumaration, and hopefully listed to a table. We
+might support optional captions. Formulas, like
+figures, quotations or code samples, are separate
+paragraphs.
+<formula>
+<exp id="f">
+<exp id="math">
+</formula>
+Note that the very same source element could be used
+inlined and within a formula element paragraph. The
+actual rendering and interpretation of a mathematical
+expression should be completely self-contained and
+might vary from backend to backend. For example,
+the HTML backend might not support numbering, the
+LaTeX backend does. The external files that provide
+the actual implementation of a mathematical expression
+belong to the same category as images: essentially,
+both are best handled by external entities.
+<p>
+There are several reasons not to support a QWERTZ-like
+SGML equivalent of LaTeX mathematical expressions.
+As we depend heavily on LaTeX, we would simply
+reinvent the wheel. Markup of every single element
+within the expression provides lots of information
+that is about as useful as introducing elements for
+subject, predicate, object, or noun, verb, adjective -
+there is a limit to what is practical, doable, or
+even useful. Finally, we'll use a lot of flexibility,
+as there is a variety of packages for LaTeX, and
+personal preferences and demands vary as well.
+Essentially, we decide that description of
+mathematical expressions is beyond the scope of
+SGML-Tools.
+<p>
+Our approach re-applies the same solution used for
+images (after all, nobody is proposing an SGML
+version of EPSF or a wavelet based symbolic image
+synthesis language either). We gain additional
+flexibility, e.g. if somebody wants to provides
+mathematical expressions as GIF's, we could simply
+use EPSF files even in LaTeX mathematical mode,
+and we could use EPSF images within mathematical
+expressions.
+<p>
+The LaTeX backend maps the elements to
+<c>input ID.etex</c>
+commands. The unsual filename extension was
+chosen because LaTeX files are often intermediate
+results with SGML Tools (e.g. to create Postscript
+or GNU Info), and might be deleted automatically.
+To avoid accidents and to emphasize the fact that
+these files can not be processed standalone by
+LaTeX, stick to an extension matching the one
+chose for EPSF files: <c>ID.eps</c>.
+
+
+<sect>Equations
+<p>
+There is a particular variety of mathematical
+expressions that should be treated differently.
+Equations consist of three parts, a left and
+a right hand expression, with a qualifying
+symbol in between. Equations often come in
+sequences when a particular expression is
+modified in several steps, providing intermediate
+results, or in arrays, when a couple of
+interdependend equations is presented at once.
+The specific three part structure of an equation is
+not always matched by the general mathematical
+expression - or, to be honest, the way
+equations are described in LaTeX is not comptabile
+with mathematical expressions in LaTeX in general.
+<p>
+In consequence, it might be worth introducing a
+separate <c><equation></c> element on the same
+level as <c><formula></c>, and an <c><eqn></c>
+element matching <c><exp></c>: the latter
+would rely including LaTeX files with a slightly
+different structure.
+<p>
+Alternatively,
+an <c><exp></c> element could consist of two
+<c><exp></c> expressions, and a single sign
+element, one of <c><eq></c>, <c><neq></c>,
+<c><leq></c>, <c><lt></c>, <c><geq></c>, or
+<c><gt></c>. It might make sense to handle the
+type of equation with a <k>type</k> attribute
+within the <c><eqn></c> element, however, ASP
+mapping would not handle that easily.
+
+
+</article>
+
+
+<!-- ================================================= -->
+<!-- end of math.sgml                                  -->
+<!--
+     Local Variables:
+     mode: sgml
+     End:                                              -->
+<!-- ================================================= -->

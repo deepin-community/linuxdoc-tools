@@ -1,0 +1,110 @@
+<!-- ================================================= -->
+<!--
+
+    $Id: subdoc.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This is subdoc.sgml, distributed with SGML-Tools.
+    It checks for handling of external entities and
+    subdocs.
+
+    $Log: subdoc.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:57  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:19:06  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments: none.
+                                                       -->
+<!-- ================================================= -->
+<!DOCTYPE sgmltool
+         PUBLIC "-//SGML-Tools//DTD SGML-Tools v0.9//EN"
+ [
+   <!ENTITY   SGMLT              "SGML-&amp;Tools;" >
+   <!ENTITY   CSGMLT     CDATA   "SGML-&amp;Tools;" >
+   <!ENTITY   QSGMLT             "<q>SGML-&amp;Tools;</q>" >
+   <!ENTITY   ExtEntity  system  "entity.etxt"      >
+   <!ENTITY   ImgEntity           "small_picture"   >
+   <!ENTITY   SubDoc     system  "sub.sgml"  SUBDOC >
+ ]>
+<!-- ================================================= -->
+
+<article>
+
+<title>TEST: External Entity and Subdoc
+<author>b. kreimeier
+<date>May 1997
+
+<abstract>
+This document should demonstrate the use of external
+entities and subdocs with SGML-Tools. Applications
+are images, glyphs, special characters, and inclusion
+or larger sections of text shared between several
+documents, or kept separately for other reasons.
+</abstract>
+
+<p>
+We will use a simple <k>&amp;SGMLT;</k> entity to
+demonstrate one application of user-defined entities:
+an often used name or identifier like &SGMLT; could
+be marked, and the actual represenation could be
+changed easily within the preamble.
+<p>
+Entity replacement is quite subtle: &QSGMLT;. With a nod to
+Goedel, consider the following cases of dicussing
+SGML within an SGML document:
+<itemize>
+<item><c>Level 0: &SGMLT; </c>
+<item><c>Level 1: &amp;SGMLT; vs. &amp;CSGMLT;</c>
+<item><c>Level 2: <![CDATA[&SGMLT;]]>  </c>
+<item><c>Level 3: <![CDATA[&amp;SGMLT;]]> vs. <![CDATA[&amp;CSGMLT;]]></c>
+</itemize>
+<itemize>
+<item><k>Level 0: &SGMLT; </k>
+<item><k>Level 1: &amp;SGMLT; vs. &amp;CSGMLT;</k>
+<item><k>Level 2: none </k>
+<item><k>Level 3: <![CDATA[\&amp;SGMLT;]]> vs. <![CDATA[\&amp;CSGMLT;]]></k>
+</itemize>
+<p>
+However, internal entities will usually the the
+exception. Usually, entities will address some
+external, possibly backend dependend component of
+the text, usually found as external files. The
+<k>&amp;ExtEntity;</k> entity simply maps to a
+file, <c>entity.etxt</c> in this particular case,
+the content of which will simply replace any
+appearance of the entity like this: &ExtEntity;.
+<p>
+Finally, documents complying to the same DTD could
+be included as SUBDOC's. This requires that the DTD
+allows for omission of elements which are mapped
+to statements only allowed once in the backend
+(the LaTeX mapping is not set up for this). SUBDOC's
+are merged into the current document, a feature
+that is partly similar to LaTeX's <k>include</k>,
+<k>includeonly</k>, and <k>input</k> commands. The
+following paragraph is from <c>&amp;SubDoc;</c>,
+which incluces <c>sub.sgml</c>.
+<p>
+NOTE: <c>&amp;SubDoc;</c> does not work right now.
+<p>
+Using entities in attributes: <img id="&ImgEntity;">.
+As you can see, it is a good idea to rely on entities
+for defining the <k>id</k> attribute of any element
+like figures or formulas.
+
+</article>
+
+<!-- ================================================= -->
+<!-- end of subdoc.sgml                               -->
+<!--
+     Local Variables:
+     mode: sgml
+     End:                                              -->
+<!-- ================================================= -->

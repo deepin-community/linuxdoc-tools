@@ -1,0 +1,938 @@
+linuxdoc-tools (0.9.68) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Make linuxdoc-tools* Multi-Arch: foreign, so that they can satisfy
+    cross-build-dependencies.
+
+  [ Agustin Martin Domingo ]
+  * debian/control: Bump Standards-Version. No changes required.
+  * rtf-fix/Makefile: Use CPPFLAGS and LDFLAGS.
+  * debian/rules: Get hardened CPPFLAGS and pass them to make.
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Wed, 30 May 2012 16:12:38 +0200
+
+linuxdoc-tools (0.9.67) unstable; urgency=low
+
+  * Makefile.in: Pass CFLAGS and LDFLAGS instead of only OPTIMIZE.
+  * fmt_txt.pl: Put txt output in a single large page (Closes: #3180).
+  * debian/linuxdoc-tools.{postinst,postrm}:
+    - Renamed from {postinst,postrm}.
+    - Enable triggers for ls-R update when installed under dpkg
+      control. Normal update otherwise (e.g., dpkg-reconfigure).
+  * debian/control:
+    - Add "dependency package" string to linuxdoc-tools-* long
+      descriptions to deal with lintian empty-binary-package.
+    - Bump Standards-Version. No changes required.
+  * debian/rules:
+    - Fix lintian debian-rules-missing-recommended-target build-{arch,indep}.
+    - Get CFLAGS and LDFLAGS from dpkg-buildflags. Pass them to make.
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Mon, 10 Oct 2011 15:24:49 +0200
+
+linuxdoc-tools (0.9.66) unstable; urgency=low
+
+  * debian/control:
+    - Bump debhelper dependency to 7.
+  * lib/fmt/fmt_info.pl
+    - Make sure non-alphanumeric characters are backslashed
+      when playing with original full filename. Thanks
+      Michael Klein for report and fix (Closes: #554845).
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Sat, 07 Nov 2009 20:29:00 +0100
+
+linuxdoc-tools (0.9.65) unstable; urgency=low
+
+  * lib/fmt/fmt_txt.pl:
+    - More debugging info if debug is enabled.
+    - Remove some extra not needed .Pp
+  * tex backend:
+    - fmt_latex2e.pl: Rearrange post processing of TeX file. Cosmetic
+      changes.
+    - Make linuxdoctr-sgml.sty mostly a wrapper to linuxdoc-sgml.sty.
+    - Merge tr mapping file in main one for latex2e backend.
+    - Always pass 'breaklinks=true' to hyperref.
+  * info backend:
+    - Use input file name in initial comment of resulting info file.
+    - Remove info-postASP.awk. Use instead new InfoUtils.pm written
+      from scratch.
+    - No need of '\input texinfo' in resulting info file.
+    - fmt_info.pl: Remove leading tabs in abstract (really in preamble)
+    - Force an empty line before @example and list environments.
+    - Minimal support for tr variant.
+  * Reorganized examples dir. Added minimal example for the tr variant.
+  * Rewrite sgml2{info,latex,txt} parsers to allow different program
+    locations.
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Mon, 15 Jun 2009 14:25:50 +0200
+
+linuxdoc-tools (0.9.60) unstable; urgency=low
+
+  * Some source package reorganization:
+    - Relocate fmt and mapping files to simpler locations. Simpler
+      symlink handling.
+    - Move tex stuff in sources to a tex directory.
+    - Move perl modules to perl5lib dir.
+    - Move contrib/obsoleted/unsupported stuff to new extras/ dir
+    - Make package $(DESTDIR) aware
+  * debian/control:
+    - Update git repo info for the new debian-xml-sgml group location.
+    - Fix lintian spelling-error-in-description: latex -> LaTeX
+    - Fix lintian debhelper-but-no-misc-depends.
+  * lib/fmt/fmt_info.pl:
+    - Fix mistype in error message (lyx -> info).
+    - Remove CVS $Id string.
+  * lib/filters/info-postASP.awk:
+    - Make sure ref names are sanitized as other node names
+  * New 'auxbindir', 'perllibdir' and 'texdir' configure opts.
+  * Install auxiliary arch-dependent programs under
+    /usr/lib/linuxdoc-tools instead of /usr/bin, using new 'auxbindir'
+    configure option (Closes: #193543).
+  * Install perl modules under /usr/share/perl5, using 'perllibdir'.
+  * Rework bin/linuxdoc.in replacements in Makefile.in.
+  * bin/linuxdoc.in:
+    - New ldt_which function to search for executables in PATH.
+    - Make sure we always look in @pkgdatadir@ and @perl5libdir@
+  * Remove no longer used sgmlswhich and awkwhich functions along with their
+    calls.
+  * doc/Makedoc.sh: Simplify and reorganize doc creation script.
+  * Fixed most warnings when processing docs with perl -w enabled.
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Tue, 17 Feb 2009 14:22:56 +0100
+
+linuxdoc-tools (0.9.56) unstable; urgency=low
+
+  * debian/addition/{awk,sgmlswhich}:
+    - Fix 'unsafe echo with backslash' dashism. echo message will
+      now render properly also with bash (Closes: #489630).
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Mon, 07 Jul 2008 12:00:15 +0200
+
+linuxdoc-tools (0.9.55) unstable; urgency=low
+
+  * Improvements in the info backend:
+    - lib/dist/fmt_info.pl:
+      + Make sure headers are written in a single line
+    - lib/dist/linuxdoc-tools/info/mapping:
+      + Use more texinfo elements: @emph, @strong, @sc and @uref
+      + Reorganize mapping file.
+  * Improvements in the lyx backend:
+    - Move lyx header from mapping to fmt_lyx.pl
+    - Move tscreen code from mapping to fmt_lyx.pl. Improve support.
+    - linuxdoc class is no longer suported by lyx. Use plain article,
+      report or book classes instead. Use LyX-Code layout instead of
+      no longer suported Verbatim layout.
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Tue, 01 Jul 2008 18:55:48 +0200
+
+linuxdoc-tools (0.9.51) unstable; urgency=low
+
+  * lib/LinuxDocTools.pm:
+    - (process_options): When checking for an explicit backend option,
+      do not shift in the while condition itself, 0 in options like
+      '-s 0' will otherwise stop looping (Closes: #486965).
+  * debian/control:
+    - Bump standards version to 3.8.0. No changes required.
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Thu, 19 Jun 2008 13:45:57 +0200
+
+linuxdoc-tools (0.9.50) unstable; urgency=low
+
+  * lib/LinuxDocTools.pm:
+    - First cut of a major rewrite
+    - ldt_searchfile: New function to look for readable files in
+      different locations. Make sgml catalogs, backends, entities,
+      styles  and mapping searches use it. $file existence check
+      will also use it.
+    - Move dtd search from (process_file) to separate functions. latin1
+      to sgml conversion moved to a new ldt_latin1tosgml function.
+    - Use File::Temp::tempdir for temporary dir creation.
+    - Avoid FileHandle package use.
+    - Define intermediate file names in a single place outside of the
+      functions where they are used. This should simplify renaming them.
+    - Code reformatted, trailing whitespace removed, comments improved.
+  * lib/LinuxDocTools.pm, lib/dist/fmt_info.pl, lib/dist/fmt_latex2e.pl:
+    - Check system calls for return codes and proceed as appropriate.
+    - Improve error messages, making them more consistent.
+  * lib/dist/fmt_latex2e.pl:
+    - Fix bibtex call, should use basename.
+    - Minor cosmetic changes.
+  * doc/Makedoc.sh:
+    - Use mktemp to create doc build temporary dir
+  * debian/control:
+    - Add Vcs fields
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Thu, 05 Jun 2008 13:53:58 +0200
+
+linuxdoc-tools (0.9.31) unstable; urgency=low
+
+  * doc/Makedoc.sh:
+    - Make sure also searches for mawk. Was looking only for
+      gawk and FTBFS if only mawk is present. (closes: #483166)
+  * VERSION bumped.
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Wed, 28 May 2008 00:46:52 +0200
+
+linuxdoc-tools (0.9.30) unstable; urgency=low
+
+  * lib/dist/fmt_*.pl: Major reformatting and trailing whitespace removal.
+  * Some fixes for the info backend:
+    - lib/info.awk moved to lib/filters/info-postASP.awk: Fix
+      info node creation by the info backend.
+    - lib/dist/fmt_info.pl: Fixed regexps and improved code.
+  * lib/dist/fmt_html.pl:
+    - Better %html_escapes handling.
+    - Cleaner $ext and $img options handling.
+  * lib/dist/fmt_latex2e.pl: Better regexp.
+  * lib/dist/fmt_lyx.pl:
+    - Major rewrite of postASP. Minor changes in other functions.
+    - Modified to honour below changes in mapping file
+    - lib/filters/lyx-preNSGMLS.pl: New perl filter for preNSGMLS.
+  * lib/dist/linuxdoc-tools/lyx/mapping:
+    - Fix header
+    - Fix references format
+    - Improve family/series/shape strings
+    - Support for <sc>, <sf> and <sl> tags
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Sun, 18 May 2008 22:31:31 +0200
+
+linuxdoc-tools (0.9.22) unstable; urgency=low
+
+  * debian/control:
+    - New maintainer, set to the Debian XML/SGML Group with myself
+      as uploader. (Closes: #474126).
+    - Standards bumped to 3.7.3, no changes needed.
+    - Split long Suggests, Replaces, Depends and Build-Depends in
+      leading whitespace separared lines.
+  * bin/linuxdoc.in:
+    - "Local Vars" section added for emacs.
+  * debian/{changelog,control}:
+    - Clean trailing whitespace.
+  * debian/rules:
+    - Do not ignore make clean errors if a makefile is present.
+  * lib/dist/linuxdoc-tools/groff/{tr-,}mapping:
+    - Do not create a TOC from here, we are already doing
+      that from fmt_txt.pl. Updated comments to be consistent
+      with this.
+    - Removed trailing whitespace.
+  * Makefile.in:
+    - Make sure CVS stuff is not installed
+  * debian/copyright, docs/{CHANGES,CONTRIBUTORS}.old-v1:
+    - Update Copyright notice and make sure old CHANGES and
+      CONTRIBUTORS files are included.
+  * man/sgmlpre.1: Typo fixed.
+  * debian/linuxdoc-tools.doc-base: Section fixed.
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Tue, 22 Apr 2008 13:26:58 +0200
+
+linuxdoc-tools (0.9.21-0.11) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * lib/LinuxDocTools/Html2Html.pm:
+    - Do not generate a fake html single file for report
+      style when using '-s 0'. Thanks Xavier Droubay for
+      the patch (Closes: #433021).
+  * Makefile.in:
+    - Do not unconditionally strip sgmlpre (Closes: #437479).
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Tue, 11 Sep 2007 13:32:06 +0200
+
+linuxdoc-tools (0.9.21-0.10) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Makefile.in:
+    - Complete distclean target.
+  * debian/{doc-base.linuxdoc-tools,linuxdoc-tools.doc-base}
+    - doc-base.linuxdoc-tools renamed to linuxdoc-tools.doc-base
+    - Removed linuxdoc-sgml entry. doc-base does not support it.
+  * Build mechanism migrated to debhelper:
+    - debian/rules: simplified and migrated to debhelper.
+    - debian/control: Use ${misc:Depends} and ${perl:Depends}
+    - debian/{postinst,prerm}.dependencies removed, they will
+      be recreated by debhelper when building package.
+    - debian/{postinst,prerm}: will only run mktexlsr on
+      /usr/share/texmf when needed. Using dh_installtex seems
+      an overkill here. debhelper will add the rest.
+    - debian/linuxdoc-tools.info-base: new file with info file
+      header, for dh_installinfo benefit.
+    - debian/linuxdoc-tools.{docs,sgmlcatalogs}: new files
+  * debian/control:
+    - Build-Dependencies: Remove tetex stuff, rearrange and add
+      texlive-fonts-recommended.
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Mon, 18 Jun 2007 13:15:13 +0200
+
+linuxdoc-tools (0.9.21-0.9) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * lib/dist/fmt_txt.pl:
+    - Rewritten TOC creation code. Should now work with long
+      lines (wrapping them) and chapters, as well as remove
+      a number of undesired stuff from it (closes: #425537).
+    - Make sure we abort if groff creates an empty file
+      (closes: #248992).
+    - Make sure zero width spaces are inserted in front of
+      ' at start of line (closes: #426696).
+    - Make sure HY register is set to 0 for languages other
+      than english before sending to groff (closes: #16304).
+    - Merge $txt->{cutblank} functionality into postASP.
+    - Cosmetic changes.
+  * doc/Makedoc.sh:
+    - Use '-b 1' for guide text build.
+  * lib/LinuxDocTools/Lang.pm:
+    - Added patch from Fedora FC6 with Finnish strings
+      (closes: #423216)
+  * README,debian/{control,rules,README.Debian}:
+    - Rewrite package description, and move some of the
+      former info to README and README.Debian. Thanks David
+      Lawyer for his help (closes: #426562).
+    - Install README.Debian with info about packages required
+      for extra functionality. Refer to this needs in package
+      description (closes: #188977).
+  * entity-map/sdata/ISOnum.2l1tr:
+    - Replace &nbsp; by groff non breaking space, '\ ', instead
+      of using latin1(160), disliked by groff.
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Thu, 31 May 2007 18:40:49 +0200
+
+linuxdoc-tools (0.9.21-0.8) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * lib/dist/fmt_txt.pl:
+    - Make -f pass "-cbou" to grotty unless something else
+      is passed. Remove old un-overstriking code.
+    - Cosmetic changes.
+  * debian/changelog: Minor fixes in old entries.
+  * doc/Makedoc.sh:
+    - Use 'times' package for guide latex build. This makes
+      linuxdoc package size nearly half.
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Mon,  7 May 2007 12:11:09 +0200
+
+linuxdoc-tools (0.9.21-0.7) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * lib/dist/fmt_txt.pl:
+    - Cosmetic changes.
+    - Add emacs local variables section to have indent-level 2.
+    - "-c" is passed to grotty by default by passing "-P-c"
+      to groff, unless something else is set from the command
+      line. This should fallback to the old (overstriking)
+      grotty behavior and avoid escape sequences unless
+      explicitely desired. Thanks David Lawyer for the hint
+      (closes: #175575, #419324).
+  * lib/dist/fmt_{latex2e,txt}.pl
+    - Make sure underscores are passed as &lowbar; (closes: #194941)
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Thu, 26 Apr 2007 16:00:02 +0200
+
+linuxdoc-tools (0.9.21-0.6) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * lib/dist/linuxdoc-tools/html/mapping:
+    - Make sure <p> starts a new line in html mode, so it
+      does not mess with title declaration (closes: #182775).
+  * lib/dist/linuxdoc-tools/latex2e/{,tr-}mapping:
+    - Removed unneeded newlines from latex2e mapping
+      (closes: #168482).
+    - Make sure pdftex is used before setting \pdfcompresslevel.
+    - Extend babel options selection to other document classes.
+  * lib/dist/fmt_latex2e.pl:
+    - Remove spurious '\n' (not real '\\n') after leading "-".
+  * lib/LinuxDocTools.pm:
+    - Use -t LIST option to expand command instead of obsolete and
+      undocumented (but still working) -LIST (closes: #215271).
+  * debian/control:
+    - Fix package description, linuxdoc-tools is currently in use
+      by the LDP. Thanks David Lawyer for his suggestions
+      (closes: #406708)
+    - Add missing texlive dependencies and build dependencies and
+      make texlive preferrable to tetex, to help the texlive
+      transition.
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Thu, 12 Apr 2007 12:47:10 +0200
+
+linuxdoc-tools (0.9.21-0.5) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * lib/dist/fmt_html.pl:
+    - Make sure multiline sect names are correctly treated
+      in $html->{preASP} (closes: #193792).
+    - Minor simplifications in $html->{preASP}.
+  * lib/LinuxDocTools.pm:
+    - Signal error and provide more info if system call fails.
+  * debian/control:
+    - Add texlive alternative TeX dependencies (closes: #381468).
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Wed, 15 Nov 2006 12:45:35 +0100
+
+linuxdoc-tools (0.9.21-0.4) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * entity-map/sdata/ISOnum.2html:
+    - Add translations for some HTML entities that describe
+      ascii characters, which should just be written plain
+      in HTML files. Patch by Adeodato Simó (closes: #233919).
+  * lib/info.awk:
+    - No need to escape braces. This was producing warnings with
+      gawk. Patch by Spiro Trikaliotis (closes: #352022)
+  * debian/{prerm,postinst}:
+    - Use 'which' instead of non-POSIX 'command -v' (closes: #292994)
+  * debian/control:
+    - Make sgml-base dependency be at least on 1.04, where
+      'update-catalog' was included (closes: #187467)
+  * debian/copyright.dependencies:
+    - Refer to common GPL copyright file
+  * debian/rules:
+    - Make sure non binary perl module is installed in the right
+      location under /usr/share/perl5, not /usr/lib/perl5.
+  * lib/LinuxDocTools.pm:
+    - Check for /etc/papersize presence and set default to letter if
+      appropriate (closes: #185233)
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Wed, 10 May 2006 15:32:35 +0200
+
+linuxdoc-tools (0.9.21-0.3) unstable; urgency=low
+
+  * Non-maintainer upload.
+
+  [Agustin Martin]
+  * debian/changelog: Converted to utf-8
+  * lib/dist/fmt_lyx.pl: Fix indent level problems when using
+    sgml2lyx. An extra '$_=" ".<$infile>;' in the @/tag@ section.
+    was causing problems with $ident_level (closes: #357029)
+  * lib/dist/linuxdoc-tools/latex2e/{tr-,}mapping.orig removed
+  * lib/dist/fmt_latex2e.pl,
+    lib/dist/linuxdoc-tools/latex2e/{tr-,}mapping:
+    - Change preamble creation mechanism to use @FOO@ like strings
+      to be substituted by the right values (closes: #197914, #259266)
+    - Typo fixed (non escaped []).
+  * debian/rules: Make sure debian/linuxdoc-tools-{info,latex,txt} dirs
+    are removed in clean target as well as other stuff
+
+  [Joey Hess]
+  * debian/{postinst,prerm}{,.dependencies}
+    - Removed /usr/doc symlink (closes: #322791, #342746)
+
+ -- Agustin Martin Domingo <agmartin@debian.org>  Tue,  9 May 2006 18:13:48 +0200
+
+linuxdoc-tools (0.9.21-0.2) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Remove Obsolete code in generated LaTeX input files (Closes: #322000)
+
+ -- Alexander Wirt <formorer@debian.org>  Sun, 25 Dec 2005 12:59:08 +0100
+
+linuxdoc-tools (0.9.21-0.1) unstable; urgency=low
+
+  * Make sgml2latex work with teTeX-3.0.  NMU since this fix is necessary
+    to prevent FTBFS bugs (closes: #321998)
+
+ -- Frank Küster <frank@debian.org>  Tue, 18 Oct 2005 19:08:34 +0200
+
+linuxdoc-tools (0.9.21) unstable; urgency=low
+
+  * Another Debian specific change
+    - set versioned dependency to linuxdoc-tools from text/latex/info
+      driver backend (dependency only dummy ) packages.
+      Thanks to Paul Slootman for his kind advice (Closes: #138680)
+    - use shell scripts for producing better error messages
+      instead of just symlinks (sgml2txt, sgml2latex, and sgml2info)
+
+ -- Taketoshi Sano <sano@debian.org>  Mon, 25 Mar 2002 22:16:20 +0900
+
+linuxdoc-tools (0.9.20) unstable; urgency=low
+
+  * No hyphenation for text output (.nh in groff stylesheet)
+  * Debian specific change
+    - Revert to put sgml2{txt,info,latex} into main package
+      because the new split setup breaks build process of many
+      package at our buildd.  Thanks to Ryan Murray for his input
+      about this problem.
+
+ -- Taketoshi Sano <sano@debian.org>  Tue, 19 Mar 2002 02:37:21 +0900
+
+linuxdoc-tools (0.9.19) unstable; urgency=low
+
+  * Several Documentation update.
+    - now sgml2* and sgmlcheck commands are obsoleted.
+      Please switch to use the new single command "linuxdoc"
+      and the "-B" option to choose the proper backend drivers.
+  * Debian specific change
+    - fix the package description. (Closes: #138680)
+
+ -- Taketoshi Sano <sano@debian.org>  Mon, 18 Mar 2002 22:32:01 +0900
+
+linuxdoc-tools (0.9.18) unstable; urgency=low
+
+  * Debian specific change
+    - fix the shell script for sgml2txt and sgml2info
+      Thanks to Michael Fedrowitz for his report (Closes: #135376)
+
+ -- Taketoshi Sano <sano@debian.org>  Mon, 25 Feb 2002 00:30:27 +0900
+
+linuxdoc-tools (0.9.17) unstable; urgency=low
+
+  * Just the Debian specific change.
+    - fix dependencies from groff-base to groff (Closes: #120867)
+    - The obsoleted commands "sgml2*" aren't "binaries" at all,
+      but wishes are granted anyway.  They are contained in each
+      "dummy" packages now.  (The functions are still provided
+      by the common main command; i.e. linuxdoc. So users can
+      convert linuxdoc sgml source into text without dummy pkgs ;)
+
+ -- Taketoshi Sano <sano@debian.org>  Mon, 18 Feb 2002 20:05:14 +0900
+
+linuxdoc-tools (0.9.16) unstable; urgency=low
+
+  * fix mapping files for latex output.  Thanks to Xavier Venient
+    for his patch. (Closes: #130396)
+  * Makefile.in: change from "@datadir@" to "$(datadir)" for pkgdatadir
+    Thanks to Tim Waugh for his valuable advices.
+  * ./lib/{url.sty,epsf.sty,epsf.tex}: moved to ./obsoleted since
+    the newer version of them are available from teTeX distribution.
+  * fix a typo in man/linuxdoc.1 (tex -> txt).
+  * create dummy packages for required dependencies. (Closes: #120867)
+
+ -- Taketoshi Sano <sano@debian.org>  Tue, 29 Jan 2002 00:56:52 +0900
+
+linuxdoc-tools (0.9.15) unstable; urgency=low
+
+  * fix a remaining bug in Makefile.in
+
+ -- Taketoshi Sano <sano@debian.org>  Sun,  2 Dec 2001 23:20:14 +0900
+
+linuxdoc-tools (0.9.14) unstable; urgency=low
+
+  * changes based on the patches from Tim Waugh:
+     - add "-R" option to dvips in lib/dist/fmt_latex2e.pl
+     - fix a simple bug in rtf2rtf.l
+     - fix configure.in and Makefile.in for sane installation
+     - update doc/Makedoc.sh to keep up with other changes
+
+ -- Taketoshi Sano <sano@debian.org>  Sun,  2 Dec 2001 08:16:18 +0900
+
+linuxdoc-tools (0.9.13) unstable; urgency=low
+
+  * forgot to update the VERSION file. fixed.
+
+ -- Taketoshi Sano <sano@debian.org>  Mon, 26 Nov 2001 23:45:19 +0900
+
+linuxdoc-tools (0.9.12) unstable; urgency=low
+
+  * Update mapping files for latex output to fix a problem
+    related multiple occuring of url/htmlurl in single line.
+    Thanks to Xavier Venient <xvenient@free.fr> for finding
+    this problem and providing a sample sgml source.
+  * run texhash only gets removed. moved from prerm to postrm.
+    (Closes: #118893)
+
+ -- Taketoshi Sano <sano@debian.org>  Wed, 14 Nov 2001 00:49:28 +0900
+
+linuxdoc-tools (0.9.11) unstable; urgency=low
+
+  * add entry for multi-line DTD declaration style
+    on DTD detection code.  Thanks to Martin Schulze <joey>
+    to inform this problem to me.
+
+ -- Taketoshi Sano <sano@debian.org>  Thu, 18 Oct 2001 22:36:04 +0900
+
+linuxdoc-tools (0.9.10) unstable; urgency=low
+
+  * modify html stylesheet (lib/dists/linuxdoc-tools/html/mapping)
+    in order to enable the usage of <manpage> element in both of
+    groff (man) and html output. This is requested from the maintainer
+    of urlview. Closes: #90870
+  * add error message in LinuxDocTools.pm for file creation failure.
+    Closes: #111256
+
+ -- Taketoshi Sano <sano@debian.org>  Sun,  9 Sep 2001 12:52:43 +0900
+
+linuxdoc-tools (0.9.9) unstable; urgency=low
+
+  * Debian specific
+    - FHS transition.
+    - remove iso-entities in this package, and use entities
+      in Debian sgml-data package.  Closes: #39665
+    - try to fix an old wishlist bug.  use mawk when gawk is
+      not available and replace dependencies to gawk with
+      gawk|mawk.  Closes: #25283
+    - Old bug clean up.  Closes: #99810
+    - use update-catalog instead of old install-sgmlcatalog
+  * fix a bug in chapter handling code for html conversion.
+    Thanks to Vanessa Conchodon.  Closes: #109077
+  * change the default behavior to include subsections
+    in the table of contents, and add the note for --toc
+    option in manpages.  Closes: #96658
+  * fix a bug in index handling code for info conversion.
+    Thanks to Jim Van Zandt for his patch.  Closes: #79784
+    (Actually, this has been fixed for months, I think.
+     Just forgot to close the bug.)
+
+ -- Taketoshi Sano <sano@debian.org>  Sun,  2 Sep 2001 00:28:43 +0900
+
+linuxdoc-tools (0.9.8.1) unstable; urgency=low
+
+  * Use symlinks instead of hard links for sgml2**** commands
+    Thanks to James Troup for his notice. - Closes: #89063
+
+ -- Taketoshi Sano <sano@debian.org>  Mon,  2 Jul 2001 20:22:27 +0900
+
+linuxdoc-tools (0.9.8) unstable; urgency=low
+
+  * change the order of nsgmls and onsgmls in configure.in
+    (1st try nsgmls, and then onsgmls)
+
+ -- Taketoshi Sano <sano@debian.org>  Mon,  4 Jun 2001 15:07:45 +0900
+
+linuxdoc-tools (0.9.7.4) unstable; urgency=low
+
+  * fix debian/rules to rewrite /usr/bin/linuxdoc correctly
+    for /usr/lib/linuxdoc-tools/sgmlswhich  - Closes: #99810
+
+ -- Taketoshi Sano <sano@debian.org>  Mon,  4 Jun 2001 10:44:29 +0900
+
+linuxdoc-tools (0.9.7.3) unstable; urgency=low
+
+  * add gawk in build-dependency - Closes #98667
+
+ -- Taketoshi Sano <sano@debian.org>  Fri, 25 May 2001 21:46:18 +0900
+
+linuxdoc-tools (0.9.7.2) unstable; urgency=low
+
+  * update build-depends (perl-5.005 -> perl).
+
+ -- Taketoshi Sano <sano@debian.org>  Fri, 25 May 2001 02:52:39 +0900
+
+linuxdoc-tools (0.9.7.1) unstable; urgency=low
+
+  * fix lintian error by using strip with required options.
+
+ -- Taketoshi Sano <sano@debian.org>  Fri, 25 May 2001 02:46:55 +0900
+
+linuxdoc-tools (0.9.7) unstable; urgency=low
+
+  * add an explanation for -T option to man page of sgml2html
+    - Closes #96658
+  * revert to use onsgmls if nsgmls is not available.
+  * add wrapper for nsgmls to switch nsgmls/onsgmls in run time.
+
+ -- Taketoshi Sano <sano@debian.org>  Fri, 25 May 2001 02:09:43 +0900
+
+linuxdoc-tools (0.9.6) unstable; urgency=low
+
+  * fix a typo in lib/dist/linuxdoc-tools/info/mapping
+  * disable automatic language switch for Environmental Variables.
+  * update pacakge description in debian/control
+
+ -- Taketoshi Sano <sano@debian.org>  Wed, 28 Mar 2001 21:41:38 +0900
+
+linuxdoc-tools (0.9.5) unstable; urgency=low
+
+  * update package description in debian/control
+  * modify configure.in and configure to use sgmls only
+
+ -- Taketoshi Sano <sano@debian.org>  Wed, 28 Mar 2001 21:40:59 +0900
+
+linuxdoc-tools (0.9.4) unstable; urgency=low
+
+  * update mapping file for info backend.
+  * update fmt_latex2e.pl to add --dvips (-s) option for latex backend.
+  * update manpages for sgml2txt and sgml2latex as well as linuxdoc(1).
+
+ -- Taketoshi Sano <sano@debian.org>  Fri,  2 Mar 2001 13:59:12 +0900
+
+linuxdoc-tools (0.9.3) unstable; urgency=low
+
+  * modify debian/rules to use debian/changelog as changelog.gz
+  * update version in the specs/linuxdoc-tools.spec
+
+ -- Taketoshi Sano <sano@debian.org>  Thu, 14 Dec 2000 16:16:34 +0900
+
+linuxdoc-tools (0.9.2) unstable; urgency=low
+
+  * update on backend drivers for text, latex2e, and info format
+    to add more security on intermediate files in temporary directory.
+
+ -- Taketoshi Sano <sano@debian.org>  Thu, 14 Dec 2000 11:23:07 +0900
+
+linuxdoc-tools (0.9.1) unstable; urgency=low
+
+  * more fix on /tmp race condition. hope this is the final.
+  * fix fmt_latex2e.pl bug introduced in the previous version.
+
+ -- Taketoshi Sano <sano@debian.org>  Wed, 13 Dec 2000 23:18:28 +0900
+
+linuxdoc-tools (0.9.0) unstable; urgency=low
+
+  * finally upload to Debian :)
+  * fix euc-kr handling. Thanks to Changwoo Ryu.
+  * fix /tmp race conditions.  Thanks to Colin Phipps.
+  * fix Makefile.in to invoke bash script correctly.
+    Also thanks to Colin Phipps.
+  * Add automatic language detection. Thanks to Yasuhide OOMORI.
+  * Update fmt_latex2e.pl. Also thanks to Yasuhide OOMORI.
+  * update VERSION file
+
+ -- Taketoshi Sano <sano@debian.org>  Sat,  2 Dec 2000 01:25:53 +0900
+
+linuxdoc-tools (0.7.4) unstable; urgency=low
+
+  * fix a dangerous remove_tmpfiles calling bug.
+    used a patch from Evgeny Stambulchik. Thanks!
+
+ -- Taketoshi Sano <sano@debian.org>  Tue, 29 Aug 2000 08:06:16 +0900
+
+linuxdoc-tools (0.7.3) experimental; urgency=low
+
+  * work-around to avoid the problem between url.sty and
+    jlatex (lib/dist/fmt_latex2e.pl).
+
+ -- Taketoshi Sano <sano@debian.org>  Sat,  5 Aug 2000 19:34:13 +0900
+
+linuxdoc-tools (0.7.2) experimental; urgency=low
+
+  * revert to use \url{} for <url> in latex output
+    (lib/dist/linuxdoc-tools/latex2e/{mapping,tr-mapping}).
+  * start to use \urldef in order to avoid the problem
+    with the not-usable characters and the inside arguments
+    (lib/dist/fmt_latex2e.pl).
+  * added translation for tilde, circ, and dot for ascii
+    (entity-map/sdata/ISOdia.2ab).
+
+ -- Taketoshi Sano <sano@debian.org>  Sat,  5 Aug 2000 17:58:12 +0900
+
+linuxdoc-tools (0.7.1) experimental; urgency=low
+
+  * update postinst script to match the renamed catalog file
+  * udpate the VERSION (thanks to those who pointed out that
+    the VERSION file shows 0.6.5 for 0.7.0 release).
+  * update manpages (linuxdoc.1, sgml2latex.1)
+  * modify fmt_latex2e.pl based on the patch from
+    CHOI Junho <cjh@kr.FreeBSD.org> in order to make enable
+    the usage of other latex command such as hlatexp or platex.
+  * Added ko support (-l ko / -c euc-kr) with the patch from
+    CHOI Junho <cjh@kr.FreeBSD.org>.  Thanks to him!
+  * fix the typo in man/sgml2latex.1 and remove the work-around
+    for that typo from Makefile.in.
+  * fix a problem in html ouput for single colum tables.
+    Evgeny Stambulchik <fnevgeny@plasma-gate.weizmann.ac.il>
+    sent me the patch for this.  Thanks!
+  * catalog file is moved from lib/dtd into lib/, so remove
+    the work-around from Makefile.in and other related file.
+    Thanks to Evgeny Stambulchik to let me know this problem.
+
+ -- Taketoshi Sano <sano@debian.org>  Thu,  3 Aug 2000 13:10:14 +0900
+
+linuxdoc-tools (0.7.0) experimental; urgency=low
+
+  * modify LinuxDocTools.pm to use tr-mapping for groff or
+    latex2e output, even if "-c nippon" is not specified.
+    Thanks to CHOI Junho <cjh@kr.FreeBSD.org> for his report.
+    I finally found that this is the cause of his problem.
+
+ -- Taketoshi Sano <sano@debian.org>  Sun,  9 Jul 2000 18:54:18 +0900
+
+linuxdoc-tools (0.6.9) experimental; urgency=low
+
+  * more fix on fmt_latex2e.pl not to get the temporary dir
+    name into the resulted ps file when "-o ps" is specified
+    with sgml2latex.
+
+ -- Taketoshi Sano <sano@debian.org>  Sun,  9 Jul 2000 18:04:05 +0900
+
+linuxdoc-tools (0.6.8) experimental; urgency=low
+
+  * more fix on latex2e/{mapping,tr-mapping} and fmt_latex2e.pl
+    to correctly handle jlatex/dvi2ps limitation when -c nippon
+    is specified.
+
+ -- Taketoshi Sano <sano@debian.org>  Sun,  9 Jul 2000 16:56:26 +0900
+
+linuxdoc-tools (0.6.7) experimental; urgency=low
+
+  * update the description in debian/control.
+
+ -- Taketoshi Sano <sano@debian.org>  Sun,  9 Jul 2000 16:04:34 +0900
+
+linuxdoc-tools (0.6.6) experimental; urgency=low
+
+  * fix on latex2e/tr-mapping to use linuxdoctr-sgml.sty
+    (Thanks to CHOI Junho <cjh@kr.FreeBSD.org> for his report)
+
+ -- Taketoshi Sano <sano@debian.org>  Sun,  9 Jul 2000 15:47:15 +0900
+
+linuxdoc-tools (0.6.5) experimental; urgency=low
+
+  * more and more fix on groff/{mapping,tr-mapping} to restrain
+    some irerevant error messages from groff.
+
+ -- Taketoshi Sano <sano@debian.org>  Sat,  1 Jul 2000 11:28:27 +0900
+
+linuxdoc-tools (0.6.4) experimental; urgency=low
+
+  * more fix on groff/{mapping,tr-mapping} to reset the level
+    of indent in text output correctly for nested itemize list.
+
+ -- Taketoshi Sano <sano@debian.org>  Fri, 30 Jun 2000 08:41:11 +0900
+
+linuxdoc-tools (0.6.3) experimental; urgency=low
+
+  * lib/dist/linuxdoc-tools/groff/{mapping,tr-mapping} is fixed
+    to indent text output correctly for nested itemize list.
+
+ -- Taketoshi Sano <sano@debian.org>  Thu, 29 Jun 2000 09:48:17 +0900
+
+linuxdoc-tools (0.6.2) experimental; urgency=low
+
+  * Html2Html.pm is fixed in order not to halt when the input
+    is really small one without any sections.
+
+ -- Taketoshi Sano <sano@debian.org>  Thu, 29 Jun 2000 09:14:34 +0900
+
+linuxdoc-tools (0.6.1) experimental; urgency=low
+
+  * Html2Html.pm is fixed to use the correct name for the
+    temporary contents file and keep that file when the debug
+    switch is enabled.  fmt_html.pl is also udpated to give
+    the required value to Html2Html.pm.
+
+ -- Taketoshi Sano <sano@debian.org>  Wed, 28 Jun 2000 23:17:38 +0900
+
+linuxdoc-tools (0.6.0) experimental; urgency=low
+
+  * Add "-T" option to sgml2html (linuxdoc -B html) to control
+    the level of toc generation independent with the level of
+    file splitting. You can use "sgml2html -s 0 -T 2" (or
+    "linuxdoc -B html -s 0 -t 2") to generate single html
+    output file with the toc for sections and subsections.
+  * Update doc/guide.sgml and doc/guide.txt to match the release
+    of 0.6.0.
+
+ -- Taketoshi Sano <sano@debian.org>  Wed, 28 Jun 2000 09:15:50 +0900
+
+linuxdoc-tools (0.5.0) experimental; urgency=low
+
+  * Bugs in configure.in (thus configure), Makefile.in and
+    LinuxDocTools.pm are fixed.
+  * Modify asp mapping file for latex output in order to use
+    img element for pdf. This eliminates the necessity to use
+    the conditional syntax. An eps element is only used for EPS
+    EPS graphics in tex/dvi/PS outputs, and an img element is
+    used for PNG/JPG graphics on HTML/PDF outputs.
+    (lib/dist/linuxdoc-tools/latex2e/mapping)
+  * Add some explanations of elements for tables and graphics
+    on doc/example.sgml. Also update on doc/guide.sgml and
+    doc/guide.txt to match the 0.4.0 release.
+  * Update README on TOPDIR to brush up on my English grammar
+    (Thanks to David Lawyer). And merge the contents of
+    README.pdf from Juan Jose Amor Iglesias in order to avoid
+    the confusion.
+
+ -- Taketoshi Sano <sano@debian.org>  Mon, 19 Jun 2000 21:05:30 +0900
+
+linuxdoc-tools (0.4.0) experimental; urgency=low
+
+  * more fix on LinuxDocTools.pm: found the keywords selected
+    for previous version is not so adequate. So they are changed
+    to just add "pdflatex=yes" when "-o pdf" is specified with
+    sgml2latex. The example to use graphics in html/dvi/ps/pdf
+    will be added to doc/example.sgml and/or doc/guide.sgml,
+    maybe later.
+
+ -- Taketoshi Sano <sano@debian.org>  Mon, 19 Jun 2000 21:05:15 +0900
+
+linuxdoc-tools (0.3.9) experimental; urgency=low
+
+  * more fix fmt_latex2e.pl to enable the use of graphics
+    for dvi, ps, pdf output in latex format. Previous version
+    can not handle if "height=" and "angle=" attribute is
+    specified, or extra space exists in the beggining of
+    the line.
+  * fix LinuxDocTools.pm to enable the automatic adding
+    the definition setting for sgmlpre command.
+    This is required because pdfTeX does not support eps
+    graphic file. You should use conditional syntax to use
+    the graphics for all of dvi, ps, and pdf.
+
+ -- Taketoshi Sano <sano@debian.org>  Sat, 20 May 2000 10:08:50 +0900
+
+linuxdoc-tools (0.3.8) experimental; urgency=low
+
+  * fix fmt_latex2e.pl to enable the use of graphics
+    for dvi, ps, pdf output in latex format.
+
+ -- Taketoshi Sano <sano@debian.org>  Fri, 19 May 2000 18:27:48 +0900
+
+linuxdoc-tools (0.3.7) experimental; urgency=low
+
+  * fix a bug in handling the global option "--backend / -B"
+    I found "-b" is used at sgml2latex, so the short option
+    name has been changed. And the short option name for
+    "--blanks" in sgml2txt is revered to "-b".
+  * Apply the pdf patch written by Juan Jose Amor Iglesias,
+    which was downloaded from:
+    <http://slug.hispalinux.es/~jjamor/linuxdoc-sgml/>
+
+ -- Taketoshi Sano <sano@debian.org>  Fri, 19 May 2000 15:54:31 +0900
+
+linuxdoc-tools (0.3.6) experimental; urgency=low
+
+  * fix a bug which prevents sgmlcheck working.
+  * change the argument for option -b (--backend)
+    from "sgmlcheck" to "check". This works as sgmlcheck.
+
+ -- Taketoshi Sano <sano@debian.org>  Wed, 17 May 2000 14:56:05 +0900
+
+linuxdoc-tools (0.3.5) experimental; urgency=low
+
+  * ver 0.3.5
+  * update the manpage of linuxdoc(1), adding the description
+    of the new option "--backend / -b".
+
+ -- Taketoshi Sano <sano@debian.org>  Wed, 17 May 2000 09:12:04 +0900
+
+linuxdoc-tools (0.3.4) experimental; urgency=low
+
+  * ver 0.3.4
+  * apply the fix for latex convertion, related to CA in
+    tabular elements. "to use '|' to denote a vertical line
+    separating columns". Thanks to Evgeny Stambulchik, he
+    posted this fix on sgml-tools list.
+
+ -- Taketoshi Sano <sano@debian.org>  Wed, 17 May 2000 08:48:32 +0900
+
+linuxdoc-tools (0.3.3) experimental; urgency=low
+
+  * some bug-fixes for new option "--backend / -b" and
+    message output for usage.
+
+ -- Taketoshi Sano <sano@debian.org>  Wed, 17 May 2000 08:19:23 +0900
+
+linuxdoc-tools (0.3.2) experimental; urgency=low
+
+  * revert the command names. ld-xxx and ld2xxxx is
+    not so good than I expected, and backward compatibility is
+    important for users' convenience.
+  * revert the command names. now sgml2* and sgmlcheck is
+    the same as sgml-tools 1.0.9 for users compatibility.
+  * /usr/bin/sgmltools is now called /usr/bin/linuxdoc
+  * /usr/bin/linuxdoc have a new option "--backend / -b"
+    so an option "-b" for sgml2txt is changed as "-B".
+
+ -- Taketoshi Sano <sano@debian.org>  Wed, 17 May 2000 07:16:28 +0900
+
+linuxdoc-tools (0.1) experimental; urgency=low
+
+  * New branch. Initial release.
+  * doc/guide.sgml : update for the command name change.
+  * Command names are changed from sgml2* to ld2*,
+    sgmlcheck is now called ld-check, and sgmltools are
+    renamed to ld-tools.
+  * Update documents (README, INSTALL, etc). Old documents
+    are preserved in old-doc subdirectory.
+  * Created the branch based on sgml-tools 1.0.9, with
+    the modification in most recent Debian package.
+    Please refer old-docs/CHANGES.Debian and old-docs/CHANGES.109j
+    for the details of these modification.
+
+ -- Taketoshi Sano <sano@debian.org>  Sun, 14 May 2000 00:23:02 +0900

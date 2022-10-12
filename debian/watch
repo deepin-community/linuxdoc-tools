@@ -1,0 +1,5 @@
+
+version=4
+
+https://gitlab.com/agmartin/linuxdoc-tools/-/tags \
+  (?:.*/)@PACKAGE@@ANY_VERSION@\.tar\.gz

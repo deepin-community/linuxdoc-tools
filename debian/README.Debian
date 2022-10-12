@@ -1,0 +1,35 @@
+linuxdoc-tools README for Debian
+================================
+
+Dependencies
+------------
+
+out-of-the-box linuxdoc-tools will only provide support for
+sgml2html conversion. Other conversions will need other Debian
+packages be installed. Those dependencies will be pulled either
+by linuxdoc-tools-text, linuxdoc-tools-info or
+linuxdoc-tools-latex packages, although you can install them
+by your own.
+
+The relevant dependencies are:
+
+sgml2txt:
+  * groff package
+
+sgml2info:
+  * texinfo package
+
+sgml2latex:
+  * texlive-latex-base | tetex-base
+  * texlive-base-bin | tetex-bin
+  * texlive-latex-recommended | tetex-extra
+
+Handling of other DTD
+---------------------
+
+linuxdoc-tools has been designed and implemented only for linuxdoc DTD.
+If you wish to convert debiandoc DTD documents, please install and use
+debiandoc-sgml package. If you wish to convert docbook DTD documents,
+please install and use jade (with or without sgmltools-lite).
+
+ -- Agustin Martin Domingo <agmartin@debian.org>, Thu, 31 May 2007 11:30:51 +0200

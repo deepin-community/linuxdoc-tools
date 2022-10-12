@@ -1,0 +1,105 @@
+<!DOCTYPE sgmltool
+         PUBLIC "-//SGML-Tools//DTD SGML-Tools v0.9//EN" >
+<!-- ================================================= -->
+<!--
+
+    $Id: code.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This is code.sgml, distributed with SGML-Tools.
+
+    $Log: code.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:57  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:18:43  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments: none.
+
+                                                       -->
+<!-- ================================================= -->
+
+
+<article>
+
+<title>TEST: Code Environment
+<author>b. kreimeier
+<date>May 1997
+
+<sect>Code Paragraphs and Lines
+<p>
+Code usually comes in verbatim paragraphs, which are marked
+as <c><code></c>. Here's a bit of code from the DTD:
+<code>
+<!-- This is a DTD, but will be read as -*- sgml -*-   -->
+<!-- ================================================= -->
+     This is LINUXDOC96 DTD for SGML-Tools,
+     a hacked version of QWERTZ.DTD v1.3 by Matt Welsh,
+     Greg Hankins, Eric Raymond, Marc Baudoin and
+     Tristan Debeaupuis; modified from QWERTZ.DTD by
+     Tom Gordon.                                       -->
+<!-- ================================================= -->
+
+<TRY>
+
+</code>
+Often, one will use <c>program</c> or
+<c>script</c> names, packages, <c>function</c>
+or <c>variable</c> names, or other source related expressions.
+In this case, inlined code will be marked with <c><c></c>.
+<p>
+The code paragraphs should have an optional caption,
+including counters and entries into a table.
+
+
+<sect>Literal Programming
+<p>
+One potential application of SGML-Tools is literal
+programming, as with WEB by Donald Knuth, which has
+been used for LaTeX. The basic idea is to maintain
+source and documentation within the same document,
+and create the actual source by extracting it
+from the document. In compiling a manual or
+source documentation, certain parts of the source
+will have to be omitted, others included, depending
+on how exhaustive the final result should be.
+<p>
+The requires the notion of a destination file. It
+might be useful to maintain two or more different
+modules within one document - e.g. header and
+implementation file. For that reason, we would need
+an <k>id</k> attribute for a <c><code></c> element.
+In addition, we need an attribute that conveys
+information about the actual language used:
+<k>lang</k>, which allows for values like
+<k>c</k>, <k>cpp</k>, <k>pascal</k>, <k>fortran</k>,
+<k>makefile</k>, <k>sh</k>, <k>perl</k> or even
+<k>sgml</k>.
+<p>
+A hypothetical, QWERTZ-like <c>extract</c> utility
+would then emit all code fragments, appending them
+in the sequence encountered within the document
+to files <c>id.lang</c>. Code that should be ignored
+could use a garbage collector id.
+<p>
+Note that you could use eternal <k>system</k>
+entities to include entire source files within a
+<c><code></c> element. However, this sometimes
+contradicts the concept of literal programming.
+
+</article>
+
+
+<!-- ================================================= -->
+<!-- end of code.sgml                                  -->
+<!--
+     Local Variables:
+     mode: sgml
+     End:                                              -->
+<!-- ================================================= -->

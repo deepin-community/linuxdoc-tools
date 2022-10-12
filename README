@@ -1,0 +1,125 @@
+The Linuxdoc-Tools package: <https://gitlab.com/agmartin/linuxdoc-tools>
+
+LinuxDoc is a kind of SGML DTD. It was created for the Linux HOWTOs, and is
+being used by the Linux Documentation Project (LDP).
+
+Linuxdoc-Tools is in fact a small bug-fix version of SGML-Tools 1.0.9,
+and is a toolset for processing LinuxDoc DTD SGML files. It was
+bundled and maintained by Taketoshi Sano <sano@debian.org>, who
+carried out the big changes and wrote text below, and now is in
+maintenance mode by Agustin Martin <agmartin@debian.org>.
+
+SGML-Tools 1.0.9 is the last official release of SGML-Tools with direct
+support for LinuxDoc DTD.  More recent version of SGML-Tools 2.x and
+its successor, SGMLtools-Lite <http://sgmltools-lite.sourceforge.net/>
+only supports the conversion from LinuxDoc DTD sgml into DocBook DTD.
+
+But currently many HOWTO documents in LDP are still provided as
+LinuxDoc DTD sgml files, and many Linux users wish to use the tool
+which converts LinuxDoc DTD sgml files into various format directly.
+
+So Taketoshi Sano made a modification on SGML-Tools 1.0.9, and
+released the result as a new branch in order to avoid the confusion
+with the SGML-Tools and the SGMLTools-Lite.
+
+Since Linuxdoc-Tools is a derivative of SGML-Tools 1.0.9, it has
+almost the same functions of its predecessor.  It is a text-formatting
+package based on SGML (Standard Generalized Markup Language), which
+allows you to produce LaTeX, HTML, GNU info, LyX, RTF, and plain text
+(via groff) from a single source;
+
+Now old command form sgml2* is obsoleted and a single command
+"linuxdoc" is the prefered form.
+
+   Old (obsoleted)	  New (prefered)
+ -------------------	-----------------
+  sgml2txt		 linuxdoc -B txt
+  sgml2html		 linuxdoc -B html
+  sgml2info		 linuxdoc -B info
+  sgml2latex		 linuxdoc -B latex
+  sgml2lyx		 linuxdoc -B lyx
+  sgml2rtf		 linuxdoc -B rtf
+  sgmlcheck		 linuxdoc -B check
+
+This system is tailored for LinuxDoc DTD sgml files, and other DTDs
+are not supported.  If you need the tool for DocBook DTD (which is
+now a more popular DTD than LinuxDoc in writing technical software
+documentation), then you should check SGMLTools-Lite, OpenJade,
+and docbook-tools.  Check their Web sites below.
+
+  SGMLTools-Lite: <http://sgmltools-lite.sourceforge.net/>
+
+  OpenJade: <http://openjade.sourceforge.net/>
+
+  docbook-tools: <http://sourceware.cygnus.com/docbook-tools/>
+
+The file doc/guide.sgml is Linuxdoc DTD SGML source for the User's Guide,
+originally written by Matt Welsh and updated by many people.
+
+As you probably don't know how to format it yet, there is formatted plain
+text in doc/guide.txt.  There's also guide.dvi and guide.ps, if you wish
+to print them instead.  The first thing you should read is doc/guide.txt,
+which explains how to install the software (namely, it tells you to
+read the file INSTALL), and how to start writing documents with it.
+The file doc/example.sgml is a simple example document which you can use
+as a tutorial.
+
+Linuxdoc-Tools depends on the usage of the sgml parser from Jade or
+OpenJade (nsgmls or onsgmls). You have to install either of them.
+
+Matt Welsh originally created the package under the name Linuxdoc-SGML,
+using James Clark's sgmls parser and the QWERTZ DTD by Tom Gordon.
+Then Greg Hankins maintained it.  It was renamed to SGML-Tools later,
+and had been maintained by Cees de Groot <cg@cdegroot.com>.
+SGML-Tools 2.x was significantly changed from 1.0.x, and it dropped
+the direct support of Linuxdoc DTD and adopted the support of the DocBook
+DTD using Jade.  SGMLtools-Lite is the latest branch from SGML-Tools 2.x,
+and it is  maintained by Cees at <http://sgmltools-lite.sourceforge.net/>.
+
+This Linuxdoc-Tools is the branch from SGML-Tools 1.0.9, and its
+focus is to provide the backward compatibility for users of the old
+Linuxdoc DTD.
+
+This branch uses patch from JF ("The Japanese FAQ Project") to support
+euc-jp encoded Japanese sgml file on sgml2txt, sgml2html, and sgml2latex.
+(sgml2info, sgml2lyx, and sgml2rtf have no special on Japanese support.)
+
+The JF patch for sgml-tools (v1) was originally written by Kazuyuki
+Okamoto <ikko-@pacific.rim.or.jp> and Tetsu ONO <ono@jf.gee.kyoto-u.ac.jp>.
+They tried to contribute their patch to the upstream, but they could not
+success.  I am a member in JF project, and I have heard from them that
+their patch can be used under the license of the original code.
+
+The JF patch adds also a new DTD named "linuxdoctr", which is a variant
+of "linuxdoc" with two more tags (<trans> and <tdate>, for the name of
+the translator and for the date, time and version information of
+the translation).  This is required by JF ("The Japanese FAQ Project",
+<http://www.linux.or.jp/JF/>) because the activity in JF includes the
+translation of LDP documents into Japanese, and the translation may be
+often revised for the same original revision.
+Improvements in fmt_txt.pl (<tt> tags in <sect> do not harm in <toc>)
+are also included in the original JF patch.
+
+From version 0.3.7, it was merged pdf patch written by Juan Jose Amor
+<jjamor@hispalinux.es> for sgml-tools 1.0.9.  This patch is to use
+pdfLaTeX in sgml2latex to produce nice PDF files.
+
+More recently, it was made a distribution independent package by
+Agustin Martin. Info filtering was rewritten from scratch and tons of
+general changes in backends were added here and there sine then.
+
+UTF-8 experimental support has been recently added. It is still very
+experimental, but has already proven to be useful. Testing is
+appreciated, as well as patches to improve it.
+
+Experimental support for Simplied Chinese is the more recent addition,
+using ctex and xelatex.
+
+And old documents are kept in old-docs/ subdirectory.  If you are
+interested in history, then please check there.
+
+Please send me any questions or bug reports, as well as suggestions for
+improvement. You can use the gitlab project for this purpose.
+
+ Agustin Martin <agmartin at debian org>
+ Taketoshi Sano <sano     at debian org>

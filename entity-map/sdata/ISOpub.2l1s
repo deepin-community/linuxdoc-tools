@@ -1,0 +1,88 @@
+[emsp  ]	{emsp}
+[ensp  ]	{ensp}
+[emsp3 ]	{emsp3}
+[emsp4 ]	{emsp4}
+[numsp ]	{numsp}
+[puncsp]	{punsp}
+[thinsp]	{thinsp}
+[hairsp]	{hairsp}
+[mdash ]	{mdash}
+[ndash ]	{ndash}
+[dash  ]	-
+[blank ]	{blank}
+[hellip]	{hellip}
+[nldr  ]	{nldr}
+[frac13]	{frac13}
+[frac23]	{frac23}
+[frac15]	{frac15}
+[frac25]	{frac25}
+[frac35]	{frac35}
+[frac45]	{frac45}
+[frac16]	{frac16}
+[frac56]	{frac56}
+[incare]	{incare}
+[block ]	{block}
+[uhblk ]	{uhblk}
+[lhblk ]	{lhblk}
+[blk14 ]	{blk14}
+[blk12 ]	{blk12}
+[blk34 ]	{blk34}
+[marker]	{marker}
+[cir   ]	{cir}
+[squ   ]	{squ}
+[rect  ]	{rect}
+[utri  ]	{utri}
+[dtri  ]	{dtri}
+[star  ]	{star}
+[bull  ]	{bull
+[squf  ]	{squf}
+[utrif ]	{utrif}
+[dtrif ]	{dtrif}
+[ltrif ]	{ltrif}
+[rtrif ]	{rtrif}
+[clubs ]	{clubs}
+[diams ]	{diams}
+[hearts]	{hearts}
+[spades]	{spades}
+[malt  ]	{malt}
+[dagger]	{dagger}
+[Dagger]	{Dagger}
+[check ]	{check}
+[ballot]	×
+[sharp ]	{sharp}
+[flat  ]	{flat}
+[male  ]	{male}
+[female]	{female}
+[phone ]	{phone}
+[telrec]	{telrec}
+[copysr]	{copysr}
+[caret ]	^
+[lsquor]	{lsquor}
+[ldquor]	{ldquor}
+[fflig ]	{fflig}
+[filig ]	{filig}
+[fjlig ]	{fjlig}
+[ffilig]	{ffilig}
+[ffllig]	{ffllig}
+[fllig ]	{fllig}
+[mldr  ]	{mldr}
+[rdquor]	{rdquor}
+[rsquor]	'
+[vellip]	{vellip}
+[hybull]	{hybull}
+[loz   ]	{loz}
+[lozf  ]	{lozf}
+[ltri  ]	{ltri}
+[rtri  ]	{rtri}
+[starf ]	{starf}
+[natur ]	{natur}
+[rx    ]	{rx}
+[sext  ]	{sext}
+[target]	{target}
+[dlcrop]	{dlcrop}
+[drcrop]	{drcrop}
+[ulcrop]	{ulcrop}
+[urcrop]	{urcrop}
+[tex   ]	TeX
+[latex ]	LaTeX
+[latexe]	LaTeX2e

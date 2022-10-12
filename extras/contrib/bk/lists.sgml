@@ -1,0 +1,138 @@
+<!DOCTYPE linuxdoc
+         PUBLIC "-//LinuxDoc//DTD LinuxDoc 97//EN" >
+<!-- ================================================= -->
+<!--
+
+    $Id: lists.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This is lists.sgml, distributed with SGML-Tools.
+    It tests and demonstrates use of the list elements
+    currently supported.
+
+    $Log: lists.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:57  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:18:50  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments: none.
+
+                                                       -->
+<!-- ================================================= -->
+
+
+<article>
+
+<title>TEST: Lists SGML
+<author>b. kreimeier
+
+<sect>Simple Lists
+<p>
+The list itself. Some elements intentionally left blank.
+Paragraphs and other elements are supported as list
+entries.
+
+<sect1>Unordered List
+<p>
+Bulleted list, no particular order of elements.
+<itemize>
+<item>Item
+<item>Item
+<item>
+<item>Item 1 Paragraph A
+      <p>
+      Item 1 Paragraph B
+<item>Item 2 Paragraph A
+      <p>
+      Item 2 Paragraph B
+      <p>
+      Item 2 Paragraph C
+</itemize>
+
+<sect1>Ordered List
+<p>
+Enumarated, use for elements that have to be
+referenced, or have inherent order.
+<enum>
+<item>Item
+<item>Item
+<item>
+<item>Paragraph A
+      <p>
+      Paragraph B
+      <p>
+      Paragraph C
+<item>Paragraph A
+      <p>
+      Paragraph B
+      <p>
+      Paragraph C
+      <p>
+      Paragraph D
+      <p>
+      Paragraph E
+<item>Paragraph A
+      <p>
+      Paragraph B
+      <p>
+      Paragraph C
+</enum>
+
+
+<sect>Lists within Lists
+<p>
+Lists are supposed to work nested within other lists.
+<itemize>
+<item>List A
+       <enum>
+       <item>List A item
+       <item>List A item
+       </enum>
+<item>No List
+<item>List B
+       <itemize>
+       <item>List B item
+       <item>List B item
+       </itemize>
+<item>List C
+       <itemize>
+       <item>List C.a
+               <enum>
+               <item>List C.a item
+               <item>List C.a item
+               </enum>
+       <item>No List
+       <item>List C.b
+               <enum>
+               <item>List C.b item
+               <item>List C.b item
+               </enum>
+       <item>No List
+       </itemize>
+</itemize>
+
+
+<sect>Named lists
+<p>
+There is a glossary/description list that allows for
+assigning names to list entries. This is handled
+separately, as it is conceptually different.
+
+
+
+</article>
+
+<!-- ================================================= -->
+<!-- end of lists.sgml                                -->
+<!--
+     Local Variables:
+     mode: sgml
+     End:                                              -->
+<!-- ================================================= -->

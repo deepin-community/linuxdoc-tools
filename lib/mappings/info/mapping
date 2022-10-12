@@ -1,0 +1,410 @@
+% linuxdoc{,tr} to texinfo replacement file
+%
+% This file contains the replacements for both linuxdoc and linuxdoctr DTDs
+% Heavily based on qwertz one
+%
+%   Copyright (C) 1994-1996, Matt Welsh
+%   Copyright (C) 1996, Cees de Groot
+%   Copyright (C) 1999-2000, Taketoshi Sano
+%   Copyright (C) 2008-2020 Agustin Martin
+% ------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------
+% linuxdoc specific things (currently nothing)
+% ------------------------------------------------------------------------
+
+% ------------------------------------------------------------------------
+% linuxdoctr specific things
+% ------------------------------------------------------------------------
+
+<trans>		+ "@ldt_translator "
+</trans>
+
+<tdate>		+ "@ldt_tdate "
+</tdate>
+
+% ------------------------------------------------------------------------
+% Everything common to linuxdoc and linuxdoctr DTDs
+% ------------------------------------------------------------------------
+
+<qwertz>					+
+</qwertz>					+
+
+<article>	+ "\\input texinfo\n"
+		  "@comment @encoding@\n"		+
+</article>	+ "@bye"			+
+
+<dina4>		+ "@afourpaper"			+
+</dina4>
+
+% Manual Pages are expected to be formatted using nroff (or groff), unless
+% they are included  as sections of other qwertz documents.
+
+<manpage>
+</manpage>
+
+%<titlepag>	+	"@node Top\n@top"	+
+<titlepag>	+	"@TOP"			+
+</titlepag>	+
+
+<title>		+	"@title "
+</title>
+
+<subtitle>	+	"@subtitle "
+</subtitle>
+
+<author>	+	"@author "
+</author>	+	"@ldt_endauthor"
+
+<name>
+</name>
+
+<and>			" and "
+</and>
+
+<thanks>		" thanks to "
+</thanks>
+
+% ???
+<inst>			" \\\\\n\\\\" 		+
+</inst>
+
+<date>		+	"@subtitle "
+</date>
+
+<abstract>	+	"\n\n"
+</abstract>	 	""			+
+
+<newline>		"@*"
+</newline>
+
+% ----------
+
+<toc>
+</toc>
+
+<lof>
+</lof>
+
+<lot>
+</lot>
+
+% ----------
+
+<header>	+	"@c %% "
+</header>
+
+<lhead>			"{"
+</lhead>		"}"
+
+<rhead>			"{"
+</rhead>		"}"			+
+
+<heading>		""
+</heading>		"\n\n"
+
+<sect>		+	"\n@SUB "
+</sect>		+       "@ENDSUB"		+
+
+<sect1>		+	"\n@SUB "
+</sect1>	+       "@ENDSUB"		+
+
+<sect2>		+	"\n@SUB "
+</sect2>	+       "@ENDSUB"		+
+
+<sect3>		+	"\n@SUB "
+</sect3>	+       "@ENDSUB"		+
+
+<sect4>		+	"\n@SUB "
+</sect4>	+       "@ENDSUB"		+
+
+<appendix>	+	"\n@appendix "
+</appendix>
+
+<biblio>
+</biblio>
+
+<p>
+</p>			"\n\n"
+
+% ------------ List environments -----------------
+
+<itemize>	+	"\n@itemize @bullet"	+
+</itemize>	+	"@end itemize"		+
+
+<enum>		+	"\n@enumerate"		+
+</enum>		+	"@end enumerate"	+
+
+<list>		+	"\n@itemize"     		+
+</list>		+	"@end itemize"		+
+
+<descrip>	+	"\n@table @code"	+
+</descrip>	+	"@end table"		+
+
+<item>		+	"@item\n"
+</item>
+
+<tag>		+	"@item "
+</tag>			"\n"
+
+% -- index commands are ignored for non LaTeX backends --
+
+<idx>
+</idx>
+
+<cdx>
+</cdx>
+
+<nidx>
+</nidx>
+
+<ncdx>
+</ncdx>
+
+% ------------- referencing things ------------------
+
+<label>		+	"@LABEL [ID]"
+</label>	+
+
+<ref>		+	"@REF [ID]"		+
+</ref>
+
+<pageref>		"@REF [ID]"
+</pageref>
+
+<cite>			"\\cite{[ID]"
+</cite>			"}"
+
+<ncite>			"\\cite\[[NOTE]\]{[ID]"
+</ncite>		"}"
+
+<url>                  "@uref{[URL],[NAME]}"
+</url>
+
+<htmlurl>              "@uref{[NAME]}"
+</htmlurl>
+
+% The idea here is to automatically insert soft hyphens after every slash in
+% the filename, so long filenames will break naturally.  The url{} macro is
+% a kluge but it works,
+<file>			"\\url{"
+</file>			"}"
+
+<footnote>		"@footnote{"
+</footnote>		"}"
+
+<sq>			"``"
+</sq>			"''"
+
+% ------------- Different emphasis ------------------------
+
+<em>		 	"@emph{"
+</em>			"}"
+
+<it>			"`"
+</it>			"'"
+
+<bf>			"@strong{"
+</bf>			"}"
+
+<sf>			""
+</sf>			""
+
+<sl>			"`"
+</sl>			"'"
+
+<tt>			"`"
+</tt>			"'"
+
+% Added by mdw
+<cparam>		"\\cparam{"
+</cparam>		"}"
+
+<sc>			"@sc{"
+</sc>			"}"
+
+<rm>			"`"
+</rm>			"'"
+
+% ------------
+
+<x>
+</x>
+
+<mc>
+</mc>
+
+<code>		+	"\n@example"		+
+</code>		+	"@end example"		+
+
+<verb>
+</verb>
+
+<tscreen>	+	"\n@example"		+
+</tscreen>	+	"@end example"		+
+
+<quote>		+       "@quotation"    	+
+</quote>        +       "@end quotation" 	+
+
+<lq>		+       "@quotation"    	+
+</lq>	        +       "@end quotation" 	+
+
+<comment>	+	"\n@example"		+
+</comment>	+	"@end example"		+
+
+% ------------ theorems and such ---------------------
+
+<def>		+	"@deffn"
+</def>		+	"@end deffn"	 	+
+
+<prop>		+	"\\begin{proposition}"	+
+</prop>		+	"\\end{proposition}"	+
+
+<lemma>		+	"\\begin{lemma}"
+</lemma>	+	"\\end{lemma}\n\n"	+
+
+<coroll>	+	"\\begin{corollary}"
+</coroll>	+	"\\end{corollary}\n\n"	+
+
+<proof>		+	"\n{\\noindent{\\bf Proof.}  "	+
+</proof>	+	"}"
+
+<theorem>	+	"\\begin{theorem}"
+</theorem>	+	"\\end{theorem}\n\n"	+
+
+<thtag>			"\["
+</thtag>		"\]"			+
+
+% ------------ mathematics. Unused by linuxdoc ?? --
+
+<f>			"$"
+</f>			"$"
+
+<dm>		+	"\\\["
+</dm>			"\\\]"  		+
+
+<eq>		+	"\\begin{equation}"	+
+</eq>		+	"\\end{equation}\n"	+
+
+<fr>			"\\frac"
+</fr>
+
+<nu>			"{"
+</nu>			"}"
+
+<de>			"{"
+</de>			"}"
+
+<lim>
+</lim>
+
+<op>
+</op>
+
+<ll>			"_{"
+</ll>			"}"
+
+<ul>			"^{"
+</ul>			"}"
+
+<opd>
+</opd>
+
+<pr>			"\\prod"
+</pr>
+
+<in>			"\\int"
+</in>
+
+<sum>			"\\sum"
+</sum>
+
+<root>			"\\sqrt\[[n]\]{"
+</root>			"}"
+
+<ar>		+	"\\begin{array}{[ca]}"	+
+</ar>		+	"\\end{array}"		+
+
+<arr>                   " \\\\ " +
+</arr>
+
+<arc>                   " & "
+</arc>
+
+
+<sup>			"^("
+</sup>			")"
+
+<inf>			"_("
+</inf>			")"
+
+<unl>			"*"
+</unl>			"*"
+
+<ovl>			"ol("
+</ovl>			")"
+
+<rf>			"\\mbox{\\tt "
+</rf>			"}"
+
+<v>			"\\vec{"
+</v>			"}"
+
+<fi>			""
+</fi>			""
+
+<phr>			"{@r{}"
+</phr>			"}"
+
+<tu>			"\\\\ \n"
+</tu>
+
+% --------------- figures and tables ---------------------------
+
+% <figure>	+	"\\begin{figure}\[[LOC]\]"	+
+% </figure>	+	"\\end{figure}\n"		+
+
+% <eps>		+   	"\\centerline{\\epsffile{[FILE].ps}}"  +
+% </eps>
+
+
+% <ph>		+	"\\vspace{[VSPACE]}\n\\par"	+
+% </ph>
+
+% <caption>	+	"\\caption{"
+% </caption>		"}" 			+
+
+% tables
+
+% <table>		+ 	"\\begin{table}\[[LOC]\]"	+
+% </table>	+	"\\end{table}"		+
+
+% <tabular>	+	"\\begin{center}\n"
+% 			"\\begin{tabular}{[ca]}"	+
+% </tabular>	+	"\\end{tabular}\n"
+%			"\\end{center}"		+
+
+<tabular>	+	"@table @asis \n"
+			"@tblitem "		+
+</tabular>	+	"@end table"		+
+
+% <rowsep>		"\\\\ "			+
+% </rowsep>
+
+<rowsep>		"\n@tblitem "		+
+</rowsep>
+
+% <colsep>		"& "
+% </colsep>
+
+<colsep>	+	"@tblitem "		+
+</colsep>
+
+<caption>	+	"@*\n@center "
+</caption>		"\n" 			+
+
+% <hline>		+	"\\hline"	+
+% </hline>
+
+
+% =============== end of texinfo replacement file ==============

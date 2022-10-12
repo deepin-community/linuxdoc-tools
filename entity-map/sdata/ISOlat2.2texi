@@ -1,0 +1,121 @@
+[abreve]	a
+[Abreve]	A
+[amacr ]	a
+[Amacr ]	A
+[aogon ]	a
+[Aogon ]	A
+[cacute]	c
+[Cacute]	C
+[ccaron]	c
+[Ccaron]	C
+[ccirc ]	c
+[Ccirc ]	C
+[cdot  ]	c
+[Cdot  ]	C
+[dcaron]	d
+[Dcaron]	D
+[dstrok]	d
+[Dstrok]	D
+[ecaron]	e
+[Ecaron]	E
+[edot  ]	e
+[Edot  ]	E
+[emacr ]	e
+[Emacr ]	E
+[eogon ]	e
+[Eogon ]	E
+[gacute]	g
+[gbreve]	g
+[Gbreve]	G
+[Gcedil]	G
+[gcirc ]	g
+[Gcirc ]	G
+[gdot  ]	g
+[Gdot  ]	G
+[hcirc ]	h
+[Hcirc ]	H
+[hstrok]	h
+[Hstrok]	H
+[Idot  ]	I
+[Imacr ]	I
+[imacr ]	i
+[ijlig ]	ij
+[IJlig ]	IJ
+[inodot]	i
+[iogon ]	i
+[Iogon ]	I
+[itilde]	i
+[Itilde]	I
+[jcirc ]	j
+[Jcirc ]	J
+[kcedil]	k
+[Kcedil]	K
+[kgreen]	k
+[lacute]	l
+[Lacute]	L
+[lcaron]	l
+[Lcaron]	L
+[lcedil]	l
+[Lcedil]	L
+[lmidot]	l
+[Lmidot]	L
+[lstrok]	l
+[Lstrok]	L
+[nacute]	n
+[Nacute]	N
+[eng   ]	@{eng@}
+[ENG   ]	@{ENG@}
+[napos ]	n
+[ncaron]	n
+[Ncaron]	N
+[ncedil]	n
+[Ncedil]	N
+[odblac]	o
+[Odblac]	O
+[Omacr ]	O
+[omacr ]	o
+[oelig ]	oe
+[OElig ]	OE
+[racute]	r
+[Racute]	R
+[rcaron]	r
+[Rcaron]	R
+[rcedil]	r
+[Rcedil]	R
+[sacute]	s
+[Sacute]	S
+[scaron]	s
+[Scaron]	S
+[scedil]	s
+[Scedil]	S
+[scirc ]	s
+[Scirc ]	S
+[tcaron]	t
+[Tcaron]	T
+[tcedil]	t
+[Tcedil]	T
+[tstrok]	t
+[Tstrok]	T
+[ubreve]	u
+[Ubreve]	U
+[udblac]	u
+[Udblac]	U
+[umacr ]	u
+[Umacr ]	U
+[uogon ]	u
+[Uogon ]	U
+[uring ]	u
+[Uring ]	U
+[utilde]	u
+[Utilde]	U
+[wcirc ]	w
+[Wcirc ]	W
+[ycirc ]	y
+[Ycirc ]	Y
+[Yuml  ]	Y
+[zacute]	z
+[Zacute]	Z
+[zcaron]	z
+[Zcaron]	Z
+[zdot  ]	z
+[Zdot  ]	Z

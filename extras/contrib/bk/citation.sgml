@@ -1,0 +1,131 @@
+<!DOCTYPE sgmltool
+         PUBLIC "-//SGML-Tools//DTD SGML-Tools v0.9//EN" >
+<!-- ================================================= -->
+<!--
+
+    $Id: citation.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This is citation.sgml, distributed with SGML-Tools.
+    It demonstrates the citation and bibliography
+    support currently available.
+
+    $Log: citation.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:57  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:18:42  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments: none.
+
+                                                       -->
+<!-- ================================================= -->
+
+
+<article>
+
+<title>TEST: Quotes, Citation, and Bibliography
+<author>b. kreimeier
+<date>May 1997
+
+<sect>Quotes
+<p>
+Quotations are paragraphs, distinctly rendered. The following
+is taken from the <q>TEI Gentle Introduction to SGML</q>,
+as published by the Text Encoding Initiative. Note that
+you are already encountered the inlined quotation within
+this paragraph. Now here's a full quote.
+<quote>
+Historically, the word markup has been used to describe
+annotation or other marks within a text intended to
+instruct a compositor or typist how a particular passage
+should be printed or laid out: e.g. wavy underlining to
+indicate boldface.
+</quote>
+Quotations that are not inlined are paragraphs, and you
+might use an optional caption with them.
+<quote>
+As formatting and printing of textes
+was automated, the term was extended to cover all sorts
+of special markup codes inserted into electronic texts
+to govern formatting, printing, or other processing.
+<!-- caption>
+From: <q>TEI Gentle Introduction</q>
+</caption -->
+</quote>
+
+Make sure to mark all inlined quotations appropriately,
+so both indented quotations paragraphs, marked by
+the <c><quote></c>, and small single line quotes marked
+with <c><c></c> can be indentified as belonging to the same
+category.
+
+
+<sect>Citations
+<p>
+SGML Tools currently support a simple citation mechanism,
+which works with LaTeX and HTML, but not yet with ASCII
+backends. See
+<citeref key="sgmltool.dtd">SGMLTOOL DTD proposal</citeref>
+for details on the actual implementation.
+As you can see, a hyperlink-resembling
+<c><citeref></c> element is available. In consequence, annotation as
+with the QWERTZ DTD <cite key="qwertz.dtd"> and the original
+Linuxdoc DTD <cite key="linuxdoc96.dtd"> is not supported.
+There is, obviously, support for simple bracketed references,
+though, with the <c><cite></c> element.
+<p>
+Hidden citations by <c><citeonly></c> (no citations within the text,
+but the actual reference will be present in the bibliography)
+and an alternative <c><citeall></c> element to enforce inclusion of all
+entries in the database are supported, but might be used
+only within the bibliography element. The <c><citeall></c>
+element might be rendered obselete in the future by
+improved handling of parameter based conditionals in the
+backend.
+
+<sect>Bibliography
+<p>
+The bibliography itself is invoked by the <c><bibliogr></c> element
+at the end of the file. It might contain one <c><citeall></c>
+element, or several <c><citeonly></c> elements, followed by a
+<c>bibdb</c> element that contains one reference to
+source files. Note that, like with images, only the name,
+not the file format qualifying extension is to be given.
+<p>
+Current restrictions: in the <c>bib2html</c> based HTML backend,
+there is no filtering for entries not cited. This would
+have to be based on <c>citefind.sh</c> and <c>citetags.sh</c>
+found in the <c>bibextract</c> package. There is currently no
+support for multiple BibTeX files (as implied by the design of
+the <c><bibdb></c> element), and the style parameter is currently
+not supported: both require parsing of the SGML source prior
+to invoking <c>bib2html</c> within the HTML backend.
+<p>
+There are no checks done by the validating parser to
+verify references. Only the BibTeX processing
+in the LaTeX backend provides any checks whatsoever.
+So there.
+
+<bibliogr>
+<citeall>
+<bibdb>
+<bibdata src="sgmltool"> <!-- bibdata src="bibtex" -->
+</bibdb>
+</bibliogr>
+
+</article>
+
+<!-- ================================================= -->
+<!-- end of citation.sgml                              -->
+<!--
+     Local Variables:
+     mode: sgml
+     End:                                              -->
+<!-- ================================================= -->

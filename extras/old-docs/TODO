@@ -1,0 +1,17 @@
+$Id: TODO,v 1.1.1.1 2001/05/24 15:57:41 sano Exp $
+
+Encoding:
+- Proposal (somebody mentioned it and it was considered a good idea)
+* Worked on (somebody took ownership)
+! Testing (it's in the source tree, test it!)
++ Completed (testing went fine)
+? Long-standing (is this still a viable thing/not done already ?)
+
+============================================
+? do we really need "expand $TABS"
+? tables!
+- Convert LyX stuff from sed and awk to Perl.
+- support other character sets than latin1 (ISO 8859-1). Start out simple with
+  the latin-n alternatives.
+- --output-directory switch so the output files aren't automatically put
+  in $(basename input-file).

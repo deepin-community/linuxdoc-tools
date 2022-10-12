@@ -1,0 +1,48 @@
+*** This file describes the installation of the sgml-tools package ***
+
+You need to do the following things to get sgml-tools installed:
+
+o Configure SGML-Tools for your system:
+
+     ./configure
+
+  You can specify different installation prefixes during installation,
+  the default prefix is `/usr/local'. For example:
+  install linuxdoc-sgml to `/usr':
+
+     ./configure --prefix=/usr
+
+  If you have sgmls-1.1 and or sp-1.1.1 already installed, you can leave
+  out their compilation:
+
+     ./configure --with-installed-sgmlsasp --with-installed-nsgmls
+
+o Compile SGML-Tools:
+
+    make
+
+  or
+
+    gmake
+
+  whatever calls GNU make on your system. If you don't have GNU make installed,
+  get the sources from prep.ai.mit.edu now and install it - SGML-Tools needs
+  it to compile.
+
+
+o Install SGML-Tools:
+
+    make install
+
+  (You must probably be root to install in /usr/local and other system
+  directories).
+
+  It might be a good idea to install in a temporary directory for testing,
+  first (/tmp perhaps).
+
+o the contrib directory has some interesting patches and scripts that may be
+  useful to you.
+
+o there is a guide on the sgml-tools documentation  directory, it
+  describes how to use this package, read it next...
+

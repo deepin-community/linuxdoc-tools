@@ -1,0 +1,46 @@
+$Id: ==MIGRATE==,v 1.1.1.1 2001/05/24 15:57:41 sano Exp $
+
+*******************************************************************
+SGML-Tools is going to chance, please read this document on every
+version of SGML-Tools 1.0.x you install.
+*******************************************************************
+
+
+Check the website for details on the migration - the short version is
+that we're going to drop the SGML-Tools DTD in favour of the more
+widely established DocBook DTD.
+
+This will mean some work for authors, and in order to keep everybody
+informed this file has been created for keeping you up-to-date.
+
+Resume of migration path as it currently stands:
+
+o At the moment, SGML-Tools 1.0.x is the productive version. People should
+  upgrade from Linuxdoc-SGML and older SGML-Tools versions to this release
+  in order to make sure that their documents are compatible
+  with the current DTD;
+o We're now starting SGML-Tools 1.1 development, which will be a hacker
+  version. Later versions will likely be stable enough to give early
+  adopters an early transition chance;
+o Hopefully 98Q3, SGML-Tools 2.0 will be released. This version will not
+  support linuxdoc.dtd anymore, but will have an automated conversion
+  tool from linuxdoc.dtd to DocBook. Authors should use 2.0 in order
+  to migrate their documents;
+o 6 months after SGML-Tools 2.0 release, support for SGML-Tools 1.0
+  will be dropped. LDP authors should have converted their documents
+  by then; the SGML-Tools team will consider linuxdoc.dtd obsolete
+  from then on.
+
+Currently available tools for early adopters:
+
+o SGML-Tools 1.1.0 is a collection of two alternative tools we can base
+  on. On the one hand, there is Quilt with it's own (Perl-based) style
+  sheets, on the other hand a collection of Cygnus-modified standard
+  DSSSL stylesheets. If you really insist, I figure that you could
+  actually use this.
+
+o Paul Prescod (see SGML-Tools website for a reference) has a conversion
+  DSSSL stylesheet that translates your LinuxDoc documents to DocBook. The
+  output is ugly, though. This stylesheet will also be available in
+  SGML-Tools 1.1.1, if  you're lazy.
+

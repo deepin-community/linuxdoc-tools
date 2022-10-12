@@ -1,0 +1,18 @@
+README for 1.09j
+This is a partly support for japanese.
+I tested
+sgml2html -l ja -c nippon xxxx.sgml
+and
+sgml2txt -l ja -c nippon xxxx.sgml
+or
+sgml2txt -f -l ja -c nippon xxxx.sgml.
+
+
+This version works with
+groff version 1.10 (jversion 0.99)
+jperl5.004_04-971016
+nkf (Network Kanji Filter Version 1.5)
+
+Thank you.
+
+Tetsu ONO <ono@jf.gee.kyoto-u.ac.jp> Tue Nov 17 16:46:57 JST 1998

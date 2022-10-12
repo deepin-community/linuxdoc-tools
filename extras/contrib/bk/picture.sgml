@@ -1,0 +1,136 @@
+<!DOCTYPE sgmltool
+         PUBLIC "-//SGML-Tools//DTD SGML-Tools v0.9//EN" >
+<!-- ================================================= -->
+<!--
+
+    $Id: picture.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This is picture.sgml, distributed with SGML-Tools.
+    It illustrates [sic!] the use of inline image and
+    figure elements.
+
+    $Log: picture.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:57  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:18:58  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments: none.
+
+                                                       -->
+<!-- ================================================= -->
+
+<article>
+
+<title>TEST: Image and Figure
+<author>b. kreimeier
+<date>May 1997
+
+<abstract>
+This is a test file regarding the use of pictures,
+as inlined images within text, and as figures
+consisting of one or more pictures, with an
+required caption, and treated as a separate
+paragraph.
+</abstract>
+
+
+<sect>Images
+<p>
+Inlined Images like
+<img id="small_picture">
+will appear at or below the position at
+which they are included in the text. You will note that ASCII backends
+provide only a bracketed string (a required alternative
+descrption of the image). The following picture
+has its own paragraph.
+<p>
+<img id="small_picture">
+<p>
+ In case of
+subsequent multiple images like
+<img id="small_picture">
+<img id="small_picture">,
+the order will be kept.
+<p>
+Images could contain ASCII art from <c>id.txt</c> files
+that will be merged into the ouput (not yet available).
+Currently, only the file name is emitted.
+
+<sect>Figures
+<p>
+Figures will always be centered, and separated from the
+text. They might float on the page they are introduced
+on, but should not appear prior to their actual
+introduction with the LaTex backend, which tries to
+match preserve the locations created by the HTML backend.
+<p>
+A typical single image figure, with required caption:
+<figure>
+<img id=picture >
+<caption>Single Image Figure</caption>
+</figure>
+<p>
+Figures can be composed of multiple images, but will
+always have only
+one caption. <figure>
+<img id=picture >
+<img id=picture >
+<img id=picture >
+<caption>Multi Image Figure</caption>
+</figure>
+It is thus possible to arrange images in a row, but
+subsequent figures will appear in a column. Note that
+the backend has to take care of width and height
+limitations - currently, not even LaTeX does.
+
+<figure>
+<img id=picture>
+<caption>Top Figure</caption>
+</figure>
+<figure>
+<img id=picture>
+<caption>Bottom Figure</caption>
+</figure>
+<p>
+You will get the error message
+"document type does not allow element "IMG" here"
+if you place an image element behind the caption,
+or if you have an empty figure without any image element.
+If you omit the caption, the validating parser will
+warn you about an "end tag for "FIGURE" which is not finished".
+
+<sect>Miscancellous
+<p>
+There is no support for width, height, or scaling, which
+are supposed to be formatting issues, depending on the
+actual output format (e.g. paper size) and to be handled
+by the backend. Customization is supposed to be done by
+modifying the mapping tables.
+<p>
+There is no support for
+rotation or mirroring of images. Basically, images are
+not that much different from character entities; the
+image element is just a placeholder for something the
+backend will generate from a source (file). Note that
+the filenames chosen do actually leak into the backend
+(UNIX filenames in NT or DOS environments).
+<p>
+There is no alignment (right, left, center) with images.
+This issue is not image specific, and applies to any
+kind of inlines (e.g. plain text). The same is true for
+more complicated arrangements or images; handling
+tabular-like structures is not image specific as well.
+
+
+</article>
+
+<!-- File: $Id: picture.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $ -->
+

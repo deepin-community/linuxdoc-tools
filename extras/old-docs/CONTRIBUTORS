@@ -1,0 +1,90 @@
+
+$Id: CONTRIBUTORS,v 1.1.1.1 2001/05/24 15:57:41 sano Exp $
+
+Everybody who appears in the CHANGELOG file will appear here as well. Probably
+superfluous explanation of contents:
+
+XXX = Name <Email>
+  http:HomePage
+
+where ``XXX'' will be used on the CVS change log messages.
+
+Maintainer:
+
+CdG = Cees A. de Groot <cg@pobox.com>
+  http://pobox.com/~cg
+
+People doing the actual work in alphabetical order:
+
+AB  = Andries Brouwer <Andries.Brouwer@cwi.nl>
+
+AS  = Arun Sharma <asharma@sco.com>
+
+AS2 = Andre Schoorl <aschoorl@engr.UVic.CA>
+
+BL  = Bernd 'Bing' Leibing <bernd.leibing@rz.uni-ulm.de>
+
+DG  = Daniele Giacomini <daniele@tv.shineline.it>
+
+DL  = Dave Love <d.love@dl.ac.uk>
+
+DP  = Dave Platt <dplatt@iq.TVSoft.com>
+
+DS  = Davide G. M. Salvetti <salve@debian.org>
+
+ESR = Eric S. Raymond <esr@thyrsus.com>
+
+FJM = Francisco J. Montilla <pacopepe@nova.es>
+
+FB  = Florin Boariu <florin@bamberg.baynet.de>
+
+FP  = Fabrizio Polacco <fpolacco@megabaud.fi>
+
+FP2 = Frank Pavageau <pavageau@imaginet.fr>
+      (previously <frank@via.ecp.fr>).
+
+IWM = Ian W Moor <i.moor@doc.ic.ac.uk>
+
+JAM = Jose Abilio Oliveira Matos <jamatos@novalis.fc.up.pt>
+
+JE  = Jan Echternach <echter@informatik.uni-rostock.de>
+
+JE2 = Jeremy Elson <jelson@circlemud.org>
+
+HN  = Hartmut Niemann <niemann@cip.e-technik.uni-erlangen.de>
+
+HT  = Henry S. Thompson <ht@cogsci.ed.ac.uk>
+
+KT  = Karsten Tinnefeld <tinnefeld@irb.informatik.uni-dortmund.de>
+
+KdB = Kees de Bruin <kees_de_bruin@tasking.nl>
+
+KML = Ken MacLeod <kmacleod@midamerican.com>
+
+LM  = Lee Marzke <marzke_lee@si.com>
+
+LM2 = Laurent Martelli <laurent@lolo.martelli.fr>
+
+MB  = Marco Budde <Marco_Budde@hqsys.fido.de>
+
+MB2 = Marc Baudoin <Marc.Baudoin@solsoft.com>
+
+MG  = Michael Gerdts <gerdts@cae.wisc.edu>
+
+MHP = Marc Huguet Puig (Perceval) <mhp@nil.fut.es>
+
+MP  = Mitchell Perilstein <mnp@compass-da.com>
+
+NJ  = Niels Kristian Bech Jensen <nkbj@image.dk>
+
+RM  = Rune Mathisen <mathrune@online.no>
+
+SM  = Simon Marlow <simonm@dcs.gla.ac.uk>
+
+SM2 = Samuel Mikes <smikes@alumni.hmc.edu>
+
+SR  = Sven Rudolph <sr1@os.inf.tu-dresden.de>
+
+TM  = Tommy Marcus McGuire <mcguire@cs.utexas.edu>
+
+UW  = Ulrich Windl <ulrich.windl@rz.uni-regensburg.de>

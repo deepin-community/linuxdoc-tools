@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if which groff > /dev/null 2>&1; then
+    exec /usr/bin/linuxdoc --backend=txt "$@"
+else
+    echo "Please install groff to use LinuxDoc DTD SGML Text Conversion"
+    exit 1
+fi

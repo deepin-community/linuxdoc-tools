@@ -1,0 +1,88 @@
+[emsp  ]	\hskip1em
+[ensp  ]	\hskip0.5em
+[emsp3 ]	\hskip0.33333em
+[emsp4 ]	\hskip0.25em
+[numsp ]	\hskip0.5em
+[puncsp]	\hskip0.25em
+[thinsp]	\hskip0.16667em
+[hairsp]	\hskip0.08333em
+[mdash ]	{---}
+[ndash ]	{--}
+[dash  ]	$-$
+[blank ]	{\tt\char"20}
+[hellip]	$\ldots$
+[nldr  ]	\{nldr\}
+[frac13]	\sfrac1/3
+[frac23]	\sfrac2/3
+[frac15]	\sfrac1/5
+[frac25]	\sfrac2/5
+[frac35]	\sfrac3/5
+[frac45]	\sfrac4/5
+[frac16]	\sfrac1/6
+[frac56]	\sfrac5/6
+[incare]	\{incare\}
+[block ]	\{block\}
+[uhblk ]	\{uhblk\}
+[lhblk ]	\{lhblk\}
+[blk14 ]	\{blk14\}
+[blk12 ]	\{blk12\}
+[blk34 ]	\{blk34\}
+[marker]	\{marker\}
+[cir   ]	$\mathchar"20E$
+[squ   ]	\{squ\}
+[rect  ]	\{rect\}
+[utri  ]	$\bigtriangleup$
+[dtri  ]	$\bigtriangledown$
+[star  ]	\{star\}
+[bull  ]	$\bullet$
+[squf  ]	\squf{}
+[utrif ]	\{utrif\}
+[dtrif ]	\{dtrif\}
+[ltrif ]	\{ltrif\}
+[rtrif ]	\{rtrif\}
+[clubs ]	$\clubsuit$
+[diams ]	$\diamondsuit$
+[hearts]	$\heartsuit$
+[spades]	$\spadesuit$
+[malt  ]	\{malt\}
+[dagger]	$\dag$
+[Dagger]	$\ddag$
+[check ]	$\surd$
+[ballot]	$\times$
+[sharp ]	$\sharp$
+[flat  ]	$\flat$
+[male  ]	\male{}
+[female]	\female{}
+[phone ]	\{phone\}
+[telrec]	\{telrec\}
+[copysr]	\{copysr\}
+[caret ]	$\mathchar"1356$
+[lsquor]	\quotesinglbase{}
+[ldquor]	\quotedblbase{}
+[fflig ]	{ff}
+[filig ]	{fi}
+[fjlig ]	{fj}
+[ffilig]	{ffi}
+[ffllig]	{ffl}
+[fllig ]	{fl}
+[mldr  ]	\{mldr\}
+[rdquor]	{''}
+[rsquor]	{'}
+[vellip]	$\vdots$
+[hybull]	\hybull{}
+[loz   ]	\{loz\}
+[lozf  ]	\{lozf\}
+[ltri  ]	$\triangleleft$
+[rtri  ]	$\triangleright$
+[starf ]	$\star$
+[natur ]	$\natural$
+[rx    ]	\{rx\}
+[sext  ]	\{sext\}
+[target]	$\mathchar"2208$
+[dlcrop]	\{dlcrop\}
+[drcrop]	\{drcrop\}
+[ulcrop]	\{ulcrop\}
+[urcrop]	\{urcrop\}
+[tex   ]	\TeX{}
+[latex ]	\LaTeX{}
+[latexe]	\LaTeXe{}

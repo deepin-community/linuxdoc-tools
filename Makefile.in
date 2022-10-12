@@ -1,0 +1,235 @@
+#
+#  Makefile.in
+#
+#  Copyright (C) 1996 Sven Rudolph
+#  Copyright (C) 2008-2015 Agustin Martin
+
+prefix             = @prefix@
+exec_prefix        = @exec_prefix@
+bindir             = @bindir@
+auxbindir          = @auxbindir@
+datadir            = @datadir@
+mandir             = @mandir@
+PERL               = @PERL@
+PERLWARN           = @PERLWARN@
+GROFFMACRO         = @GROFFMACRO@
+pkgdatadir         = @pkgdatadir@
+texdir             = @texdir@
+perl5libdir        = @perl5libdir@
+
+docdir             = $(prefix)/share/doc/linuxdoc-tools
+man1dir            = $(mandir)/man1
+
+INSTALL            = @INSTALL@
+INSTALL_PROGRAM    = @INSTALL_PROGRAM@ -m 755
+INSTALL_DATA       = @INSTALL_DATA@
+INSTALL_SCRIPT     = @INSTALL_SCRIPT@
+
+# nsgmls or onsgmls should be installed already
+# BUILD_NSGMLS=@BUILD_NSGMLS@
+
+BUILD_SGMLSASP     = @BUILD_SGMLSASP@
+BUILD_ENTITY_MAP   = @BUILD_ENTITY_MAP@
+BUILD_ISO_ENTITIES = @BUILD_ISO_ENTITIES@
+BUILDDOC_FORMATS   = @BUILDDOC_FORMATS@
+
+# Now real destination dirs, honouring $(DESTDIR)
+auxbin_ddir        = $(DESTDIR)$(auxbindir)
+bin_ddir           = $(DESTDIR)$(bindir)
+doc_ddir           = $(DESTDIR)$(docdir)
+man1_ddir          = $(DESTDIR)$(man1dir)
+perl5lib_ddir      = $(DESTDIR)$(perl5libdir)
+pkgdata_ddir       = $(DESTDIR)$(pkgdatadir)
+tex_ddir           = $(DESTDIR)$(texdir)
+
+progs    := sgml2html sgml2info sgml2latex sgml2lyx sgml2rtf sgml2txt sgmlcheck
+
+all: build
+
+build:
+ifeq ($(BUILD_SGMLSASP), true)
+	@echo "Compiling the SGML translator tools (in sgmls-1.1/)..."
+	( cd sgmls-1.1 ; \
+	  $(MAKE) CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" sgmlsasp )
+endif
+# nsgmls or onsgmls should be installed already
+# ifeq ($(BUILD_NSGMLS), true)
+# 	@echo "Compiling the SGML parsing tools (in sp/)..."
+# 	( cd sp ; \
+# 	  $(MAKE) )
+# endif
+ifeq ($(BUILD_ENTITY_MAP), true)
+	@echo "Building Entity Mapping library (in entity-map)..."
+	( cd entity-map ; \
+	  $(MAKE) CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)")
+endif
+	@echo "Compiling preprocessor (in sgmlpre/)..."
+	$(MAKE) CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" LEX=flex sgmlpre/sgmlpre
+
+	@echo "Compiling RTF conversion tools (in rtf-fix/)..."
+	( cd rtf-fix ; \
+	  $(MAKE) CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" || exit -1 )
+
+	@echo "Making man pages in genman ..."
+	if [ ! -d genman ]; then mkdir genman ; fi
+	for ii in man/* ; do \
+	  bn=`basename $$ii`; \
+	  cat $$ii | sed \
+	    -e "s,\$$LINUXDOCLIB,$(pkgdatadir)," \
+	    -e "s,\$$LINUXDOCBIN,$(bindir)," \
+	    > genman/$$bn; \
+	done
+
+ifneq ($(BUILDDOC_FORMATS),)
+#    -- Build documentation
+	@echo "Building documentation ..."
+	(cd doc; \
+		MAKE="$(MAKE)" \
+		PREFIX=$(prefix) \
+		BUILD_ISO_ENTITIES=$(BUILD_ISO_ENTITIES) \
+		BUILD_ENTITY_MAP=$(BUILD_ENTITY_MAP) \
+		PKGPERL5LIB=$(CURDIR)/perl5lib \
+		PKGDATADIR=$(CURDIR)/lib \
+		PKGENTITYMAPDIR=$(CURDIR)/entity-map \
+		BUILDDOC_FORMATS="$(BUILDDOC_FORMATS)" \
+		sh Makedoc.sh)
+endif
+
+install:: bin/linuxdoc
+	@echo "Installing binaries and scripts in $(bin_ddir) ..."
+	[ -d $(bin_ddir) ] || mkdir -m 755 -p $(bin_ddir)
+# nsgmls or onsgmls should be installed already
+# ifeq ($(BUILD_NSGMLS), true)
+#	$(INSTALL_PROGRAM) sp/nsgmls/nsgmls $(bin_ddir)/nsgmls
+# endif
+
+#    --
+ifeq ($(BUILD_SGMLSASP), true)
+	@echo "Installing sgmlsasp program ..."
+	$(INSTALL_PROGRAM) sgmls-1.1/sgmlsasp $(bin_ddir)/sgmlsasp
+endif
+
+#    --
+ifeq ($(BUILD_ENTITY_MAP), true)
+	@echo "Installing Entity Mapping library (in entity-map)..."
+	( cd entity-map; \
+	  $(MAKE) install DESTDIR=$(DESTDIR) perl5libdir=$(perl5libdir))
+endif
+
+#    --
+ifeq ($(BUILD_ISO_ENTITIES), true)
+	@echo "Installing ISO character entity sets (in iso-entities)..."
+	( cd iso-entities; \
+	  $(MAKE) install  DESTDIR=$(DESTDIR))
+endif
+
+#    -- Install linuxdoc script. Use $(INSTALL_SCRIPT) to prevent stripping.
+	@echo "Installing linuxdoc script ..."
+	$(INSTALL_SCRIPT) bin/linuxdoc $(bin_ddir)/linuxdoc
+
+#    -- Install auxiliary programs
+	@echo "Installing auxiliary programs in $(auxbin_ddir) ..."
+	mkdir -p $(auxbin_ddir)
+	for ii in sgmlpre/sgmlpre rtf-fix/rtf2rtf; do \
+	  bn=`basename $$ii`; \
+	  $(INSTALL_PROGRAM) $$ii $(auxbin_ddir)/$$bn; \
+	done
+
+#    -- Install perl libraries and support files
+	@echo "Installing library and support files in $(pkgdata_ddir)..."
+	[ -d $(pkgdata_ddir) ] || mkdir -m 755 -p $(pkgdata_ddir)
+#	# cp -r lib/* $(pkgdata_ddir)
+	( cd lib && tar --exclude='CVS' -cpf - . ) | ( cd $(pkgdata_ddir) && tar -xpf - )
+	cp VERSION $(pkgdata_ddir)
+
+#    -- Install manual pages
+	@echo "Installing man pages in $(man1_ddir) ..."
+
+	[ -d $(man1_ddir) ] || mkdir -m 755 -p $(man1_ddir)
+
+	for ii in genman/sgml2* genman/sgmlcheck.1 \
+	          genman/rtf*.1 genman/sgmlpre*.1; do \
+	  bn=`basename $$ii`; \
+	  $(INSTALL_DATA) $$ii $(man1_ddir)/$$bn; \
+	done
+	$(INSTALL_DATA) genman/linuxdoc.1 $(man1_ddir)/linuxdoc.1
+ifeq ($(BUILD_NSGMLS), true)
+	$(INSTALL_DATA) man/nsgmls.1 $(man1_ddir)/nsgmls.1
+endif
+ifeq ($(BUILD_SGMLSASP), true)
+	$(INSTALL_DATA) man/sgmlsasp.1 $(man1_ddir)/sgmlsasp.1
+endif
+#    -- Fix permissions in $(pkgdata_ddir)
+	find $(pkgdata_ddir) -type d -print | xargs chmod 755
+	find $(pkgdata_ddir) -type f -print | xargs chmod 644
+
+	(cd $(bin_ddir); for i in $(progs); do rm -f $$i; ln -s linuxdoc $$i;done)
+
+#    -- Install perl modules
+	@echo "Installing perl modules ..."
+	mkdir -m 755 -p $(perl5lib_ddir)/LinuxDocTools $(perl5lib_ddir)/LinuxDocTools/Data
+	$(INSTALL_DATA) perl5lib/LinuxDocTools.pm   $(perl5lib_ddir)
+	$(INSTALL_DATA) perl5lib/LinuxDocTools/*.pm $(perl5lib_ddir)/LinuxDocTools
+	$(INSTALL_DATA) perl5lib/LinuxDocTools/Data/*.pm $(perl5lib_ddir)/LinuxDocTools/Data
+
+#    -- Install tex stuff
+	@echo "Installing TeX stuff in $(tex_ddir) ..."
+	mkdir -m 755 -p $(tex_ddir)
+	$(INSTALL_DATA) tex/* $(tex_ddir)
+
+ifneq ($(BUILDDOC_FORMATS),)
+#    -- Install documentation
+	@echo "Installing documentation in $(doc_ddir) ..."
+	mkdir -m 755 -p $(doc_ddir)
+	( cd doc && tar --exclude='CVS' -cpf - . ) | ( cd $(doc_ddir) && tar -xpf - )
+	rm -f $(doc_ddir)/Makedoc.sh $(doc_ddir)/Makefile
+	find $(doc_ddir) -type d -print | xargs chmod 755
+	find $(doc_ddir) -type f -print | xargs chmod 644
+endif
+
+# what dirs do the targets clean and distclean need?
+DDIRS=
+MDIRS=
+ifeq ($(BUILD_SGMLSASP), true)
+     DDIRS += sgmls-1.1
+endif
+ifeq ($(BUILD_NSGMLS), true)
+     DDIRS += sp
+endif
+ifeq ($(BUILD_ENTITY_MAP), true)
+     MDIRS += entity-map
+endif
+ifeq ($(BUILD_ISO_ENTITIES), true)
+     MDIRS += iso-entities
+endif
+
+bin/linuxdoc:: Makefile bin/linuxdoc.in
+	sed -e 's!\@prefix\@!$(prefix)!g' \
+	    -e 's!\@isoentities_prefix\@!$(prefix)!g' \
+	    -e 's!\@auxbindir\@!$(auxbindir)!g' \
+	    -e 's!\@pkgdatadir\@!$(pkgdatadir)!g' \
+	    -e 's!\@perl5libdir\@!$(perl5libdir)!g' \
+	    -e 's!\@PERL\@!$(PERL)!g' \
+	    -e 's!\@PERLWARN\@!$(PERLWARN)!g' \
+	    -e 's!\@GROFFMACRO\@!$(GROFFMACRO)!g' \
+	bin/linuxdoc.in > bin/linuxdoc
+
+clean::
+	-rm -f *~ bin/*~ bin/linuxdoc
+	for d in $(DDIRS) $(MDIRS) rtf-fix; do $(MAKE) -C $$d clean; done
+	(cd sgmlpre ; rm -f sgmlpre.o sgmlpre.c sgmlpre)
+	-rm -rf genman/
+
+distclean:: clean
+	for d in $(MDIRS); do $(MAKE) -C $$d distclean; done
+	-rm -f Makefile config.cache config.log config.status \
+		entity-map/Makefile iso-entities/Makefile \
+		sgmls-1.1/config.h \
+		sp/Makefile sp/Makefile.lib sp/config.log sp/config.status \
+		sp/*/Makefile.dep \
+		doc/guide.txt doc/guide.tex doc/guide.dvi doc/guide.ps doc/guide.ps.gz \
+		doc/guide.info doc/guide.lyx doc/html/guide*.html \
+		$(GENFILES)
+	rm -rf 	doc/rtf
+
+include Makefile.maint

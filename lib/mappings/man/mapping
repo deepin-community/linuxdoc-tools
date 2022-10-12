@@ -1,0 +1,164 @@
+
+
+% qwertz manual replacement file
+% produces nroff using the man macros
+
+
+<manpage>	+	".if n .ds Q \\&\"\n"
+			".if t .ds Q ``\n"
+			".if n .ds U \\&\"\n"
+			".if t .ds U ''\n"
+			".TH \"[TITLE]\" [SECTNUM] \n"
+
+			% James Clark's trick to prevent unintended paragraph
+			% breaks
+
+			".tr \\&\n"
+
+			% Number registers for lists
+
+			".nr bi 0\n"  % initialize begin items
+			".nr ll 0\n"  % list level, stores current level
+			".nr el 0\n"  % current enumeration level
+
+			% Not all list levels are enumerations, as
+			% itemizations can be embedded within enumerations
+			% and vice versa
+
+			% type of list level is in \n(t\n(ll, where
+			% 0 : itemize, 1 : enumerate, 2: description
+
+			% enumerator for an enumeration level is in
+			% \n(e\n(el -- i.e. \n(e1=2 means current item of
+			% enumeration level 1 is 2
+
+			% context-sensitive paragraph macro
+% SDT: Use `empty' DS and DE macros since the preroff.sed script
+% relies on them for identifying `code' sections
+			".de DS\n..\n.de DE\n..\n"
+
+".de Pp\n"
+".ie \\\\n(ll>0 \\{\\\n"   	 % within list?
+".ie \\\\n(bi=1 \\{\\\n"   % first par element of item?
+".nr bi 0\n"	 % reset bi flag
+% if itemization, mark with a bullet
+".if \\\\n(t\\\\n(ll=0 \\{.IP \\\\(bu\\}\n" % itemize
+%  if enumeration: increment and print enumerator
+% for this enumeration level
+".if \\\\n(t\\\\n(ll=1 \\{.IP \\\\n+(e\\\\n(el.\\}\n"
+% if first par element of descrip, do nothing
+".\\}\n"
+".el .sp \n"		% subsequent par element of item
+".\\}\n"
+".el \\{\\\n"		     	% not within list
+".ie \\\\nh=1 \\{\\\n"	% first par after heading
+".LP\n"
+".nr h 0\n"	% reset h flag
+".\\}\n"
+".el .PP \n"
+".\\}\n"
+"..\n"
+
+</manpage>
+
+<sect1>		+	".SH "
+</sect1>
+
+<heading>
+</heading>		"\n\n"
+
+<p>		+	".Pp"		+
+</p>
+
+
+<enum>		+	".nr ll +1\n"	    % increment list level
+			".nr el +1\n"	    % increment enumeration level
+			".nr t\\n(ll 1\n"   % set type of level to enum
+			".nr e\\n(el 0 1\n" % initialize enumerator
+			".af e\\n(el \\*(f\\n(el\n" % style of enumerator
+			".if \\n(ll>1 .RS"  +
+</enum>		+	".if \\n(ll>1 .RE\n"
+			".nr el -1\n"	    % decrement enumeration level
+			".nr ll -1"	+   % decrement list level
+
+<itemize>       +	".nr ll +1\n"       % increment list level
+                        ".nr t\\n(ll 0\n"   % set type of level to itemize
+                        ".if \\n(ll>1 .RS"  +
+</itemize>	+	".if \\n(ll>1 .RE\n"
+                        ".nr ll -1"     +   % decrement list level
+
+<descrip>	+	".nr ll +1\n"	    % increment list level
+			".nr t\\n(ll 2\n"   % set type of level to descrip
+                        ".if \\n(ll>1 .RS"  +
+</descrip>	+	".if \\n(ll>1 .RE\n"
+			".nr ll -1\n"	+   % decrement list level
+
+% number register bi means "begin item".  Used in the .P macro to print
+% bullets or numbers at beginning of first paragraph of an item.
+% If bi=1 then the paragraph is the first one of the item.
+
+<item>		+	".nr bi 1\n.Pp"		+
+</item>
+
+<tag>		+	".IP \""
+</tag>			"\"\n"
+			".nr bi 1"			+
+
+<sq>			"\\*Q"
+</sq>			"\\*U"
+
+<lq>		+	".RS\n"
+			".nr LL \\n(LL-\\n(PI"	+
+</lq>		+	".nr LL \\n(LL+\\n(PI\n"
+			".RE"			+
+
+<em>			"\\fI"
+</em>		 	"\\fP"
+
+<bf>			"\\fB"
+</bf>			"\\fP"
+
+<it>			"\\fI"
+</it>			"\\fP"
+
+<sf>			"\\f(HR"
+</sf>			"\\fP"
+
+<sl>			"\\f(HI"
+</sl>			"\\fP"
+
+<tt>			"\\f(CR"
+</tt>			"\\fP"
+
+
+<comment>	+	".PP\n.ft HI"		+
+</comment>	+	".ft P"			+
+
+<x>
+</x>
+
+% within code and verb, first turn off the escape mechanism
+
+<code>		+	".DS\n"
+			".sp\n"
+			".ft CR\n"
+	%		".eo \n"
+			".nf"	+
+</code>		+	".DE\n"
+			".fi \n"
+			".ec\n"
+			".ft P\n"
+			".sp"	+
+
+<verb>		+	".DS\n"
+			".sp \n"
+			".ft CR\n"
+	%		".eo \n"
+			".nf"	+
+</verb>		+	".DE\n"
+			".fi \n"
+			".ec\n"
+			".ft P\n"
+			".sp"	+
+
+

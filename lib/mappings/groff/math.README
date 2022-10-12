@@ -1,0 +1,11 @@
+Math symbols and Greek letters.  Sed script for groff Also adds the
+"delim $$" declaration to the top of the file. Thus it is now
+unnecessary to pipe the ms file through eqn (or geqn) unless the
+file file contain formulas.
+
+1i\
+.EQ\
+delim $$\
+.EN
+
+[this is a historical file.  Doesn't apply to current sed script - Greg]

@@ -1,0 +1,94 @@
+<!DOCTYPE sgmltool
+         PUBLIC "-//SGML-Tools//DTD SGML-Tools v0.9//EN" >
+<!-- ================================================= -->
+<!--
+
+    $Id: notes.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This is notes.sgml, distributed
+     with SGML-Tools.
+    It serves as test file for handling of remarks
+    in insertions/footnotes/endnotes.
+
+    $Log: notes.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:57  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:18:54  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments: none.
+
+                                                       -->
+<!-- ================================================= -->
+
+
+<article>
+
+<title>TEST: Notes and Remarks
+<author>b. kreimeier
+<date>May 1997
+
+
+<sect>Regular Text Section
+<p>
+This is supposed to be a regular paragraph concerning
+notes, that is remarks that might be rendered as insertions,
+footnotes or endnotes. From a theoretical point of view,
+a <c><note></c> is anything that requires a stack-like
+operations on the part of the reader - push the current
+context, context switch to process the insertion, restore
+the previous context - cognitively speaking.
+<p>
+As far as the rendering is concerend, things are even more
+sutble. The concept of footnotes is a tricky one,
+as it does not translate to Hypertext
+<note>
+Hypertext has no real concept of a page footer or
+bottom. Basically, a footnote is something to put
+in a separate module or (for HTML) on another page.
+</note>
+or Folding Editors
+<note>
+Folding is a Hypertext-like concept, but the rendering
+of a previously hidden fold is done by unfolding it
+into the current text. Folds are hidden behind
+headings, like hypertext hides behind references
+(or, with HTML, resource locators), but they are
+conceptually different, because, once unfolded,
+they integrate seamlessly into the surrounding
+text. Emacs' outline mode is a prime example.
+</note>
+easily - the very word itself is tied to the
+visual appearance of a printed page of text.
+<p>
+For LaTeX backends, <c><note></c> elements will
+be handled classically, as footnotes or, using
+the <c>endnotes</c> package, as endnotes. ASII
+backends will simply include the text, marked as
+NOTE and bracketed, as a simple insertion within
+the flow of text. Currently, the same solution is
+used with the HTML backend, but it would be more
+desirable to collect all notes of an entire section,
+or the whole document, on a separate page. Just as
+well, one page for each single note is doable as well.
+Hypertext, after all, is about fragmentation of
+information beyond retrieval...
+<p>
+
+
+</article>
+
+<!-- ================================================= -->
+<!-- end of notes.sgml                                 -->
+<!--
+     Local Variables:
+     mode: sgml
+     End:                                              -->
+<!-- ================================================= -->

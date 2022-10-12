@@ -1,0 +1,82 @@
+<!DOCTYPE linuxdoc
+         PUBLIC "-//LinuxDoc//DTD LinuxDoc 96//EN" >
+<!-- ================================================= -->
+<!--
+
+    $Id: glossary96.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This is glossary96.sgml, distributed with SGML-Tools.
+    It tests and describes the glossary/description
+    element used to introduce and list keywords.
+
+    $Log: glossary96.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:57  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:18:48  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments: none.
+
+                                                       -->
+<!-- ================================================= -->
+
+
+<article>
+
+<title>TEST: Linuxdoc97 Glossary
+<author>b. kreimeier
+<date>May 1997
+
+
+<sect>Glossary
+<p>
+There is only limited support for a glossary like
+structure in Linuxdoc97 Strict DTD. Essentially,
+it is a list of keywords and definitions. There
+is no corresponding markup for keywords appearing
+in the text. Thus, this element has been changed
+for SGMLTOOL DTD. Here you will find the version
+supported for backwards compatibility.
+
+<p>
+The glossary or description element consists
+of a list of keywords or tags, each followed
+by one or more definition paragraphs
+The glossary does not allow empty definitions.
+<descrip>
+<tag>Tag 1</tag> Explanation of Tag 1
+<tag/Tag 1/Explanation, part A
+           <p>
+           Explanation, part B
+<tag/Tag A/An actual list of explanations
+          <enum>
+          <item>Definition
+          <item>Definition
+          </enum>
+<tag/Tag B/List of keywords
+          <descrip>
+          <tag/Definition/ Details
+          <tag/Definition/ Details
+          </descrip>
+</descrip>
+<p>
+The definitions might contain other elements.
+Lists and other elements can be used. In
+addition, descriptions could be nested.
+
+</article>
+
+<!-- ================================================= -->
+<!-- end of glossary97.sgml                            -->
+<!--
+     Local Variables:
+     mode: sgml
+     End:                                              -->
+<!-- ================================================= -->

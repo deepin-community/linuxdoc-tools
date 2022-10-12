@@ -1,0 +1,76 @@
+[half  ]	{half}
+[frac12]	{frac12}
+[frac14]	{frac14}
+[frac34]	{frac34}
+[frac18]	{frac18}
+[frac38]	{frac38}
+[frac58]	{frac58}
+[frac78]	{frac78}
+[sup1  ]	{sup1}
+[sup2  ]	{sup2}
+[sup3  ]	{sup3}
+[plus  ]	+
+[plusmn]	{plusmn}
+[lt    ]	<
+[equals]	=
+[gt    ]	>
+[divide]	{divide}
+[times ]	{times}
+[curren]	{curren}
+[pound ]	{pound}
+[dollar]	$
+[cent  ]	{cent}
+[yen   ]	{yen}
+[num   ]	#
+[percnt]	%
+[amp   ]	&
+[ast   ]	*
+[commat]	@
+[lsqb  ]	[
+[bsol  ]	\
+[rsqb  ]	]
+[lcub  ]	{
+[horbar]	{horbar}
+[verbar]	|
+[rcub  ]	}
+[micro ]	{micro}
+[ohm   ]	{ohm}
+[deg   ]	{deg}
+[ordm  ]	{ordm}
+[ordf  ]	{ordf}
+[sect  ]	{sect}
+[para  ]	{para}
+[middot]	{middot}
+[larr  ]	{larr}
+[rarr  ]	{rarr}
+[uarr  ]	{uarr}
+[darr  ]	{darr}
+[copy  ]	{copy}
+[reg   ]	{reg}
+[trade ]	{trade}
+[brvbar]	{brvbar}
+[not   ]	{not}
+[sung  ]	{sung}
+[excl  ]	!
+[iexcl ]	{iexcl}
+[quot  ]	"
+[apos  ]	'
+[lpar  ]	(
+[rpar  ]	)
+[comma ]	,
+[lowbar]	_
+[hyphen]	-
+[period]	.
+[sol   ]	/
+[colon ]	:
+[semi  ]	;
+[quest ]	?
+[iquest]	{iquest}
+[laquo ]	{laquo}
+[raquo ]	{raquo}
+[lsquo ]	`
+[rsquo ]	'
+[ldquo ]	{ldquo}
+[rdquo ]	{rdquo}
+[nbsp  ]	{nbsp}
+[shy   ]	{shy}

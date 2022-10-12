@@ -1,0 +1,88 @@
+[emsp  ]	 
+[ensp  ]	 
+[emsp3 ]	 
+[emsp4 ]	 
+[numsp ]	 
+[puncsp]	 
+[thinsp]	
+[hairsp]	
+[mdash ]	---
+[ndash ]	--
+[dash  ]	-
+[blank ]	_
+[hellip]	...
+[nldr  ]	@{nldr@}
+[frac13]	 1/3
+[frac23]	 2/3
+[frac15]	 1/5
+[frac25]	 2/5
+[frac35]	 3/5
+[frac45]	 4/5
+[frac16]	 1/6
+[frac56]	 5/6
+[incare]	@{incare@}
+[block ]	@{block@}
+[uhblk ]	@{uhblk@}
+[lhblk ]	@{lhblk@}
+[blk14 ]	@{blk14@}
+[blk12 ]	@{blk12@}
+[blk34 ]	@{blk34@}
+[marker]	@{marker@}
+[cir   ]	o
+[squ   ]	@{squ@}
+[rect  ]	@{rect@}
+[utri  ]	@{utri@}
+[dtri  ]	@{dtri@}
+[star  ]	@{star@}
+[bull  ]	o
+[squf  ]	@{squf@}
+[utrif ]	@{utrif@}
+[dtrif ]	@{dtrif@}
+[ltrif ]	@{ltrif@}
+[rtrif ]	@{rtrif@}
+[clubs ]	@{clubs@}
+[diams ]	@{diams@}
+[hearts]	@{hearts@}
+[spades]	@{spades@}
+[malt  ]	@{malt@}
+[dagger]	@{dagger@}
+[Dagger]	@{Dagger@}
+[check ]	@{check@}
+[ballot]	x
+[sharp ]	#
+[flat  ]	@{flat@}
+[male  ]	@{male@}
+[female]	@{female@}
+[phone ]	@{phone@}
+[telrec]	@{telrec@}
+[copysr]	@{copysr@}
+[caret ]	^
+[lsquor]	'
+[ldquor]	"
+[fflig ]	ff
+[filig ]	fi
+[fjlig ]	fj
+[ffilig]	ff
+[ffllig]	ffl
+[fllig ]	fl
+[mldr  ]	@{mldr@}
+[rdquor]	"
+[rsquor]	'
+[vellip]	:
+[hybull]	-
+[loz   ]	@{loz@}
+[lozf  ]	@{lozf@}
+[ltri  ]	@{ltri@}
+[rtri  ]	@{rtri@}
+[starf ]	@{starf@}
+[natur ]	@{natur@}
+[rx    ]	@{rx@}
+[sext  ]	@{sext@}
+[target]	@{target@}
+[dlcrop]	@{dlcrop@}
+[drcrop]	@{drcrop@}
+[ulcrop]	@{ulcrop@}
+[urcrop]	@{urcrop@}
+[tex   ]	TeX
+[latex ]	LaTeX
+[latexe]	LaTeX2e

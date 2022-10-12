@@ -1,0 +1,20 @@
+This is dummy package to provide the required dependencies
+for some specific facility of `linuxdoc-tools', a series of
+tools to convert LinuxDoc DTD SGML source files.
+
+The current maintainer of linuxdoc-tools is Agustin Martin Domingo
+<agmartin@debian.org>, within the Debian XML/SGML Group
+
+This dummy package was created by Taketoshi Sano <sano@debian.org>
+
+  Copyright (C) 1999-2002 Taketoshi Sano <sano@debian.org>
+
+Original linuxdoc-SGML itself does not have any limitations, and
+it can be freely used, modified, and redistributed.
+
+Please refer the documentation of LinuxDoc-Tools for more detail.
+
+The license of this dummy package is either GPL or XFree86, as you like.
+
+On Debian GNU/Linux systems, the complete text of the GNU General
+Public License can be found in `/usr/share/common-licenses/GPL'.

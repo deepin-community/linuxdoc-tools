@@ -1,0 +1,7 @@
+%
+% This is f.etex, inlined mathematical expressions.
+% Comment: be careful with comments for
+%  inlined formulas, leave no blank lines
+%
+E = m \times c^2
+% Beware of trailing blank lines for inlines.

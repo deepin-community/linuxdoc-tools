@@ -1,0 +1,146 @@
+#!/usr/bin/make -f
+#
+# Rules makefile for linuxdoc-tools package
+#
+# Copyright (C) 2007-2016 Agustin Martin <agmartin@debian.org>
+#
+# Based on debhelper examples by Joey Hess and former Debian/rules
+# by Taketoshi Sano and Sven Rudolph
+# --------------------------------------------------------------
+
+SHELL     = /bin/bash
+
+package   = linuxdoc-tools
+copyright = debian/$(package).copyright
+DESTDIR   = $(CURDIR)/debian/tmp
+
+# -- For FHS transition
+MANDIR    = /usr/share/man
+
+# Get default build flags for maximum hardening (Needs dpkg-dev >= 1.16.1.1)
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/buildflags.mk
+
+# -- Create linuxdoc-tools copyright file by merging some files
+
+define build_ldt_copyright
+	cat debian/copyright                                           > $(copyright)
+	echo -e '\n------------------\n The linuxdoc-tools license\n' >> $(copyright)
+	cat COPYING                                                   >> $(copyright)
+	echo -e '\n------------------\n The sgmls license\n'          >> $(copyright)
+	cat sgmls-1.1/LICENSE                                         >> $(copyright)
+# sp is no longer included.
+#	echo -e '\n------------------\n The sp license\n' >>\
+#		debian/$(package).copyright
+#	cat sp/COPYING >> debian/$(package).copyright
+	echo -e '\n------------------\n The iso-entities license\n'   >> $(copyright)
+	cat iso-entities/COPYING                                      >> $(copyright)
+	echo -e '\n------------------\n The entity-map license\n'     >> $(copyright)
+	cat entity-map/COPYING                                        >> $(copyright)
+endef
+
+# The next section may have to be extensively modified
+
+build: build-arch build-indep
+build-arch: build-stamp
+build-indep: build-stamp
+build-stamp:
+	dh_testdir
+
+	./configure --prefix=/usr \
+	 	--mandir=$(MANDIR) \
+		--with-installed-nsgmls \
+		--with-auxbindir=/usr/lib/linuxdoc-tools \
+		--with-perllibdir=/usr/share/perl5 \
+		--with-texdir=/usr/share/texmf/tex/latex/misc
+
+	$(MAKE) CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)"
+
+	$(build_ldt_copyright)
+
+	for i in text latex info; do \
+		ln -sf copyright.dependencies \
+			debian/$(package)-$$i.copyright; \
+	done
+
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp
+	rm -f debian/$(package)-{text,latex,info}.copyright
+	rm -f debian/$(package).copyright
+	rm -f linuxdoc.new LinuxDocTools.pm.new doc/linuxdoc-sgml.info
+
+	[ ! -f Makefile ] || $(MAKE) distclean
+
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_prep
+	dh_installdirs
+
+# --- do 'make install'
+	$(MAKE)	DESTDIR=$(DESTDIR) install
+
+# --- Install shell scripts for sgml2{txt,latex,info}
+	for i in txt latex info; do \
+	  install -m 755 debian/addition/sgml2$$i \
+	    $(DESTDIR)/usr/bin/sgml2$$i; \
+	done
+# ---
+	cat debian/linuxdoc-tools.info-base doc/guide.info > doc/linuxdoc-sgml.info
+	dh_installinfo doc/linuxdoc-sgml.info
+# ---
+	mkdir -p $(DESTDIR)/usr/share/sgml
+	( cd $(DESTDIR)/usr/share/linuxdoc-tools && mv dtd ../sgml )
+
+binary-indep:
+	dh_testdir -i
+	dh_testroot -i
+	dh_installchangelogs  -i
+	dh_installdocs  -i
+	dh_installman  -i
+	dh_link  -i
+	dh_strip  -i
+	dh_compress  -i -X.pdf
+	dh_fixperms  -i
+	dh_installdeb  -i
+	dh_shlibdeps  -i
+	dh_gencontrol  -i
+	dh_md5sums  -i
+	dh_builddeb -i
+
+binary-arch: build install
+	dh_testdir -a
+	dh_testroot -a
+	dh_installchangelogs  -a
+	# - Docs are installed by dh_installdocs
+	# - We use entities from sgml-data package
+	dh_install -a --sourcedir=$(DESTDIR) -Xusr/share/doc -Xusr/share/sgml/iso-entities-8879.1986  '*'
+	dh_installdocs  -a -Xdoc/guide.info
+	dh_installman  -a
+	dh_link -a usr/share/info/linuxdoc-sgml.info.gz \
+		usr/share/doc/linuxdoc-tools/linuxdoc-sgml.info.gz
+	dh_link -a usr/share/sgml/dtd usr/share/linuxdoc-tools/dtd
+	dh_installcatalogs -a
+	dh_perl -a
+	dh_strip  -a
+	dh_compress  -a -X.pdf
+	dh_fixperms  -a
+	dh_installdeb  -a
+	dh_shlibdeps  -a
+	dh_gencontrol  -a
+	dh_md5sums  -a
+	dh_builddeb -a
+
+
+# Below here is fairly generic really
+
+binary:	binary-indep binary-arch
+
+.PHONY: binary binary-arch binary-indep clean

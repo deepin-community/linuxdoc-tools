@@ -1,0 +1,15 @@
+
+% tangle: Replacement file generating m4 code for source code
+% author: Tom Gordon
+% institute: GMD, F3/XPS
+
+% discard everything except code
+% pipe out through:   sed -e '/<omit>/,/<\/omit>/d'
+
+<qwertz>	+	"<omit>"		+
+
+<code>		+	"</omit>"		+
+</code>		+       "<omit>"		+
+
+
+

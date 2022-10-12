@@ -1,0 +1,94 @@
+-- This is a DTD, but will be read as -*- sgml -*-   --
+-- ================================================= --
+-- $Id: linuxdoc-tools.catalog,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+   This is dtd/catalog for SGML-Tools.
+
+   Initial revision June 23st, 1997, by B. Kreimeier
+
+   $Log: linuxdoc-tools.catalog,v $
+   Revision 1.1.1.1  2001/05/24 15:57:40  sano
+   linuxdoc-tools 0.96
+   This is re-imported because of cvs repository is lost
+   due to HDD trouble
+
+   Revision 1.1  2000/07/10 16:47:58  sano
+   moved from dtd/catalog.
+
+   Revision 0.2  2000/06/08 07:06:43  sano
+   fix the bug in 0.4.0, this prevents to use on system with just openjade
+   and linuxdoc-tools.
+
+   Revision 0.1.0.1  2000/05/13 14:59:57  sano
+   Initial release of Linuxdoc-Tools
+
+   Revision 1.7  1998/10/13 12:12:09  cg
+   * Clean up catalog file. (CdG)
+
+   Revision 1.6  1998/03/09 21:10:14  cg
+   * Removed sgmltool.dtd. (CdG)
+
+   Revision 1.5  1998/01/08 19:59:54  cg
+   * Add empty line, it gave problems. (CdG)
+
+   Revision 1.4  1997/12/09 20:56:15  cg
+   * Added html32.dtd (with a modified reference to ISOent) and updated
+     catalog accordingly. You can now do sgmlcheck on HTML files. (CdG)
+
+   Revision 1.3  1997/07/09 13:27:12  cg
+   * Completely new DTD setup by Bernd (BK).
+
+
+                                                       --
+-- ================================================= --
+-- Revision Comments                                 --
+
+-- BK/97/06/23: added a header, changed for 0.99.12  --
+-- ================================================= --
+
+
+
+-- Linuxdoc96.dtd, frozen orignal Linuxdoc DTD --
+DOCTYPE "LINUXDOC"    "dtd/linuxdoc96.dtd"
+PUBLIC "-//LinuxDoc//DTD LinuxDoc 96//EN" dtd/linuxdoc96.dtd
+
+-- Linuxdoc97 Strict DTD --
+PUBLIC "-//LinuxDoc//DTD LinuxDoc 97//EN" dtd/linuxdoc97.dtd
+
+-- outdated and shared entities --
+ENTITY %common            "dtd/common"
+ENTITY %isoent            "dtd/isoent"
+
+ENTITY %deprec96          "dtd/deprec96"
+
+-- Linuxdoctr96.dtd, modified from Linuxdoc96.dtd to usable for translators --
+DOCTYPE "LINUXDOCTR"    "dtd/linuxdoctr96.dtd"
+PUBLIC "-//LinuxDoc//DTD LinuxDocTr 96//EN" dtd/linuxdoctr96.dtd
+
+-- outdated and shared entities --
+ENTITY %common            "dtd/common"
+ENTITY %isoent            "dtd/isoent"
+
+ENTITY %deprec96          "dtd/deprec96"
+
+
+-- for development and debug, internal use only --
+DOCTYPE "QWERTZ"      "dtd/qwertz.dtd"
+-- DOCTYPE "TEST"        "test.dtd" --
+
+-- for SGML validation --
+-- DOCTYPE "HTML"        "html32.dtd" --
+-- PUBLIC "-//W3C//DTD HTML 3.2 Final//EN" html32.dtd --
+
+-- obsolete --
+ENTITY %general           "entities/general"
+
+
+-- ================================================= --
+-- end of dtd/catalog                                --
+--
+   Local Variables:
+   mode: sgml
+   End:                                              --
+-- ================================================= --
+

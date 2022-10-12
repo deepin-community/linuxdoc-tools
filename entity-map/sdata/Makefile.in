@@ -1,0 +1,80 @@
+INSTALL      = @INSTALL@
+INSTALL_DATA = @INSTALL_DATA@
+LN_S         = @LN_S@
+
+--SHELL= /bin/sh
+
+ISOBASEFILES = ISOlat1       ISOlat2      ISOdia       ISOnum       ISOpub       ISOtech
+2ABFILES     = ISOlat1.2ab   ISOlat2.2ab  ISOdia.2ab   ISOnum.2ab   ISOpub.2ab   ISOtech.2ab   GFextra.2ab
+2ASFILES     = ISOlat1.2as   ISOlat2.2as  ISOdia.2as   ISOnum.2as   ISOpub.2as   ISOtech.2as   GFextra.2as
+HTMLFILES    = ISOlat1.2html              ISOdia.2html ISOnum.2html ISOpub.2html ISOtech.2html LDextra.2html greek.2html
+L1BFILES     = ISOlat1.2l1b                            ISOnum.2l1b  ISOpub.2l1b  ISOtech.2l1b
+L1SFILES     =                                         ISOnum.2l1s  ISOpub.2l1s  ISOtech.2l1s
+TEXFILES     = ISOlat1.2tex  ISOlat2.2tex ISOdia.2tex  ISOnum.2tex  ISOpub.2tex  ISOtech.2tex  GFextra.2tex LDextra.2tex
+TEXIFILES    =               ISOlat2.2texi             ISOnum.2texi ISOpub.2texi ISOtech.2texi GFextra.2texi
+RTFFILES     =               ISOlat2.2rtf              ISOnum.2rtf  ISOpub.2rtf  ISOtech.2rtf
+TRFILES      =                            ISOdia.2tr   ISOnum.2tr   ISOpub.2tr   ISOtech.2tr   LDextra.2tr
+OTHERFILES   =                                         ISOnum.2l1tr lat1.2sdata
+
+
+SDATA0FILES  =  $(ISOBASEFILES) $(2ABFILES) $(2ASFILES) \
+		$(HTMLFILES) $(L1BFILES) $(L1SFILES) \
+		$(TEXFILES) $(TEXIFILES) $(RTFFILES) \
+		$(TRFILES) $(OTHERFILES)
+
+SDATA8FILES  =  ISOlat1.2u8b ISOnum.2u8b ISOpub.2u8b ISOtech.2u8b
+
+SDATA8LINKS  =  "ISOlat1.2u8s->ISOlat1.2u8b" \
+		"ISOlat1.2u8tr->ISOlat1.2u8b" \
+		"ISOdia.2u8b->ISOdia.2ab" \
+		"GFextra.2u8b->GFextra.2ab"
+
+L1S_LINKS    =  "ISOlat1.2l1s->ISOlat1.2l1b" \
+		"ISOlat2.2l1s->ISOlat2.2as" \
+		"ISOdia.2l1s->ISOdia.2as" \
+		"GFextra.2l1s->GFextra.2as"
+
+L1B_LINKS    =  "ISOlat2.2l1b->ISOlat2.2ab" \
+		"ISOdia.2l1b->ISOdia.2ab" \
+		"GFextra.2l1b->GFextra.2ab"
+
+TR2L1_LINKS  =  "ISOlat1.2tr->ISOlat1.2ab" \
+		"ISOlat1.2l1tr->ISOlat1.2l1b" \
+		"ISOdia.2l1tr->ISOdia.2tr" \
+		"ISOpub.2l1tr->ISOpub.2tr" \
+		"ISOtech.2l1tr->ISOtech.2tr" \
+		"LDextra.2l1tr->LDextra.2tr"
+
+TEXI_LINKS   =  "ISOlat1.2texi->ISOlat1.2ab" \
+		"ISOdia.2texi->ISOdia.2ab"
+
+RTF_LINKS    =  "ISOlat1.2rtf->ISOlat1.2ab" \
+		"ISOdia.2rtf->ISOdia.2ab" \
+		"GFextra.2rtf->GFextra.2ab"
+
+SDATAFILES   =  $(SDATA0FILES) $(SDATA8FILES)
+SDATA_LINKS  =  $(L1S_LINKS) $(L1B_LINKS) $(SDATA8LINKS) \
+	        $(TR2L1_LINKS) $(TEXI_LINKS) $(RTF_LINKS)
+
+.SUFFIXES: .2l1b .2u8b
+
+default: $(SDATA8FILES)
+
+.2l1b.2u8b:
+	iconv -f iso-8859-1 -t utf-8 $< > $@
+
+install: $(SDATA8FILES)
+	$(INSTALL) -d $(LIBDIR)
+	$(INSTALL_DATA) $(SDATAFILES) $(LIBDIR)
+
+	# ln -s $from->$to for all symlinks.
+	( cd $(LIBDIR) && \
+	for i in $(SDATA_LINKS); do \
+	    rm -f $${i%%->*} && $(LN_S) $${i##*->} $${i%%->*}; \
+	done )
+
+clean-utf8:
+	rm -f $(SDATA8FILES) $(SDATA8LINKS)
+
+clean: clean-utf8
+	${RM} *~

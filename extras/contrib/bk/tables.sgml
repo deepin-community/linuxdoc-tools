@@ -1,0 +1,166 @@
+<!DOCTYPE sgmltool
+         PUBLIC "-//SGML-Tools//DTD SGML-Tools v0.9//EN" >
+<!-- ================================================= -->
+<!--
+
+    $Id: tables.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This is tables.sgml, distributed with SGML-Tools.
+    It tests and describes the use of table and
+    tabular element, to arrange data in rows and
+    columns.
+
+    $Log: tables.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:57  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:19:07  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments: none.
+
+                                                       -->
+<!-- ================================================= -->
+
+
+<article>
+
+<title>TEST: Tables
+<author>b. kreimeier
+<date>May 1997
+
+<abstract>
+This document demonstrates the SGML Tools support for
+table and tabular elements, essentially for means to
+arrange data in columns and rows.
+</abstract>
+
+
+<sect>Simple Tables
+<p>
+Basically, tables are means to arrange data items
+in columns and rows. In SGML Tools, there is no
+support for nested tables, or multicolumns, or
+other sophisticated arrangements of data items.
+<p>
+Moreover, tables are handled as separate paragraphs,
+comparable to figures. They float, that is will appear
+at the position at which they are introduced, or below,
+depending. Tables are placed centered, and have a
+caption placed below. Unlike multiple image support
+with figures, there is no support for multiple tables
+within one - each table has its one caption. Subsequent
+tables will be placed in a column.
+<p>
+Here is a minimal example:
+<table>
+<tabform>  <tdat><tdat>
+<tabhead>    Left Heading     |  Right Heading
+<tabular>
+						 Item 1/1 | Item 1/2 <tr>
+             Item 2/1 | Item 2/2
+</tabular>
+<caption>
+Minimal Table.
+</caption>
+</table>
+You will notive that a table is always surrounded by
+a border. The headling lines, which are highlighted,
+could be omitted.
+<table>
+<tabform>  <tdat><tdat>
+<tabular>
+						 Item 1/1 | Item 1/2 <tr>
+             Item 2/1 | Item 2/2
+</tabular>
+<caption>
+Table w/o Heading.
+</caption>
+</table>
+<p>
+Each table contains several elements: form, heading,
+body, and caption.
+
+<sect1>Table Form and Heading
+<p>
+Headings are treated differently even in the otherwise
+sloppy HTML. This is relevant e.g. with respect to tools
+like SGML-sensitive filters. We allow for multiple
+heading lines. In LaTeX, this are distinctly rendered
+by default, and separated from the table by double
+rules.
+<p>
+The preceeding tabform element is a bit
+awkward, as it is a good example of both descriptive markup
+creeping into the SGML source, and ASP based backend
+implementation shining through. It is needed
+only because the current backend does not determine the
+number of columns e.g. from the heading.
+<p>
+However, it might be useful for future extension, e.g.
+for tables that contain a different class of information
+in the leftmost column.
+
+
+<sect1>Table Body and Caption
+<p>
+The Table Body is just a list of elements,
+ie. data items, cell/column separators, and table row
+separators.
+<p>
+Unfortunately, the validating parser does not check
+the table for consistency. Thus, missing or
+additional elements will proliferate into the backends,
+and will only yield unpredictable results in HTML, but
+errors in LaTeX.
+<p>
+The caption is identical to the one used with figures.
+It will be placed centered, below the actual table
+itself.
+
+
+
+<sect>Tables with Images
+<p>
+Inlined elements like images could be placed in tables. Here
+is a full sized example with all structure details.
+<table>
+<tabform>    <tdat><tdat><tdat><tdat><tdat>
+<tabhead>    Column A1  |    Column A2 |    Column B1 | Column B2   | Column B2a
+<tabular>
+ <img id="small_picture"> |
+                      Text     |  Text    |  Text    | Text  <tr>
+             Text   |          |          |  Text    | Text  <tr>
+             Text   | Text     |  Text    |  Text    | Text  <tr>
+<img id="small_picture"> |
+                      Text     |  Text    |  Text    | Text  <tr>
+             Text   | Text     |  Text    |
+               <img id="small_picture"> | Text <tr>
+             Text   | Text     |
+    <img id="small_picture"> | Text     | Text <tr>
+                    | Text     |  Text    |  Text    | Text <tr>
+             Text   | Text     |  Text    |          | Text <tr>
+             Text   | Text     |          |  Text    |      <tr>
+                    | Text     |  Text    |          | Text
+</tabular>
+<caption>
+Table Example
+</caption>
+</table>
+
+
+</article>
+
+<!-- ================================================= -->
+<!-- end of tables.sgml                               -->
+<!--
+     Local Variables:
+     mode: sgml
+     End:                                              -->
+<!-- ================================================= -->

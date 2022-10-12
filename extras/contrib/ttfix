@@ -1,0 +1,27 @@
+Typing <tt> xxx </tt> around everything that needs it is a bore.  The
+shortened form <tt/xxx/ is helpful, but no use if `xxx' includes a `/'
+character.  Probably half the things I want to appear in fixed-width
+font are pathnames ...
+
+I preprocess my HOWTOs with this perl one-logical-liner, which allows
+me to write
+
+ <tt,/usr/doc/howto/,
+
+and have it transformed to
+
+ <tt>/usr/doc/howto</tt>
+
+In fact, it works for any other tag as well.  If you have a pressing
+need to typeset lots of italic forward slashes, it will cope with
+<em,////////, no problem.  A semi-reasonable example of this is
+
+ <tt,/usr/lib/gcc-lib/,<em,target,<tt,/,<em/version/<tt,/,
+
+perl -e \
+'undef $/; $_=<STDIN>;s@<([a-z]+),([^,]+),@<$1>$2</$1>@gs; print' \
+<foo-howto.sgmlp >foo-howto.sgml
+
+(actually, I have a Makefile which deals with all my sgml processing.
+Don't forget to double the $ signs if you do likewise)
+Daniel Barlow <daniel.barlow@sjc.ox.ac.uk>

@@ -1,0 +1,212 @@
+<!DOCTYPE linuxdoc
+         PUBLIC "-//LinuxDoc//DTD LinuxDoc 97//EN" >
+<!-- ================================================= -->
+<!--
+
+    $Id: entity.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This is entity.sgml, distributed with SGML-Tools.
+    It serves as a test and an overview of all
+    supported character entities.
+
+    $Log: entity.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:57  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:18:44  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments:
+    The SGML Tools lib/general needs to be browsed.
+    I used an O'Reilly short reference on HTML 2.0.
+    There are probably more up to date lists?
+
+-->
+<!-- ================================================= -->
+
+<article>
+
+<!-- Document header (required) -->
+
+<title>TEST: Entities
+<author>b. kreimeier
+<date>May 1997
+
+<!-- Abstract (optional) -->
+
+<abstract>
+This file is part of the SGML Tools Test Suite. Its purpose is
+to verify backend support for all predefined and officially
+supported entities. At the same time, it serves as a sample file,
+listing all entities conveniently.
+</abstract>
+
+<!-- Table of contents (optional) -->
+<toc>
+
+<!-- Begin the document -->
+
+
+<sect>HTML DTD entities
+<p>
+All HTML 3.0 entities that have a name should be supported.
+Entities that can only be adressed by decimal code are not
+supported. Entities that provide formatting control (horizontal
+tan, line feed, carriage return) are not supported. The
+mappings for 7bit ASCII backends (if different) are given as
+well.
+
+<sect1>SGML relevant character entities
+<p>
+<descrip>
+<tag/&amp;  (amp) /   Ampersand
+<tag/&lt;   (lt)  /   Less than
+<tag/&gt;   (gt)  /   Greater than
+</descrip>
+
+<sect1>Quotation
+<p>
+<descrip>
+<tag/&quot; (quot)/   Quotation mark
+<tag/&laquo;  (laquo) / Left angle quote, guillemotleft
+<tag/&raquo; (raquo)  / Right angle quote, quillemotright
+</descrip>
+
+<sect1>Currency
+<p>
+<descrip>
+<tag/&curren;(curren) / General currency sign
+<tag/&cent; (cent) /  Cent sign
+<tag/&pound;(pound) / Pound sign
+<tag/&yen; (yen)     / Yen sign
+</descrip>
+
+<sect1>Legal
+<p>
+<descrip>
+<tag/&reg; (reg)      / Registered trademark
+<tag/&copy; (copy)    /  Copyright
+</descrip>
+
+
+<sect1>Math/Units
+<p>
+<descrip>
+<tag/&frac14; (frac14) / Fraction 1/4
+<tag/&frac12; (frac12) / Fraction 1/2
+<tag/&frac34; (frac34) / Fraction 3/4
+
+<tag/&not;   (not)   / Not sign
+<tag/&shy; (shy)       / Soft hyphen
+<tag/&plusmn; (plusmn) / Plus or minus
+<tag/&middot;(middot)  / Middle dot
+<tag/&times; (times)   / Multiply sign
+<tag/&divide; (divide) / Divide sign
+
+<tag/&micro; (micro)   / Micro sign
+<tag/&deg;  (deg)     / Degree sign
+</descrip>
+
+<sect1>Languages
+<p>
+<descrip>
+<tag/&Agrave;, &Egrave;, &Igrave;, &Ograve;, &Ugrave;
+     &agrave;, &egrave;, &igrave;, &ograve;, &ugrave; (_grave) /
+    Accent grave
+
+<tag/&Aacute;, &Eacute;, &Iacute;, &Oacute;, &Uacute;
+     &aacute;, &eacute;, &iacute;, &oacute;, &uacute;
+     &Yacute;, &yacute; (_acute) /
+    Accent acute
+
+<tag/&Acirc;, &Ecirc;, &Icirc;, &Ocirc;, &Ucirc;
+     &acirc;, &ecirc;, &icirc;, &ocirc;, &ucirc; (_circ) /
+    Accent circumflex
+
+<tag/&Auml;, &Euml;, &Iuml;, &Ouml;, &Uuml;
+     &auml;, &euml;, &iuml;, &ouml;, &uuml;
+     &Yuml;, &yuml; (_uml) /
+    Dieresis, umlaut mark
+
+<tag/&Atilde;, &Otilde;, &atilde;, &otilde;,
+     &Ntilde; &ntilde; (_tilde) /
+    Accent tilde
+
+
+<tag/&Aring;, &aring; (Aring, aring) /
+    Accent ring
+
+<tag/&AElig;, &aelig; (AElig, aelig) /
+    AE, ae diphtong, ligature
+<tag/&szlig (szlig)  /
+    Sz ligature
+
+<tag/&Ccedil;, &ccedil; (Ccedil, ccdeil) / C cedilla
+
+<tag/&ETH;, &eth; (ETH, eth) / Eth, icelandic
+<tag/&THORN;, &thorn; (THORN, thorn) / Thorn, icelandic
+
+<tag/&Oslash;, &oslash; (Oslash, oslash) / slashed
+</descrip>
+
+
+<sect1>Sectioning/Annotation
+<p>
+It might be a good idea not to support these.
+<descrip>
+<tag/&sect;   (sect)  / Section sign
+<tag/&para;  (para)    / Paragraph sign
+
+<tag/&sup1;  (sup1)   / Superscript 1
+<tag/&sup2;  (sup2)    / Superscript 2
+<tag/&sup3;  (sup3)    / Superscript 3
+</descrip>
+
+
+<sect1>Misc
+<p>
+Are these useful?
+<descrip>
+<tag/&ordf; (ordf)   / Feminine ordinal
+<tag/&ordm;  (ordm)    / Masculine ordinal
+
+<tag/&iexcl;(iexcl) /  Inverted exclamation
+<tag/&iquest; (iquest) / Inverted question mark
+
+<tag/&brvbar; (brvbar) / Broken vertical bar
+</descrip>
+
+
+<p>
+Not sure about these, I'd recommend no support. I fail to
+see what purpose the accent/cedilla serve without backspace,
+which is backend specific. Non breaking space?
+<descrip>
+<tag/&nbsp; (nbsp) /   Non breaking space
+<tag/&uml;  (uml)  /   Dieresis (for german Umlaut, but useless?)
+<tag/&macr;  (macr) /  Macron accent (useless?)
+<tag/&acute; (acute) / Accute accent (useless?)
+<tag/&cedil; (cedil) / Cedilla (useless?)
+</descrip>
+
+<sect>SGML Tools specific entities
+<p>
+There are some: &dollar; &lowbar;. I got to browse lib/general
+for this.
+
+
+<!-- End document -->
+</article>
+<!-- ================================================= -->
+<!-- end of entity.sgml                                -->
+<!--
+     Local Variables:
+     mode: sgml
+     End:                                              -->
+<!-- ================================================= -->

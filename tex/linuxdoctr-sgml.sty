@@ -1,0 +1,27 @@
+%% This is linuxdoctr-sgml.sty, a wrapper to linuxdoc-sgml.sty
+%% to enable "trans" and "tdate" tags avoiding duplicated code.
+%%
+%% "trans" and "tdate" tags originally added by Taketoshi Sano
+%% Made just a wrapper by Agustin Martin to avoid duplicated code
+%%
+%% Copyright (C) 2001 Taketoshi Sano sano@debian.org
+%% Copyright (C) 2009 Agustin Martin agmartin@debian.org
+%% ------------------------------------------------------------
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{linuxdoctr-sgml}
+
+\DeclareOption*{\PassOptionsToPackage{\CurrentOption}{linuxdoc-sgml}}
+\ProcessOptions
+\RequirePackage{linuxdoc-sgml}
+
+\gdef\@tdate{}
+\gdef\tdate#1{\gdef\@tdate{#1}}
+\gdef\@trans{}
+\gdef\trans#1{\gdef\@trans{#1}}
+
+\gdef\LDT@WriteTranslators{%
+  \\[2ex]
+  \@trans\hfill\@tdate
+  %\gdef\@tdate{}\gdef\@trans{}
+}

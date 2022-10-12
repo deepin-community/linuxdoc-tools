@@ -1,0 +1,96 @@
+# --------------------------------------------------------
+# Makefile.maint: Makefile for maintenance help
+#
+# Copyright (C) 2013-2020 Agustin Martin
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see https://www.gnu.org/licenses/.
+# --------------------------------------------------------
+
+GPG_SIGN_TAGS =
+VERSION       = $(shell cat VERSION)
+TARBALL       = ../linuxdoc-tools-$(VERSION).tar.gz
+TARBALL_SIGN  = ../linuxdoc-tools-$(VERSION).tar.gz.asc
+
+copyright: COPYING
+COPYING: Makefile.maint linuxdoc-tools.copyright sgmls-1.1/LICENSE iso-entities/COPYING entity-map/COPYING
+	echo "----------------------------------"  > $@
+	echo "    The linuxdoc-tools license"     >> $@
+	echo "----------------------------------" >> $@
+	cat linuxdoc-tools.copyright              >> $@
+	echo ""                                   >> $@
+	echo "----------------------------------" >> $@
+	echo "    The sgmls license"              >> $@
+	echo "----------------------------------" >> $@
+	echo ""                                   >> $@
+	cat sgmls-1.1/LICENSE                     >> $@
+# sp is no longer included.
+#	echo "----------------------------------" >> $@
+#	echo "    The sp license"                 >> $@
+#	echo "----------------------------------" >> $@
+#	cat sp/COPYING                            >> $@
+	echo ""                                   >> $@
+	echo "----------------------------------" >> $@
+	echo "    The iso-entities license"       >> $@
+	echo "----------------------------------" >> $@
+	echo ""                                   >> $@
+	cat iso-entities/COPYING                  >> $@
+	echo ""                                   >> $@
+	echo "----------------------------------" >> $@
+	echo "    The entity-map license"         >> $@
+	echo "----------------------------------" >> $@
+	echo ""                                   >> $@
+	cat entity-map/COPYING                    >> $@
+
+set-signed-tags: GPG_SIGN_TAGS = -s
+set-signed-tags: set-tags
+
+set-tags:
+	git tag $(GPG_SIGN_TAGS) upstream/$(VERSION) -m "Upstream version $(VERSION). Debian like tag."
+	git tag $(GPG_SIGN_TAGS) $(VERSION)          -m "Upstream version $(VERSION). Slash free tag."
+
+tarball: GIT_STATUS = $(shell git status --porcelain)
+tarball: $(TARBALL)
+$(TARBALL):
+	$(if $(wildcard $@), \
+		$(error "$@ tarball already exists. Skipping"))
+	@if test -z "$(GIT_STATUS)"; then \
+	git archive --format tar.gz \
+		    --prefix linuxdoc-tools-$(VERSION)/ \
+		    --output $@ HEAD; \
+	echo "$@ created"; \
+        else echo "$(GIT_STATUS)"; fi
+
+tarball+sums: $(TARBALL)
+	( cd .. && ( \
+	[ -z "`which md5sum`" ]    || md5sum    $(notdir $<); \
+	[ -z "`which sha1sum`" ]   || sha1sum   $(notdir $<); \
+	[ -z "`which sha256sum`" ] || sha256sum $(notdir $<); \
+	[ -z "`which sha512sum`" ] || sha512sum $(notdir $<); ))
+
+
+tarball-sign: $(TARBALL_SIGN)
+$(TARBALL_SIGN): $(TARBALL)
+	gpg --detach-sign --armor $<
+
+pristine-tar-commit: $(TARBALL) $(TARBALL_SIGN)
+	pristine-tar -s $(TARBALL_SIGN) commit $(TARBALL) master
+	( git checkout pristine-tar && git commit --amend -sS && git checkout master )
+
+# --------------------------------------------------------
+# End of standard Makefile.maint
+# --------------------------------------------------------
+
+# Local Variables:
+# mode: makefile
+# End:

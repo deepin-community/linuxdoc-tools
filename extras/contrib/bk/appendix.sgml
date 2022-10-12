@@ -1,0 +1,74 @@
+<!DOCTYPE sgmltool
+         PUBLIC "-//SGML-Tools//DTD SGML-Tools v0.9//EN" >
+
+<!-- ================================================= -->
+<!--
+
+    $Id: appendix.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This is appendix.sgml, distributed with SGML-Tools.
+    It serves as test file for appendices.
+
+    $Log: appendix.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:56  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:18:39  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments: none.
+
+                                                       -->
+<!-- ================================================= -->
+
+
+<article>
+
+<title>TEST: Appendices
+<author>b. kreimeier
+<date>May 1997
+
+
+<toc>
+
+<sect>Main Body Text Section
+<p>
+The main body of the text is structured as usual,
+consisting of (possibly) chapters, sections,
+subsections, subsubsections, paragraphs, and
+subpragraphs. You will be able to use the same
+kind of classification to organize your appendices.
+
+
+<appendix>
+
+<sect>Top Level Appendix
+<p>
+As you can see, appendices are just structured like
+the main body of the text, but bracketed by the
+<c><appendix></c> element.
+
+<sect1>Level 1
+<sect2>Level 2
+
+<sect>Top Level Section
+<sect1>Level 1 Section
+<sect1>Level 1 Section
+
+</appendix>
+
+</article>
+
+<!-- ================================================= -->
+<!-- end of appendix.sgml                                -->
+<!--
+     Local Variables:
+     mode: sgml
+     End:                                              -->
+<!-- ================================================= -->

@@ -1,0 +1,189 @@
+--- CHANGES FOR sgml-tools-1.0.9 (16 October 1998):
+
+* Committed missing replacement for GROFFMACRO. (CdG)
+
+--- CHANGES FOR sgml-tools-1.0.8 (13 October 1998):
+
+* Clean up catalog file. (CdG)
+
+* Regenerated documentation. (CdG)
+
+* More precise scanning for fmt_*.pl, so that fmt_bla.pl.orig isn't seen
+  as a module. (CdG)
+
+* Allow --define=x=y. (IWM)
+
+* Don't ignore pass data. (IWM)
+
+* Fix some small typo's in manpages. (CdG)
+
+* Fix [] withing <tag>. (HN)
+
+* Fix missing definition of off_t under HP/UX. (MG)
+
+* Make sure SGMLtools v1.0 and SGMLtools v2.0 can coexist by renaming
+  'sgmltools' executable. (CdG)
+
+* Add bindir to $PATH when generating documentation. (CdG)
+
+* Fix to groff macro-detection code. (JE2)
+
+* Let autoconf find out whether to use -ms or -mgs for groff. (JE2)
+
+--- CHANGES FOR sgml-tools-1.0.7 (26 June 1998):
+
+* Regenerated all documentation. (CdG)
+
+* Add doc generation build rules. (NJ)
+
+* Add (La)TeX logos. (NJ)
+
+* Make sure LaTeX uses T1 encoding. (NJ)
+
+* Add symbols as they're mentioned in the user guide. (NJ)
+
+* Doc fixes: examples and pointers to the mailing list. (NJ)
+
+* Added missing chapters of HTML version of SGML-Tools guide. (CdG)
+
+* Remove generation target before cat'ing to it. Works better when target
+  is a link or symlink. (HN)
+
+* Romanian language support. (FB)
+
+* Better mapping for <htmlurl> to LaTeX2e. (HN)
+
+* Famous last words: temporary file removal is now bugfree. (CdG)
+
+--- CHANGES FOR sgml-tools-1.0.6 (7 April 1998):
+
+* More sensible code to handle subpackages. (AB)
+
+* Cleanups to documentation files. (AB)
+
+* Updated version info in guide. (CdG)
+
+* Fix line breaks between numbers and text in some section headings in
+  sgml2txt. (NJ)
+
+* Corrected "isoent" entity reference in DTD. (CdG)
+
+* Added META GENERATOR tag to HTML output. (CdG)
+
+* Removed second declaration of "$dir". (CdG)
+
+* Removed sgmltool.dtd. (CdG)
+
+* Added a file that details the 1.0 -> 2.0 migration path. (CdG)
+
+* Treat ID attributes the same way as URL attributes. (CdG)
+
+--- CHANGES FOR sgml-tools-1.0.5 (3 March 1998):
+
+* Replace char-entities by their 8859-1 equivalents in the translation
+  tables. (NJ)
+
+  [Note: this is a dirty patch to a problematic bug. I've accepted this
+  one because it is quite likely that sgml-tools 1.0 will only support
+  8859-1 as long as it is current, and version 2 will have to solve this
+  problem the right way - CdG]
+
+* Add babel to the list of packages included in the LaTeX output. (CdG)
+
+* Fix temp file cleanup code. (SM2)
+
+* Fix typo in Italian translation. (DS)
+
+* Use DirHandle instead of csh globbing for filepattern stuff. (SM2)
+
+--- CHANGES FOR sgml-tools-1.0.4 (11 February 1998):
+
+* Removed version number from SP subdirectory name. (CdG)
+
+* Cleanup of obsoleted files after sp-1.2.1 import. (CdG)
+
+* Import of SP 1.2.1. (CdG)
+
+* Final fix to PostScript output problems. (NJ)
+
+* Correct PostScript output bug. (NJ)
+
+* Danish language support. (NJ)
+
+* Suppress <nidx> contents in HTML and .txt backends. (CdG)
+
+* Small cleanups to makefile rules for sgmlpre. (SR)
+
+* Split up long comment in LyX output. (JAM)
+
+* Manpage didn't mention correct output format. (SR)
+
+* Italian language support. (DS)
+
+* Catalan language support. (MHP)
+
+* Added note about GNU make. (CdG)
+
+--- CHANGES FOR sgml-tools-1.0.3 (8 January 1998):
+
+* Add empty line to catalog, it gave problems. (CdG)
+
+* Portuguese support. (JAM)
+
+* Removed obsoleted awk and sed scripts for LyX backend. (CdG)
+
+* Major overhaul of LyX backend. (JAM)
+
+* Added "invisible" index tags <nidx> and <ncdx>. (SM/CdG)
+
+* Added <LINK..> tags at the top of the HTML output so you can navigate
+  more conveniently in LINK-aware browsers. (LM2)
+
+* Change &mu; to &micro; for HTML output. (MHP)
+
+* Work-around for primitive Solaris and OSF/1 shells. (CdG)
+
+* Removed @@formula/@@endformula placeholders, they aren't used anymore
+  and showed through in the final HTML file. (CdG)
+
+--- CHANGES FOR sgml-tools-1.0.2 (10 December 1997):
+
+* Added correct dimensions to "a4" paper size reference on manpage. (CdG)
+
+* Added html32.dtd (with a modified reference to ISOent) and updated
+  catalog accordingly. You can now do sgmlcheck on HTML files. (CdG)
+
+* Added swedish. (CdG)
+
+* Add check for Perl 5.004 (CdG)
+
+* Remove passing to \url of NAME attribute on URL's in LaTeX backend. It
+  removed all the spaces and wasn't really necessary. (CdG)
+
+* Fixed ngsmls typo. (CdG)
+
+* Norwegian language support. (RM)
+
+* Fixed URL bug according to Ken's proposal. Will do until we add SPGrove.
+  (CdG)
+
+* Enhanced hard-coded guide revision number with Revision tag. (CdG)
+
+--- CHANGES FOR sgml-tools-1.0.1 (3 December 1997):
+
+* Add -f to rm when removing old links. (AB)
+
+* Portability fixes to install commands. (KML)
+
+* Fixed single-backslash bug in makeindex code. (ESR)
+
+* Fix comment buglet. (CdG)
+
+--- CHANGES FOR sgml-tools-1.0.0 (26 November 1997):
+
+* Replaced two more occurrences of "make" with "$(MAKE)". (MB2)
+
+* LSM Entry file for SGML-Tools. (CdG)
+
+* New CHANGES file. (CdG)
+

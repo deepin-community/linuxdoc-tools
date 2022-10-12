@@ -1,0 +1,88 @@
+
+
+                  EntityMap -- Entity Mapping Tables
+
+                             Version 0.1
+
+                      Maintained by Ken MacLeod
+                         ken@bitsko.slc.ut.us
+
+
+INTRODUCTION
+
+    EntityMap is a set of look-up tables for translating SGML
+    character entity names into output formats.  This release of
+    EntityMap includes mappings for the ISO 8879:1986 character entity
+    sets to ASCII, Latin 1, TeX, Texinfo, and RTF.
+
+    EntityMap includes a Perl module for reading and querying the
+    entity mapping tables.  Documentation is in PerlDoc in `EntityMap'
+    and will also be installed as a man page as `Text::EntityMap(3)'.
+
+STATUS
+
+    The mapping tables in this release come directly from GF (General
+    Formatter) by Gary Houston.
+
+    Upcoming releases will merge mappings from SGML Tools and Jade.
+
+ACKNOWLEDGEMENTS
+
+    These are Gary Houston's acknowledgements for the initial `sdata'
+    files:
+
+     *  The tables for the conversion of `ISOlat1' to ``best'' ASCII
+        follow a system developed by Markus Kuhn.
+
+     *  `ISOlat1.2tex' is based on a `latin1' to TeX table by (I
+        think) Peter Flynn.
+
+     *  Other TeX symbols were grabbed individually from numerous
+        sources.
+
+INSTALLATION
+
+    If you are not using the Perl module you can copy the files in the
+    `sdata' directory to wherever you need them.
+
+    If you are using the Perl module, the following commands will
+    install the Perl module into your standard Perl library and
+    install the `sdata' files into `$PREFIX/lib/entity-map-0.1'.
+
+    zcat entity-map-0.1.tar.gz | tar xvf -
+    cd entity-map-0.1
+    ./configure
+    make
+    make install
+
+FORMAT
+
+    Each file contains one character entity per line.  Each line is
+    the entity name, followed by a tab, followed by the replacement
+    text for that entity.
+
+    The replacement text should be already escaped properly for it's
+    output format.
+
+    If there is no equivalent output format for an entity, the
+    convention is use the entity name within braces (`{name}') so that
+    the braces appear in the output.
+
+    NOTE:  The file format may change in the future.  Other output
+    formats may also require a new file format.
+
+FILE NAMES
+
+    The current convention is `ENTITY-SET.2FORMAT' where ENTITY-SET
+    is the source entity set name (like `ISOpub') and FORMAT is an
+    identifier for the output format:
+
+        .2ab    ASCII (best approximation)
+        .2as    ASCII
+        .2l1b   Latin 1 (best approximation)
+        .2l1s   Latin 1
+        .2tex   TeX
+        .2texi  Texinfo
+        .2rtf   RTF
+        .2tr    TROFF
+	.2u8b   UTF-8

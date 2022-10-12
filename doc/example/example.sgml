@@ -1,0 +1,333 @@
+<!doctype linuxdoc system>
+
+<!-- Here's an SGML example file.  Format it and print out the source,
+     and use it as a model for your own SGML files.  As you can see
+     this is a comment.
+ -->
+
+<article>
+
+<!-- Title information -->
+
+<title>Quick Example for Linuxdoc DTD SGML source</title>
+<author>
+ <name>Matt Welsh <tt/&lt;mdw@cs.cornell.edu/&gt;
+   Original version  as &dquot;Quick SGML Example&dquot;,
+   <newline>
+ </name>
+ <and>
+ <name>Taketoshi Sano <tt/&lt;sano@debian.org/&gt;
+       Updated and renamed to current name<newline></name>
+</author>
+<date>2002/03/18</date>
+
+<abstract>
+This document is a brief example using the Linuxdoc DTD SGML.
+</abstract>
+
+<!-- Table of contents -->
+<toc>
+
+<!-- Begin the document -->
+
+<sect>
+ <heading>Introduction</heading>
+
+ <p>
+This is an SGML example file using the Linuxdoc DTD SGML.
+You can format it using the command
+  <tscreen>
+   <verb>
+% linuxdoc -B txt example.sgml
+   </verb>
+  </tscreen>
+this will produce a plain ASCII file.  You can also produce
+files in various formats including LaTeX, HTML and GNU info
+with the commands in linuxdoc-tools.
+ </p>
+
+ <p>
+The command name is ``<tt>linuxdoc</tt>''.
+It is ``<tt>-B</tt>'' option to choose the proper backend driver.
+Old command names are now obsoleted.
+
+<verb>
+   Old (obsoleted)		  New (prefered)
+ -------------------		------------------
+  sgml2txt			 linuxdoc -B txt
+  sgml2html			 linuxdoc -B html
+  sgml2latex			 linuxdoc -B latex
+  sgml2info			 linuxdoc -B info
+  sgml2lyx			 linuxdoc -B lyx
+  sgml2rtf			 linuxdoc -B rtf
+</verb>
+
+You can use ``<tt>linuxdoc -B latex</tt>'' to produce
+the tex, dvi, ps and pdf output.
+ </p>
+
+ <p>
+You can also use ``<tt>linuxdoc -B check</tt>'' command
+to check the syntax of your document sources.
+ </p>
+
+ <p>
+The linuxdoc-tool provides the general command &dquot;linuxdoc&dquot;,
+and you can use it with &dquot;--backend=<it>format</it>&dquot; option
+in order to access the facility of all the command above.  Check the
+online manual of linuxdoc command.
+ </p>
+
+</sect>
+
+<sect>The source
+
+<p>
+Looking at the source for this file will be instructive to show you
+how to use many of the Linuxdoc-SGML constructs.  You should also read
+the <em/Linuxdoc-SGML User's Guide/, in the file <tt/guide.sgml/.
+
+The source looks and feels like LaTeX, as you can see.  Paragraphs are
+separated by blank lines, macros are enclosed in angle brackets.  It's
+quite simple.
+
+(Warning!) This is just a simplificated explanation as a quick reference.
+In fact, the correct way to separate paragraphs are not just to put the
+blank lines between them.  But since the Linuxdoc DTD was created as an
+introduction to the SGML world, it allows us to use the easy way.
+
+If you wish to know the correct but not-so-easy way, then read the source
+of the previous section.  (Hint: using &lt;p&gt; with &etago;p&gt;).
+
+<sect>Some examples
+
+<p>
+Here are examples of things that you'll be using in the source.  First,
+let's decend into a subsection:
+
+<sect1>This is a subsection
+
+<p>
+As the header says.  Note that you need to use the <tt/p/ command to
+start the body of the section, after the <tt/sect1/ command.
+Here's a subsubsection:
+
+<sect2>This is a subsubsection
+
+<p>
+Right.  5 levels of sections are available.  Use the commands
+<tt/sect/, <tt/sect1/, <tt/sect2/, <tt/sect3/, and <tt/sect4/ to get them.
+This document uses the <tt>article</> document style, which is
+appropriate for HOWTOs and other docs; the <tt>report</> style (which
+includes the <tt/chapt/ sectioning command) should be used for the LDP docs.
+
+<sect1>Example text
+
+<p>
+All right, so you're typing along, and you want to show some example code,
+or example I/O with a program, whatever.  Use the <tt/code/ or <tt/verb/
+``environments'' for this, wrapped in a <tt/tscreen/ environment, as so:
+<tscreen><verb>
+This is an example verb environment.
+</verb></tscreen>
+As well as:
+<tscreen><code>
+This is an example code environment.
+</code></tscreen>
+The <tt/tscreen/ environment just sets the font to small type and
+indents it nicely.  It's not required for using <tt/verb/ or <tt/code/,
+but I suggest that you do.
+
+The <em/Linuxdoc-SGML User's Guide/ explains what special characters you
+can and can't use in the <tt/verb/ and <tt/code/ environments.
+
+<sect1>
+ <heading>Cross references<label id="test-ref"></heading>
+
+<p>
+What about cross-references? This section has been marked with the
+<tt>label</> command; using <tt>ref</> will provide a cross reference,
+as in ``See Section <ref id="test-ref">'' for more. </p>
+<p>
+Right now cross-references don't work in the <tt/groff/ translation for
+plain ASCII.  They do work when generating LaTeX or HTML output.</p>
+
+<sect1>Using fonts
+
+<p>
+You want fonts, we got fonts.  Of course these won't show up in the
+plain ASCII text, but they all map into the various output formats:
+<bf/boldface/, <em/emphasis/, <sf/sans serif/, <sl/slanted/,
+<tt/typewriter/, and <it/italics/.
+
+<sect1>Lists
+
+<p>
+Lists are easy as well.  Just use the <tt/itemize/ element with the
+<tt/item/ commands, seen here:
+<itemize>
+<item> This is a list.
+<item> Nothing exciting about that.
+       <itemize>
+       <item> Multiple levels are supported as well.
+       <item> Again, that's no surprise.
+       </itemize>
+       <enum>
+       <item> Enumerated lists using <tt>enum</> also work.
+       <item> Description environments using <tt>descrip</> along
+	      with <tt>tag</> are also available, as seen here.
+       </enum>
+       <descrip>
+       <tag/First item./  Here's one item.
+       <tag/Second item./  Here's another.
+       <tag/Third item./  Can we go for three?
+       </descrip>
+<item> A final item to top it all off.
+</itemize>
+
+
+<sect1>Tables and Figures
+
+<p>
+The Linuxdoc DTD itself has the element definition for tables and figures
+which exists in the original QWERTZ DTD.  They are not used widely because
+the Linuxdoc DTD is created for multiple outputs with the same contents.
+Tables can be used only in text, html, and latex formats.  And figures can
+be used only in html and latex formats.
+</p>
+<p>
+The usage of these tags without very strong reasons is not recommended.
+If you wish to enhance your documents, then it may be the time you should
+move up to the DocBook DTD.  But if you think you have enough reasons to
+use graphics with Linuxdoc DTD for your documents, then it is your choice.
+</p>
+<p>
+One more point.  Please remember that text only documents can be listened
+by a blind person, while the heavy graphical documents can't.
+</p>
+
+
+<sect2>
+ <heading>Table</heading>
+<p>
+Here is an example of table.  Check this in various output formats.
+Please take care in using this.  There are several limitation.
+Each row can not be folded into multiple lines, and too long row
+will be corrupted in the output.  The output in info, lyx, and rtf
+may not be correct at all.  Anyway, you are warned.  Be carefull.
+
+<table loc="tbp">
+<tabular ca="lll">
+ DTD |comments |tools @
+Linuxdoc|What this document aimed at|linuxdoc-tools@
+DocBook|Now the de facto standard|openjade, sgmltools-lite@
+QWERTZ|The origin of Linuxdoc|sgml2latex-format
+</tabular>
+<caption>Comparison on Some DTD</caption>
+</table>
+</p>
+</sect2>
+
+
+<sect2>
+ <heading>Figure</heading>
+<p>
+In html and latex output, the graphics can be included with
+the <it>figure</it> element.  It is not encouraged to use this feature
+since the LinuxDoc DTD is created for fairiy simple and light way of
+producing the multiple output formats with the same content.
+Using graphics only in some outputs will spoil the value of a simple
+plain text output in many cases.  And heavy usage of huge graphics
+files was just a pain when the network (and the machine) was too slow.
+But when you only need the versions in html and latex format, and if
+you don't need to concern the network speed, then you can use this.
+</p>
+<p>
+Here is an example to use the figure in html or tex (tex, dvi, and ps).
+This example uses the (unofficial) logo of Linux kernel 2.0, which was
+created by Larry Ewing with the GIMP.  Check his site:
+<url url="http://www.isc.tamu.edu/&tilde;lewing/linux/">
+I use &dquot;convert&dquot; command from ImageMagic and ghostscript
+to get the png and eps files from the original GIF.
+</p>
+<p>
+You should put all the graphic files into the same directory as the
+SGML source file.  For html and pdf, use <it>img</it> element with png
+or jpeg graphic file.  For other latex (tex, dvi, and ps), use <it>eps</it>
+element with ps or eps graphic file.
+
+<figure>
+<eps file="logo.eps">
+<img src="logo.png">
+<caption>The Penguin Logo of the Linux</caption>
+</figure>
+</p>
+</sect2>
+
+</sect1>
+
+<sect1>Summary
+
+<p>
+This is just about everything that you need to get started with
+writing SGML docs using the <tt/linuxdoc-sgml/ DTD.  Please let me know
+if you think something should be changed or added to this document.
+
+<sect>
+ <heading>SGML world</heading>
+
+<p>
+SGML is an ISO standard (ISO 8879:1986) for information processing.
+You can read some introduction of SGML related to HTML from
+<url url="www.w3.org/TR/REC-html40/intro/sgmltut.html" name="[On SGML and HTML]">.
+SGML provides the scheme to express the logical structure of a document
+(such as chapter, section, subsection, and so on.) and it call a piece of
+document as an <it>element</it>.  When we write a document in SGML, we need
+the specification of structure of the document.  This specification is called
+<it>DTD</it> (abbreviated from &dquot;Document Type Definition&dquot;), and
+this DTD defines the relation of various elements in the specific type of
+documents.
+</p>
+<p>
+This document uses the word <it>Linuxdoc DTD</it> without explanation so far.
+Here is the meaning of &dquot;DTD&dquot;.  We can't write any document in
+SGML without an appropriate DTD.
+</p>
+
+<p>
+You should also note that Linuxdoc DTD is created as a simple and easy
+introduction for SGML world.  Matt Welsh (the original author of the Linuxdoc
+DTD and the tool for it) wrote in his guide:
+<quote>
+If you'd like to write general documentation in SGML, I suggest using
+the original QWERTZ DTD instead of the hacked-up linuxdoc DTD, which I've
+modified for use particularly by the Linux HOWTOs and other such documentation.
+</quote>
+</p>
+<p>
+Now the DocBook DTD, which is maintained by OASIS, has been around
+for a while, and is very popular for technical documentation.
+Moreover, it uses DSSSL, which is an ISO standard for doing rendering.
+In the future this might move to and XML DTD and using XSL instead of
+DSSSL, but that doesn't matter to the author.  See the following URLs
+for more info:
+<itemize>
+<item><url url="http://nwalsh.com/docbook/">
+<item><url url="http://www.oasis-open.org/docbook/">
+<item><url url="http://www.docbook.org/">
+<item><url url="http://www.mulberrytech.com/dsssl/">
+<item><url url="http://www.oasis-open.org/cover/dsssl.html">
+</itemize>
+</p>
+
+<p>
+You should use the DocBook DTD if you are serious to be a writer
+in the technical documentation world.  The Linuxdoc DTD is intended
+as an easy introduction, and is considered now as the work-around
+to help many useful documents until they can be converted into the
+DocBook based.
+</p>
+
+</sect>
+
+</article>

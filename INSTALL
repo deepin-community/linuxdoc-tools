@@ -1,0 +1,90 @@
+*** This file describes the installation of the linuxdoc-tools package ***
+
+You need to do the following things to get linuxdoc-tools installed:
+
+
+o Get, make and install jade or openjade. This software needs
+  nsgmls or onsgmls command from jade or openjade.
+
+        The source of jade can be downloaded from
+        <URL:ftp://ftp.jclark.com/pub/jade/>.
+        This source archive contains source for both jade and sp.
+
+        The website for openjade is <URL:http://openjade.sourceforge.net/>.
+
+  Currently, openjade seems to be the way to go, but if your system
+  has working jade already, you can use it safely.
+
+
+o Configure linuxdoc-tools for your system:
+
+     ./configure
+
+  You can specify different installation prefixes during installation,
+  the default prefix is `/usr/local'.
+  For example: install linuxdoc-sgml to `/usr':
+
+     ./configure --prefix=/usr
+
+  If you have sgmls-1.1 already installed, you can leave
+  out their compilation:
+
+     ./configure --with-installed-sgmlsasp
+
+  Otherwise you need awk available to build sgmlsasp.
+
+  If you have entity-map already installed, you can use it:
+
+     ./configure --with-installed-entity-map
+
+  If you have iso-entities already installed, you can use it:
+
+     ./configure --with-installed-iso-entities
+
+  Other interesting configuration options
+
+     --disable-docs           No not build or install any doc
+     --enable-docs[=type]     Explicitly set doc formats to build.
+		              Possible values:
+			      txt pdf info lyx html rtf dvi+ps.
+			      (Default: enabled with "txt pdf
+			      info lyx html rtf" value)
+
+
+o Compile SGML-Tools:
+
+    make
+
+  or
+
+    gmake
+
+  whatever calls GNU make on your system. If you don't have GNU make installed,
+  get the sources from prep.ai.mit.edu now and install it - SGML-Tools needs
+  it to compile.
+
+
+o Install SGML-Tools:
+
+    make install
+
+  (You must probably be root to install in /usr/local and other system
+  directories).
+
+  Note:
+    In order to use TeX/PS/PDF output, TeX style files in ./lib
+    subdirectory (linuxdoc-sgml.sty, linuxdoctr-sgml.sty, null.sty,
+    and qwertz.sty) are to be installed your LaTeX input directory,
+    such as "/usr/share/tex/latex/misc/".
+    Also url.sty and epsf.tex are required.  Newer version of them
+    are available from recent teTeX distribution.  If you wish to
+    have old ones, check the "./obsoleted" subdirectory.
+
+  It might be a good idea to install in a temporary directory for testing,
+  first (/tmp perhaps).
+
+o the contrib directory has some interesting patches and scripts that may be
+  useful to you.
+
+o there is a guide on the linuxdoc-tools documentation  directory, it
+  describes how to use this package, read it next...

@@ -1,0 +1,45 @@
+Thu Jul 26 20:05:48 CEST 2018 Agustin Martin <agmartin@debian.org>
+
+	* Rename configure.in to configure.ac. Update files as
+	  appropriate.
+
+Sat Dec  1 08:47:36 JST 2001  Taketoshi Sano <sano@debian.org>
+
+	* configure.in:
+	    -  remove datadir definition because autoconf has
+	       the default and the option to specify it.
+	    -  update for FHS 2.0: move docdir and sgmldir to
+               $datadir from $prefix
+	    -  update spec files for FHS 2.0
+
+Sat Sep  6 17:21:31 1997  Ken MacLeod  <ken@bitsko.slc.ut.us>
+
+	* iso-entities.spec (%files): switched `:' to `.'
+
+	* MANIFEST: remove config/mkinstalldirs
+
+Fri Sep  5 19:07:16 1997  Ken MacLeod  <ken@bitsko.slc.ut.us>
+
+	* README: changed install dir
+
+	* Makefile.in (installdoc, installdirs): switched to install-sh
+
+	* configure.in (isoentdir): hardcoded to 8879.1986
+
+Sun Jun  8 13:19:09 1997  Ken MacLeod  <ken@bitsko.slc.ut.us>
+
+	* README: added FTP reference
+
+	* configure.in (isoentdir): hardcoded to 8879:1986
+
+Wed May 28 19:05:59 1997  Ken MacLeod  <ken@bitsko.slc.ut.us>
+
+	* make-dist.pl (MANIFEST.SKIP): added CVS
+
+	* iso-entities.spec: more changes for moving to 8879:1986
+
+Mon May 26 19:02:08 1997  Ken MacLeod  <ken@bitsko.slc.ut.us>
+
+	* README: change version to 8879:1986
+
+	* configure.in (VERSION): changed to 8879:1986

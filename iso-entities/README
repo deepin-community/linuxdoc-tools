@@ -1,0 +1,53 @@
+    $Id: README,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+		 ISO 8879:1986 Character Entity Sets
+
+                 Packaging Maintained by Ken MacLeod
+                         ken@bitsko.slc.ut.us
+
+
+INTRODUCTION
+
+    The ISO character entity sets are used in a wide variety of SGML
+    document types.  This package installs these entity sets and a
+    catalog to reference them.
+
+SOURCE
+
+    I know of no official online source of these entity sets.  I
+    copied the files from the SGML Repository:
+
+        <ftp://ftp.ifi.uio.no/pub/SGML/ENTITIES/>
+
+    The ISO 8879:1986 character entity sets are static.  The ``point''
+    release number of this package is the release of this packaging.
+    This package is maintained at
+
+        <ftp://ftp.uu.net/vendor/bitsko/iso-entities/>
+
+INSTALLATION
+
+    The entity sets need to be installed where your SGML processing
+    system can find them.  Copy the `iso-entities.cat' catalog to the
+    same directory.  Several packages will find the entity sets if you
+    add the full path to `iso-entities.cat' to the environment
+    variable `SGML_CATALOG_FILES', for example:
+
+        SGML_CATALOG_FILES=/usr/lib/sgml/iso-entities-8879.1986/iso-entities.cat
+        export SGML_CATALOG_FILES
+
+    This package also comes with a `configure' script and `Makefile' that
+    will install the entities following GNU install standards:
+
+        zcat iso-entities-8879.1986.2.tar.gz | tar xvf -
+        cd iso-entities-8879.1986
+        ./configure
+        make
+        make install
+
+    By default, the entities will be installed into
+    `/usr/local/lib/sgml/iso-entities-8879.1986'.  The `--prefix'
+    option to `configure' can be used to point to a different top
+    level directory:
+
+        ./configure --prefix=/usr

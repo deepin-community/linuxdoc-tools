@@ -1,0 +1,76 @@
+[half  ]	{half}
+[frac12]	½
+[frac14]	¼
+[frac34]	¾
+[frac18]	{frac18}
+[frac38]	{frac38}
+[frac58]	{frac58}
+[frac78]	{frac78}
+[sup1  ]	¹
+[sup2  ]	²
+[sup3  ]	³
+[plus  ]	+
+[plusmn]	±
+[lt    ]	<
+[equals]	=
+[gt    ]	>
+[divide]	/
+[times ]	×
+[curren]	¤
+[pound ]	£
+[dollar]	$
+[cent  ]	¢
+[yen   ]	¥
+[num   ]	#
+[percnt]	%
+[amp   ]	&
+[ast   ]	*
+[commat]	@
+[lsqb  ]	[
+[bsol  ]	\
+[rsqb  ]	]
+[lcub  ]	{
+[horbar]	{horbar}
+[verbar]	|
+[rcub  ]	}
+[micro ]	µ
+[ohm   ]	{ohm}
+[deg   ]	°
+[ordm  ]	{ordm}
+[ordf  ]	{ordf}
+[sect  ]	§
+[para  ]	¶
+[middot]	·
+[larr  ]	{larr}
+[rarr  ]	{rarr}
+[uarr  ]	{uarr}
+[darr  ]	{darr}
+[copy  ]	©
+[reg   ]	®
+[trade ]	{trade}
+[brvbar]	¦
+[not   ]	¬
+[sung  ]	{sung}
+[excl  ]	!
+[iexcl ]	¡
+[quot  ]	"
+[apos  ]	'
+[lpar  ]	(
+[rpar  ]	)
+[comma ]	,
+[lowbar]	_
+[hyphen]	-
+[period]	.
+[sol   ]	/
+[colon ]	:
+[semi  ]	;
+[quest ]	?
+[iquest]	¿
+[laquo ]	«
+[raquo ]	»
+[lsquo ]	`
+[rsquo ]	'
+[ldquo ]	{ldquo}
+[rdquo ]	{rdquo}
+[nbsp  ]	 
+[shy   ]	­

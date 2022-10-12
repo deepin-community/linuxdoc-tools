@@ -1,0 +1,76 @@
+[half  ]	{\u189?}
+[frac12]	{\u189?}
+[frac14]	{\u188?}
+[frac34]	{\u190?}
+[frac18]	1/8
+[frac38]	3/8
+[frac58]	5/8
+[frac78]	7/8
+[sup1  ]	{\u185?}
+[sup2  ]	{\u178?}
+[sup3  ]	{\u179?}
+[plus  ]	+
+[plusmn]	{\u177?}
+[lt    ]	<
+[equals]	=
+[gt    ]	>
+[divide]	/
+[times ]	{\u215?}
+[curren]	{\u164?}
+[pound ]	{\u163?}
+[dollar]	$
+[cent  ]	{\u162?}
+[yen   ]	{\u165?}
+[num   ]	#
+[percnt]	%
+[amp   ]	&
+[ast   ]	*
+[commat]	@
+[lsqb  ]	[
+[bsol  ]	\\
+[rsqb  ]	]
+[lcub  ]	\{
+[horbar]	-
+[verbar]	|
+[rcub  ]	\}
+[micro ]	{\u181?}
+[ohm   ]	\{ohm\}
+[deg   ]	{\u176?}
+[ordm  ]	\{ordm\}
+[ordf  ]	\{ordf\}
+[sect  ]	{\u167?}
+[para  ]	{\u182?}
+[middot]	{\u183?}
+[larr  ]	<-
+[rarr  ]	->
+[uarr  ]	\{uarr\}
+[darr  ]	\{darr\}
+[copy  ]	{\u169?}
+[reg   ]	{\u174?}
+[trade ]	(TM)
+[brvbar]	{\u166?}
+[not   ]	{\u172?}
+[sung  ]	\{sung\}
+[excl  ]	!
+[iexcl ]	{\u161?}
+[quot  ]	"
+[apos  ]	'
+[lpar  ]	(
+[rpar  ]	)
+[comma ]	,
+[lowbar]	_
+[hyphen]	-
+[period]	.
+[sol   ]	/
+[colon ]	:
+[semi  ]	;
+[quest ]	?
+[iquest]	{\u191?}
+[laquo ]	{\u171?}
+[raquo ]	{\u187?}
+[lsquo ]	`
+[rsquo ]	'
+[ldquo ]	"
+[rdquo ]	"
+[nbsp  ]	{\u160?}
+[shy   ]	

@@ -1,0 +1,115 @@
+#
+# Copyright (C) 1996 Ken MacLeod
+#
+# See the file COPYING for distribution terms.
+#
+# DESTDIR modifications by Agustin Martin <agmartin@debian.org>
+# ---------------------------------------------------------------------------
+
+SHELL               = /bin/sh
+
+PACKAGE             = @PACKAGE@
+VERSION             = @VERSION@
+
+prefix              = @prefix@
+exec_prefix         = @exec_prefix@
+
+libdir              = @libdir@
+datadir             = @datadir@
+docdir              = @docdir@
+perl5libdir         = @perl5libdir@
+textmoddir          = @textmoddir@
+entitymapdir        = @entitymapdir@
+localentitymapdir   = @localentitymapdir@
+
+mandir              = @mandir@
+manext              = .3
+man3dir             = ${mandir}/man3
+
+srcdir              = @srcdir@
+VPATH               = @srcdir@
+
+@SET_MAKE@
+
+INSTALL             = @INSTALL@
+INSTALL_PROGRAM     = @INSTALL_PROGRAM@
+INSTALL_DATA        = @INSTALL_DATA@
+SED                 = @SED@
+PERL5               = @PERL5@
+
+DOCS = \
+  COPYING \
+  README
+
+# Now real destination dirs, honouring $(DESTDIR)
+doc_ddir            = $(DESTDIR)@docdir@
+entitymap_ddir      = $(DESTDIR)@entitymapdir@
+localentitymap_ddir = $(DESTDIR)@localentitymapdir@
+sgml_ddir           = $(DESTDIR)@sgmldir@
+textmod_ddir        = $(DESTDIR)@textmoddir@
+# ------------------------------------------------------------------------
+
+.SUFFIXES:
+.SUFFIXES: .pl .sgml
+
+all: EntityMap.pm
+	$(MAKE) -C sdata default
+
+EntityMap.pm: EntityMap.pm.in Makefile
+	${RM} EntityMap.pm
+	sed < EntityMap.pm.in > EntityMap.pm \
+	  -e 's|[@]localentitymapdir@|${localentitymapdir}|g' \
+	  -e 's|[@]entitymapdir@|${entitymapdir}|g'
+
+install: all installdirs
+	${INSTALL_DATA} EntityMap.pm ${textmod_ddir}/EntityMap.pm
+	$(MAKE) -C sdata \
+		LIBDIR="${entitymap_ddir}" \
+		install
+
+installdirs:
+	for ii in \
+		${perl5lib_ddir} \
+		${textmod_ddir} \
+		${localentitymap_ddir} \
+		${entitymap_ddir}; do \
+	    $(INSTALL) -d $$ii; \
+	done
+
+installdoc:
+	$(INSTALL) -d ${doc_ddir}
+	$(INSTALL_DATA) $(DOCS) ${doc_ddir}
+
+check: test-links
+	perl test-entitymap.pl
+
+test-links:
+	ln -s . Text
+
+clean:
+	$(MAKE) -C sdata clean
+	${RM} make-dist MANIFEST.bak
+	${RM} Text
+	${RM} EntityMap.pm
+	${RM} *~
+
+realclean: clean
+
+distclean: clean
+	${RM} config.cache config.log config.status
+
+maintainerclean: distclean
+	${RM} Makefile configure
+
+dist: distclean make-dist
+	cd ${srcdir}; ./make-dist
+
+SEDPL= \
+  -e's;\@PACKAGE\@;${PACKAGE};' \
+  -e's;\@VERSION\@;${VERSION};' \
+  -e's;\@PERL5\@;${PERL5};'
+
+.pl:
+	${RM} $@
+	${SED} ${SEDPL} <$< >$@ || (${RM} $@; exit 1)
+	chmod +x $@

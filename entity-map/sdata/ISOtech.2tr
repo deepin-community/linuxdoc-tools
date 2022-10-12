@@ -1,0 +1,62 @@
+[aleph ]	N
+[and   ]	\(AN
+[ang90 ]	{ang90}
+[angsph]	{angsph}
+[ap    ]	\(~~
+[becaus]	{becaus}
+[bottom]	{bottom}
+[cap   ]	\(ca
+[cong  ]	{cong}
+[conint]	{conint}
+[cup   ]	\(cu
+[equiv ]	\(==
+[exist ]	{exist}
+[forall]	{forall}
+[fnof  ]	{fnof}
+[ge    ]	\(>=
+[iff   ]	iff.
+[infin ]	{infin}
+[int   ]	{int}
+[isin  ]	\(mo
+[lang  ]	\(la
+[lArr  ]	\(lA
+[le    ]	\(<=
+[minus ]	-
+[mnplus]	-/+
+[nabla ]	{nabla}
+[ne    ]	\(!=
+[ni    ]	{ni}
+[or    ]	\(OR
+[par   ]	||
+[part  ]	{part}
+[permil]	{permil}
+[perp  ]	{perp}
+[prime ]	'
+[Prime ]	"
+[prop  ]	{prop}
+[radic ]	{radic}
+[rang  ]	\(ra
+[rArr  ]	\(rA
+[sim   ]	C
+[sime  ]	C=
+[square]	{square}
+[sub   ]	\(sb
+[sube  ]	\(ib
+[sup   ]	\(sp
+[supe  ]	\(ip
+[there4]	{there4}
+[Verbar]	||
+[angst ]	A
+[bernou]	B
+[compfn]	o
+[Dot   ]	{Dot}
+[DotDot]	{DotDot}
+[hamilt]	H
+[lagran]	L
+[lowast]	*
+[notin ]	\(nm
+[order ]	{order}
+[phmmat]	M
+[tdot  ]	{tdot}
+[tprime]	{tprime}
+[wedgeq]	{wedgeq}

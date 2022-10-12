@@ -1,0 +1,141 @@
+Changelog for linuxdoc-tools:
+
+This package is no longer packaged as Debian native and this
+Changelog will only contain changes after that happened.
+
+For changes when this was packaged as a Debian native package,
+please see "doc/CHANGES.Debian-native".
+
+0.9.82:
+=======
+ * latex2e backend:
+   - Add support for Korean uft-8.
+   - Some cleanup and code reorganization.
+ * doc/guide.html: Add missing semicolon to some entity names.
+ * entities/sdata/ISOnum.2html: Do not unconditionally convert &pound;
+   to latin1 symbol, leave generic coding independent &pound;
+
+0.9.81:
+=======
+ * latex2e backend:
+   - Add basic support for integrated makeindex run.
+   - Make 'platex' the default for euc-jp Japanese.
+   - Some improvements in Japanese support.
+   - Fix buggy comparison.
+ * New ldt_err_log function to print to STDERR and log file.
+ * Use compile time 'use VERSION' rather than runtime
+   'require VERSION'
+ * Some more cleanups and code upgrades.
+
+0.9.80:
+=======
+ * linuxdoc.in: Load modules after declaring lib. Thanks Felix
+   Palmen.
+
+0.9.79:
+=======
+ * Reorganize the entity maps build chain and section.
+ * latex backend: Make lang package selection more generic.
+ * Experimental and partial support for simplified Chinese.
+ * linuxdoc.in: Move ldt_which to Utils.pm.
+ * Update some documentation and headers.
+
+0.9.78:
+=======
+ * info backend: Better handling of  tabular environments.
+ * rtf backend:
+   - Support utf-8 by translating utf8 to rtf unicode representation.
+   - Process sgml entities and replace them according to rtf
+     charmaps.
+   - ISOnum.2rtf: Use rtf escaped codes for sgml entities
+     translation.
+   - rtf2rtf.l: Increase reserved `outname' size by 6 bytes.
+   - Cosmetic changes and some logging.
+
+0.9.77:
+======
+ * lyx backend:
+   - Experimental support for UTF-8 (and may be euc-jp and euc-kr).
+   - Pass language and charset to generated lyx file.
+ * entity.map/: generate some UTF-8 mappings.
+ * fmt_latex2e.pl: Behave differently when --language is unset than
+    when set to English.
+
+0.9.76:
+======
+ * Html2Html.pm: Write charset meta line for all supported charsets.
+ * Write a logfile in temporary dir.
+ * Some improvements in Japanese+utf-8 support. Experimental.
+ * Convert latin1 to sgml entities only for html backend.
+   Complete latin1tosgml conversion tables. Reorganize.
+ * latex backend:
+   - Preliminary Japanese+utf-8 support.
+   - Use a single function for cleanup.
+   - Reorganize latex selection.
+
+0.9.75:
+======
+ * Fix wrong name in hash reference for options passed to Html2Html.pm.
+ * Basic support for UTF-8 string translations in html.
+ * Code reorganization and documentation improvements.
+
+0.9.74:
+======
+ * Preliminary implementation of utf-8 charset support.
+ * Make latex backend quiet by default. New --verbosity option for
+   verbosity selection.
+ * Pass @documentencoding to texinfo for supported charsets.
+ * entity-map/,iso-entities/:
+   - More configure.in to configure.ac renamings. Old name is deprecated.
+   - Refresh configure with recent autoconf.
+ * Remove more trailing whitespace and other cosmetic changes.
+
+0.9.73:
+======
+ * guide.sgml: Update some ancient www links and remove trailing
+   whitespace.
+ * LinuxDocTools.pm: Work around a bug in opensp when dtddecl support is
+   enabled. Use more explicit names for tempfiles.
+ * man/rtf2rtf.1: Typo fix.
+ * Rename configure.in to configure.ac. Old name is deprecated.
+
+0.9.72:
+======
+ * Use a Makefile for final doc build, after choices validation.
+ * Handle perl 5.22 deprecation of unescaped left brace in regular
+   expressions inside fmt_latex2e.pl.
+ * Upgrade deprecated latex2e commands in fmt_latex2e.pl:
+   {\em  } -> \emph{} and {\tt } -> \texttt{}.
+ * LinuxDocTools.pm::process_file: Fail if pipe to nsgmls fails (LP:#1552398).
+ * Use generic ${MAKE} in doc/Makedoc.sh rather than harcoded
+   "make". Thanks, Ilya Tumaykin.
+ * Fix compilation with >=flex-2.6.1. Thanks, Ilya Tumaykin.
+ * Makedoc.sh: Make sure ${PREFIX} is honoured where needed. Thanks
+   Felix Palmen.
+ * Makefile.in: Use ${INSTALL_SCRIPT} to install linuxdoc perl
+   script. Thanks Felix Palmen.
+
+0.9.71:
+======
+ * doc/Makedoc.sh: Really pass --filter to txt backend to strip control chars.
+
+0.9.70:
+======
+ * Replace #include <malloc.h> with standard #include <stdlib.h> in
+   rtf2rtf.l.
+ * Build documentation in build target, not in install target
+   (Debian #800537).
+ * More versatile handling of doc formats, allowing explicit selection or
+   full disabling. Add pdf format and built it instead of dvi+ps.
+ * sgmlpre/sgmlpre.l: Fix some "type defaults to 'int'" warnings.
+ * Add $main::isoentities_prefix/share/sgml/sgml-iso-entities-8879.1986/catalog
+   catalog location.
+ * doc/Makedoc.sh: Other changes,
+   - Make dvips honor /etc/papersize if letter. a4 otherwise.
+   - Do not preserve gzip timestamps when creating guide.ps.gz.
+   - Make POSIX sh portable and use as such from Makefile.in.
+ * The usual minor changes here and there.
+
+0.9.69:
+=======
+ * Fix compilation with new flex. Thanks Martin Milata (Debian #700958).

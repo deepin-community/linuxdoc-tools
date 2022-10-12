@@ -1,0 +1,62 @@
+[aacute]	\'a
+[Aacute]	\'A
+[acirc ]	\^a
+[Acirc ]	\^A
+[agrave]	\`a
+[Agrave]	\`A
+[aring ]	\aa{}
+[Aring ]	\AA{}
+[atilde]	\~a
+[Atilde]	\~A
+[auml  ]	\"a
+[Auml  ]	\"A
+[aelig ]	\ae{}
+[AElig ]	\AE{}
+[ccedil]	\c c
+[Ccedil]	\c C
+[eth   ]	\dh{}
+[ETH   ]	\DH{}
+[eacute]	\'e
+[Eacute]	\'E
+[ecirc ]	\^e
+[Ecirc ]	\^E
+[egrave]	\`e
+[Egrave]	\`E
+[euml  ]	\"e
+[Euml  ]	\"E
+[iacute]	\'\i{}
+[Iacute]	\'I
+[icirc ]	\^\i{}
+[Icirc ]	\^I
+[igrave]	\`\i{}
+[Igrave]	\`I
+[iuml  ]	\"\i{}
+[Iuml  ]	\"I
+[ntilde]	\~n
+[Ntilde]	\~N
+[oacute]	\'o
+[Oacute]	\'O
+[ocirc ]	\^o
+[Ocirc ]	\^O
+[ograve]	\`o
+[Ograve]	\`O
+[oslash]	\o{}
+[Oslash]	\O{}
+[otilde]	\~o
+[Otilde]	\~O
+[ouml  ]	\"o
+[Ouml  ]	\"O
+[szlig ]	\ss{}
+[thorn ]	\th{}
+[THORN ]	\TH{}
+[uacute]	\'u
+[Uacute]	\'U
+[ucirc ]	\^u
+[Ucirc ]	\^U
+[ugrave]	\`u
+[Ugrave]	\`U
+[uuml  ]	\"u
+[Uuml  ]	\"U
+[yacute]	\'y
+[Yacute]	\'Y
+[yuml  ]	\"y

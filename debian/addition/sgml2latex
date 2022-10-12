@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if which latex > /dev/null 2>&1; then
+    exec /usr/bin/linuxdoc --backend=latex "$@"
+else
+    echo "Please install latex to use LinuxDoc DTD SGML LaTeX/PS/PDF Conversion"
+    exit 1
+fi

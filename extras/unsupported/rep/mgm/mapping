@@ -1,0 +1,522 @@
+
+% qwertz replacement file
+% translates into groff, using groff mm macros
+% manpages can be processed using the man macros
+
+% Author:  Tom Gordon
+
+
+% Groff dependencies are few.  To port to another roff:
+% 1. Check and modify, if necessary, font changes.  (e.g. In psroff the
+% same fonts have other names.)
+% 2. Check the code for including Encapsulated PostScript, generated
+% for eps elements.
+% 3. Also make versions of general.grops and math.grops, which are sed
+% scripts translating character entities into groff character references.
+
+
+<qwertz>	+	".nr pS 10\n"	% default point size and spacing
+			".S \\n(pS \\n(pS+2\n"
+			".nr PI 3n\n"  % paragraph indendation
+
+			".PH \"\"\n"   % no page header
+			".PF \"''\%''\"\n"   % page number in footer
+
+			% DIN A4
+
+			".nr W 15c\n"
+			".po 3c\n"		% page offset, left margin
+			".nr L 29.5\n"
+
+			".nr C1 4\n"	% Four levels in table of contents
+			".ds HF  TB  TB TB TI TI TI\n"
+			".if t .ds HP +6 +4 +3 +0 -1 -2\n" % heading pt sizes
+
+			% line break and blank line after all headings
+
+			".nr Hs 7\n"
+			".nr Hb 7\n"
+
+			% Footnote style
+			".nr FD 1\n"
+
+			% James Clark's trick to prevent unintended paragraph
+			% breaks
+
+			".tr \\&\n"
+
+			% horizontal line
+			".de hl\n"
+			".br\n"
+			"\\l'\\\\n(.lu-\\\\n(.iu'\n"
+			"..\n"
+
+			% initialize indentation level of headings
+			".nr iL 1\n"
+
+			% indent all paragraphs, except when they occur
+			% after headings, lists and displays
+			".nr Pt 2\n"
+
+			% context-sensitive list macro
+
+ 			".nr eL 0\n"  % current enumeration level
+			".de aL\n"
+			".if \\\\n(eL=1 .LB \\\\n(Li 6 0 1 1\n"
+			".if \\\\n(eL=2 .LB \\\\n(Li 6 0 3 a\n"
+			".if \\\\n(eL=3 .LB \\\\n(Li 6 0 1 i\n"
+			".if \\\\n(eL=4 .LB \\\\n(Li 6 0 1 A\n"
+			"..\n\n"
+
+			% captions of figures and tables
+
+			".nr cT 0\n"	% caption type, 0=table, 1=figure
+			".de CAPTION\n"
+			".if \\\\n(cT=0 .TB \\\\$1\n"
+			".if \\\\n(cT=1 .FG \\\\$1\n"
+			"..\n\n"
+
+			% Number registers for theorems
+			".nr def 0\n"
+			".nr prop 0\n"
+			".nr lemma 0\n"
+			".nr coroll 0\n"
+			".nr proof 0\n"
+			".nr theorem 0\n"
+
+			% Math
+
+			".nr eqlabel 0\n" % equation counter
+			".EQ\ndelim $$\n.EN\n"
+			".ds nequiv { \"relation\" \"\\o'/\\(=='\" }\n"
+			".ds nsub { \"relation\" \"\\o'/\\(sb'\" }\n"
+			".ds nsube { \"relation\" \"\\o'/\\(ib'\" }\n"
+			".ds nsup { \"relation\" \"\\o'/\\(sp'\" }\n"
+			".ds nsupe { \"relation\" \"\\o'/\\(ip'\" }\n"
+			".ds nvDash { \"relation\" \"\\z\\(br\\o'/='\"}\n"
+			".ds nvdash { \"relation\" \"\\z\\(br\\o'/\\(en'\"}\n"
+
+
+			% Reference commands
+
+			".INITR #groff#\n"
+
+			% redefine superscript strings so that
+			% refer tags look like [this]
+
+			".ds \[. \[\n"
+			".ds .\] \]\n"
+
+</qwertz>
+
+% set initial level of headings, in register il
+
+<article>	+	".nr il 0"		+
+</article>
+
+<report>	+ 	".nr il 1\n"
+			".nr Ej 1"	+  % start new page at each chapter
+
+</report>	+	".TC"			+
+
+<book>		+	".nr il 1\n"
+			".nr Ej 1"		+
+</book>		+	".TC"			+
+
+<notes>
+</notes>
+
+<manpage>	+	".nr il -1"		+
+</manpage>
+
+<titlepag>	+	".ft H\n"
+			".DS C"			+
+</titlepag>	+	".DE\n"
+			".ft R\n"
+			".S \\n(pS \\n(pS+2\n"	 % reset font size to default
+			".sp 3"			+
+
+<title>		+	".S \\n(pS+6 \\n(pS+8\n"
+			".B"		+
+</title>	+ 	".R"			+
+
+<subtitle>	+	".br\n"
+			".ft R\n"
+			".S -1"		+
+</subtitle>
+
+<author>	+	".sp 2\n"
+			".S \\n(pS+2 \\n(pS+4"	+
+</author>
+
+<name>		+	".I"	 		+
+</name>
+
+<and>		+	".sp"			+
+</and>
+
+<thanks>		"\\*F\n"
+			".FS"			+
+</thanks>	+	".FE"			+
+
+<inst>		+	".sp\n.R"		+
+</inst>
+
+<newline>	+	".br"			+
+</newline>
+
+<label>		+	".SETR [ID]"		+   % works for tables, etc?
+</label>
+
+<header>
+</header>
+
+<lhead>		+	".EH &"
+</lhead>		"&&&"		+
+
+<rhead>		+	".OH &&&"
+</rhead>		"&"			+
+
+<comment>	+	".ft HI"		+
+</comment>	+	".ft P"			+
+
+<abstract>	+	".AS"			+
+</abstract>	+	".AE"			+
+
+<appendix>	+ 	".nr H1 1\n"
+			".HM A"			+
+</appendix>
+
+<toc>
+</toc>
+
+<lof>		+	".nr Lf 1\n"
+</lof>
+
+<lot>		+	".nr Lt 1\n"
+</lot>
+
+<chapt>		+	".H \\n(iL "
+</chapt>
+
+<sect>		+	".H 1+\\n(iL "
+</sect>
+
+<sect1>		+	".H 2+\\n(iL "
+</sect1>
+
+<sect2>		+	".H 3+\\n(iL "
+</sect2>
+
+<sect3>		+	".H 4+\\n(iL "
+</sect3>
+
+<sect4>		+	".H 5+\\n(iL "
+</sect4>
+
+<heading>		"\""
+</heading>		"\"\n"			+
+
+<p>		+	".P"			+
+</p>
+
+<itemize>	+	".LB \\n(Pi 6 0 0 \\(bu \n"  % bullet list
+</itemize>	+	".LE"		+
+
+<enum>		+	".nr eL +1\n"	    % increment enumeration level
+			".aL\n"		  +
+</enum>		+	".LE\n"
+			".nr eL -1\n"	    % decrement enumeration level
+
+<descrip>	+	".VL 5"
+</descrip>	+	".LE"		+
+
+<item>		+	".LI "
+</item>
+
+<tag>		+	".LI\n\\fB"
+</tag>			"\\fP"		    	+
+
+<cite>		+	".\[\n[ID]\n.\]"	+
+</cite>
+
+<ncite>		+	".\[\n[ID]\n.\]\n([NOTE])"
+</ncite>
+
+<footnote>		"\\*F\n"
+			".FS"			+
+</footnote>	+	".FE"			+
+
+<sq>			"``"
+</sq>			"''"
+
+<lq>		+	".DS I F \\n(Si/2"	+
+</lq>		+	".DE"			+
+
+<em>			"\\fI"
+</em>		 	"\\fP"
+
+<bf>			"\\fB"
+</bf>			"\\fP"
+
+<it>			"\\fI"
+</it>			"\\fP"
+
+<sf>			"\\f(HR"
+</sf>			"\\fP"
+
+<sl>			"\\f(HI"
+</sl>			"\\fP"
+
+<tt>			"\\f(CR"
+</tt>			"\\fP"
+
+
+<ref>		+	".GETHN [ID]"  	+
+</ref>
+
+<pageref>	+	".GETPN [ID]"	+
+</pageref>
+
+<x>
+</x>
+
+<mc>
+</mc>
+
+<biblio>	+	".\[\n"
+			"$LIST$\n"
+			".\]"			+
+</biblio>
+
+<code>		+	".EQ\ndelim off\n.EN\n"
+ 			".hl\n.nf\n.na\n"
+			".ft CR\n"
+			".eo"			+
+
+</code>		+	".ec\n"
+			".hl\n"
+ 			".fi\n.ad\n.EQ\ndelim $$\n.EN\n"
+			".ft P\n"
+			".P 0"			+
+
+<verb>		+	".EQ\ndelim off\n.EN\n"
+			".nf\n.na\n"
+			".ft CR\n"
+			".eo"			+
+
+</verb>		+	".ec\n"
+			".fi\n.ad\n"
+			".EQ\ndelim $$\n.EN\n"
+			".ft P\n"
+			".P 0"			+
+
+% theorems and such
+
+<def>		+	".sp\n"
+			".nr def \\n\[def\]+1\n"
+			".B \"Definition \\n\[def\] \"" +
+</def>		+	".ft P\n.sp" 		+
+
+<prop>		+	".sp\n"
+			".nr prop \\n\[prop\]+1\n"
+			".B \"Proposition \\n\[prop\] \"" +
+</prop>		+	".ft P\n.sp" 		+
+
+
+<lemma>		+	".sp\n"
+			".nr lemma \\n\[lemma\]+1\n"
+			".B \"Lemma \\n\[lemma\] \""	+
+</lemma>	+	".ft P\n.sp" 		+
+
+<coroll>	+	".sp\n"
+			".nr coroll \\n\[coroll\]+1\n"
+			".B \"Corolloary \\n\[coroll\] \"" +
+</coroll>	+	".ft P\n.sp" 		+
+
+<proof>		+	".sp\n"
+			".nr proof \\n\[proof\]+1\n"
+			".B \"Proof \\n\[proof\] \""	+
+</proof>	+	".ft P\n.sp" 		+
+
+<theorem>	+	".sp\n"
+			".nr theorem \\n\[theorem\]+1\n"
+			".B \"Theorem \\n\[theorem\] \"" +
+</theorem>	+	".ft P\n.sp" 		+
+
+<thtag>		+ 	".B\n("
+</thtag>		")\n.I"			+
+
+% mathematics
+
+<f>			"$"
+</f>			"$"
+
+<dm>		+	".DS C\n"
+			".EQ"			+
+</dm>		+	".EN\n"
+			".DE"			+
+
+<eq>		+	".DS C\n"
+			".nr eqlabel \\n\[eqlabel\]+1\n"
+			".EQ \\n\[eqlabel\]"		+
+</eq>		+	".EN\n"
+			".DE"			+
+
+<fr>
+</fr>
+
+<nu>			"{"
+</nu>			"} over "
+
+<de>			"{"
+</de>			"}"
+
+<lim>
+</lim>
+
+<op>
+</op>
+
+<ll>			" from {"
+</ll>			"}"
+
+<ul>			" to {"
+</ul>			"}"
+
+<opd>
+</opd>
+
+<pr>			" prod "
+</pr>
+
+<in>			" int "
+</in>
+
+<sum>			" sum "
+</sum>
+
+% limitation: eqn only does square roots!
+
+<root>			" sqrt {"
+</root>			"}"
+
+<ar>		+	".TS\n"
+			"center, tab(|), delim $$; \n"
+			"[ca]."			+
+</ar>		+	".TE"			+
+
+<arr>   		"\n"
+</arr>
+
+<arc>   		"|"
+</arc>
+
+
+<sup>			" sup {"
+</sup>			"}"
+
+<inf>			" sub {"
+</inf>			"}"
+
+
+<unl>			"{"
+</unl>			"} under "
+
+<ovl>			"{"
+</ovl>			"} bar "
+
+<rf>			" bold{"
+</rf>			"}"
+
+<v>			"{"
+</v>			"} vec "
+
+% limitation: no calligraphic characters, using helvetica italics instead.  Is there a better font?
+
+<fi>			"\\f(HI"
+</fi>			"\\fP"
+
+<phr>			" roman }"
+</phr>			"}"
+
+
+<tu>		+	".br"		+
+</tu>
+
+% figures
+
+<figure>	 +	".nr cT 1"		+  % set caption type
+</figure>
+
+<eps>		+  	".if t .PSPIC [file].ps\n"
+			".if n .sp 4"	  	+
+</eps>
+
+% Are TeX units properly handled by this translation of ph?
+
+<ph>		+	".sp [VSPACE]"		+
+</ph>
+
+<caption>	+	".CAPTION \""
+</caption>		"\""			+
+
+% tables
+
+<table>		+	".nr cT 0\n"		% set caption type
+			".DF\n.R"		+
+</table>	+	".DE"			+
+
+<tabular>	+	".TS\n"
+			"center, tab(|), delim ($$);\n"
+			"[ca]."			+
+</tabular>	+	".TE"			+
+
+<rowsep>		"\n"			+
+</rowsep>
+
+<colsep>		"|"
+</colsep>
+
+<hline>		+	"_"			+
+</hline>
+
+<slides>	+ 	".S 18 20"		+
+</slides>
+
+<slide>
+</slide>	+	".bp\n\\&"		+
+
+% letters -- replacement for email, using mh format.
+
+<letter>	+	".nf"	+
+</letter>	+
+
+<from>		+ 	"From: "
+<to>		+	"To: "
+
+<address>	+	".de Ad\n"
+</address>	+	".."	+
+
+<email>			" <"
+</email>		">"
+
+<subject>	+	"Subject: "
+
+<sref>		+	"Sref: "
+<rref>		+	"In-Reply-To: "
+
+<cc>		+	"cc: "
+
+<opening>	+	".fi\n.P 0"	+
+
+<closing>	+	".P 0"		+
+
+<encl>		+	".P 0\n"
+			"encl: "
+
+<ps>		+	".P 0\np.s."
+
+
+% end of roff replacement file
+

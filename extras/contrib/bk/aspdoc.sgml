@@ -1,0 +1,342 @@
+<!DOCTYPE sgmltool
+         PUBLIC "-//SGML-Tools//DTD SGML-Tools v0.9//EN" >
+
+<!-- ================================================= -->
+<!--
+
+    $Id: aspdoc.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This is aspdoc.sgml, distributed with SGML-Tools.
+    It briefly describes the ASP mapping.
+
+    $Log: aspdoc.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:56  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:18:40  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments: none.
+
+                                                       -->
+<!-- ================================================= -->
+
+
+<article>
+
+<title>Amsterdam SGML Parser
+<author>b. kreimeier
+<date>May 1997
+
+<abstract>
+This document describes the replacment files used by
+SGML-Tools, that have been introduced with the
+Amsterdam SGML Parser (ASP).
+</abstract>
+
+<toc>
+
+<sect>Introduction
+<p>
+The contents of this document are based on files
+distributed with the Amsterdam SGML Parser (ASP).
+This has been published and copyrighted by
+<code>
+Sylvia van Egmond and Jos Warmer
+
+Faculteit Wiskunde en Informatica
+Department of Mathematics and Computer Science
+Vrije Universiteit Amsterdam
+The Netherlands
+</code>
+Documentation is contained within the distribution of
+ASP SGML, see e.g.
+<code>
+http://ftp.sunet.se/ftp/pub/text-processing/sgml/ASP-SGML/Sgml.tar.gz
+</code>
+Unfortunately, the documents are supposed to be formatted
+with ASP SGML. This document is based the files found in
+the distribution.
+
+
+<sect>SGMLS ASP
+<p>
+With a few minor exceptions, SGML Tools relies on ASP style
+sheet processing, essentially a simple textual replacement
+controlled by mapping files. ASP was supported by sgmlsasp,
+which was part of the now abandoned SGMLS package. There is
+no ASP support in more recent releases of SP. Note
+that references  to  external data entities are ignored,
+as support for external data  entities was not implemented
+in ASP.
+<p>
+An sgmlsasp switch controls upper-case  substitution  (folding)
+for names in replacement files; this  option  should  be  used
+with concrete syntaxes that do not specify upper-case sub­
+stitution for general names (that is, names that  are  not
+entity names).
+<p>
+The manual page on sgmlsasp states that the program
+"translates the standard input using the specification
+in a replacement file. Each replacement file must be in
+the format of an Amsterdam SGML parser (ASP) replacement
+file;  this  format is described in the ASP documentation."
+The following explanations are taken directly from the ASP
+documentation.
+
+
+<sect>The ASP Backend
+<p>
+The backend of ASP is simple, but powerful enough to create
+typeset documents from SGML documents. The user can specify
+a mapping from each starttag with its attributes to a replacement
+text, and a mapping from each endtag to a replacement text.
+For example the mapping:
+<code>
+<title>    ".TL"
+<head>     ".NH <![CDATA[[level]]]>"
+</code>
+denotes that the starttag of the element `title' is to be
+replaced by the string `.TL', which is the Troff ms-macro
+for a title.
+The starttag of `head' is to be replaced by the string `.NH'
+followed by the value of the attribute `level'.
+Of course `level' must be a valid attribute of `head', otherwise
+an error message is given.
+<p>
+The replacement text stands between double quotes `"' and an attribute
+value is referred to by placing the attribute name between square
+brackets `[' and `]'.
+The formatter can be called with a user specified replacement file,
+which contains the mapping for the tags in the DTD.
+If a replacement file is specified, the tags in the output
+are replaced according to the mappings in the replacement file.
+Otherwise the `complete' document will be output.
+Tags that are not mentioned in the replacement file are
+mapped to the empty string and they do not appear in the output.
+For example, if the replacement file looks like:
+<code>
+<memo>         ".MS"
+<sender>       "From: "
+<forename>    " "
+<receivers>    "To: "
+<contents>     ".PP"
+&etago;memo>        ".ME"
+</code>
+The SGML document below
+<code>
+<memo><sender>
+<forename>Jos<surname>Warmer
+<receivers>
+<forename>Sylvia<surname>van Egmond
+<contents>The meeting of tomorrow will be postponed.
+&etago;memo>
+</code>
+will be converted to following  Troff document.
+<code>
+ .MS
+ From: Jos Warmer
+ To: Sylvia van Egmond
+ .PP
+ The meeting of tomorrow will be postponed.
+ .ME
+</code>
+It is possible to specify that the replacement text must appear on
+a separate line. This is needed by Troff, since each Troff command
+must start with a `.' at the start of a line.
+Provisions are made to make it possible to put any
+(including non-printable) character in the replacement text.
+This is done by an escape mechanism similar to that of
+the C programming language.
+<p>
+
+<sect>The ASP replacement file
+<p>
+When a document parser is called, a replacement file may be specified.
+The replacement file contains the mapping between starttags and their
+attributes and endtags to some replacement text.
+The (LLgen) syntax of the file is given in figure 3.
+Each identifier in uppercase is a token.
+Text between `&lt;' and `>' contains an informal description.
+<code>
+%token COMMENT, PLUS, STRING_OPEN, STRING_CLOSE,
+       ATT_OPEN, ATT_CLOSE, CHARACTER, EOLN, STAGO, ETAGO, TAGC;
+
+%start file, file;
+
+file        : [repl | comment]* ;
+comment     : COMMENT chars EOLN ;
+repl        : start_repl | end_repl ;
+start_repl  : starttag s* [PLUS s*]? rep_text [PLUS s*]? ;
+end_repl    : endtag   s* [PLUS s*]? rep_text [PLUS s*]? ;
+starttag    : STAGO name TAGC ;
+endtag      : ETAGO name TAGC ;
+rep_text    : [string s*]* ;
+string      : STRINGOPEN [chars | attref]* STRINGCLOSE ;
+chars       : CHARACTER* ;
+attref      : ATTOPEN name ATTCLOSE ;
+name        : < SGML name> ;
+s           : < layout characters: space, tab, newline, return>
+
+Syntax of replacement file
+</code>
+<p>
+<table>
+<tabform>  <tdat><tdat><tdat>
+<tabhead> token | correspoding string | recognised in
+<tabular>
+COMMENT       |  %  |  repl        <tr>
+PLUS          |  +  |  repl        <tr>
+STRING_OPEN   |  "  |  rep_text    <tr>
+STRING_CLOSE  |  "  |  string      <tr>
+ATT_OPEN      |  [  |  string      <tr>
+ATT_CLOSE     |  ]  |  attref      <tr>
+CHARACTER     |  &lt;any character>  |  always            <tr>
+EOLN          |  &lt;the newline character>  |  comment   <tr>
+STAGO         |  &lt;  |  repl             <tr>
+ETAGO         |  &lt;&bsol; |  repl             <tr>
+TAGC          |  &gt;  |   starttag, endtag
+</tabular>
+<caption>
+Definition of Tokens
+</caption>
+</table>
+
+A comment is ignored.
+A start_repl (end_rep) defines the mapping for the named starttag
+(endtag).
+<p>
+If the first PLUS in a repl is present, then the replacement text will
+start at the beginning of a line.
+If the second PLUS in a repl is present, then the replacement text will
+be directly followed by a newline in the output.
+When both PLUS's are present, the effect is that he replacement text
+is on a separate line, apart from its surrounding text, with no empty
+lines inserted.
+<p>
+Note that including a C-style newline within the replacement string
+works. This is essentially a hack slipping through the processing
+unnoticed. This could be used to format the output a bit for
+debugging. It introduces some redundancy, though.
+<p>
+rep_text is the replacement text itself, which consists of any number
+of strings.
+All specified strings are concatenated to form the replacement text.
+Putting replacement text in several strings is only useful to
+get a neat layout in the replacement file.
+So
+<code>
+<table>  ".[keep]\n" ".TS"
+</code>
+is identical to
+<code>
+<table>  ".[keep]\n"
+         ".TS"
+</code>
+<p>
+The tokens are recognised only within the rule specified in the
+third column of the definition of the tokens in figure 4.
+There is one exception for the ATT_OPEN token:
+ATT_OPEN is never recognised inside the replacement text of an end_repl,
+because there are no attributes associated with an endtag.
+<p>
+Within a string, characters can be escaped to ensure that they
+are recognised as CHARACTER's.
+For instance, this can be used to put a `"' in a string.
+Escape sequences can also be used to denote unprintable characters.
+The escape mechanism is similar to that of the C programming language.
+The recognised escape-sequences are shown in figure 5.
+
+<table>
+<tabform><tdat><tdat>
+<tabhead>  sequence | name
+<tabular>
+&bsol;n        |  newline   <tr>
+&bsol;t        |  tab       <tr>
+&bsol;r        |  return    <tr>
+&bsol;s        |  space     <tr>
+&bsol;f        |  formfeed  <tr>
+&bsol;&bsol;   |  &bsol;    <tr>
+&bsol;[        |  [         <tr>
+&bsol;"        |  "         <tr>
+&bsol;octal    |  character
+</tabular>
+<caption>
+Recognised Escape-sequences
+</caption>
+</table>
+The escape character is defined as '&bsol;'.
+An escape character followed by a character that is not mentioned
+in figure 5, denotes itself.
+For example, if the replacement file contains:
+<code>
+<report>   "line 1\n\"line 2\"\12 line 3"
+</code>
+then &lt;report> is replaced by:
+<code>
+line 1
+"line 2"
+line 3
+</code>
+
+<p>
+See the file `article.rep' in the ditributed sources
+for a more complete example of a replacement file:
+<code>
+%
+%  The substitution file for article to troff ms.
+%
+%  Each macro is preceded and followed by a +,
+%  forcing that the macro call is on a seperate line without
+%  introducing empty lines.
+%
+%  First the tags that are mapped onto nothing.
+%
+<ARTICLE>         % comment starts with % until end of line
+&etago;ARTICLE>
+
+%  Now the real macros
+
+<ABSTRACT>	  +	".AB"			+
+&etago;ABSTRACT>	+	".AE"			+
+
+% '\' escapes the next character as in C strings.
+
+<REF>	     	+	".\[\["			+
+&etago;REF>       +	".]]"
+%
+%  The following replacements must not be on a separate line,
+%  so no +'s.
+%
+<BOLD>		 	  "\\fB"
+&etago;BOLD>		 	"\\fP"
+</code>
+Another substitution simulates the default behaviour and
+delivers the same output as when no replacement file is used:
+<code>
+<CHAP>		<CHAP>"
+&etago;CHAP>		"&etago;CHAP>"
+
+% an attribute reference is the attribute name
+% enclosed between '[' and ']'
+<SH> 		"<SH LEVEL = \"[level]\">"
+&etago;SH>		"&etago;SH>"
+</code>
+
+
+
+</article>
+
+<!-- ================================================= -->
+<!-- end of aspdoc.sgml                                -->
+<!--
+     Local Variables:
+     mode: sgml
+     End:                                              -->
+<!-- ================================================= -->

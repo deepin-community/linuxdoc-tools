@@ -1,0 +1,146 @@
+% sgml-tools to lyx replacement file
+%
+% ----------------------------------------------------------
+% Copyright 1995 Frank Pavageau <frank@via.ecp.fr>
+%		 Original version
+% Copyright 1997 Jose' Matos <jamatos@novalis.fc.up.pt>
+%	         Modified to simplify, correct and  update lyx output (December 97)
+% Copyright 2008 Agustin Martin <agmartin@debian.org>
+%                Fix references format and improve/add family/series/shape strings
+% LyX code is up to date with 0.12.xx series
+% ----------------------------------------------------------
+
+<qwertz>	+
+</qwertz>	+
+
+<article>	+ 	"@article@"	+
+
+</article>	+	"\\the_end"
+
+<report>	+ 	"@report@"	+
+</report>	+	"\\the_end"
+
+<book>		+	"@book@"	+
+</book>		+	"\\the_end"
+
+<notes>
+</notes>
+
+<manpage>
+</manpage>
+
+<titlepag>
+</titlepag>	+	% "\\layout Standard\n"
+
+<title>		+	"\\layout Title\n"
+			"\\added_space_top vfill \\added_space_bottom vfill\n"
+</title>	+
+
+<subtitle>	+
+</subtitle>	+
+
+<author>	+	"\\layout Author"	+
+</author>	+
+
+<name>
+</name>
+
+<and>			" and "
+</and>
+
+<date>		+	"\\layout Date"		+
+</date>		+
+
+<abstract>	+	"\\layout Abstract"	+
+</abstract>	+
+
+<toc>		+	"\\layout Standard\n"
+			"\\begin_inset LatexCommand \\tableofcontents\n"
+			"\\end_inset\n"	+
+</toc>
+
+<chapt>		+	"\\layout Chapter"	+
+</chapt>
+
+<sect>		+	"\\layout Section"	+
+</sect>
+
+<sect1>		+	"\\layout Subsection"	+
+</sect1>
+
+<sect2>		+	"\\layout Subsubsection" +
+</sect2>
+
+<sect3>		+	"\\layout Paragraph"	+
+</sect3>
+
+<sect4>		+	"\\layout Subparagraph"	+
+</sect4>
+
+<heading>
+</heading>
+
+<p>		+	"\\layout Standard"	+
+</p>		+	"\n"
+
+<itemize>		"@itemize@\n"		+
+</itemize>	+	"@/itemize@"		+
+
+<enum>			"@enumerate@\n"		+
+</enum>		+	"@/enumerate@"		+
+
+<item>		+	"@item@"		+
+</item>		+	"\n"	+
+
+<descrip>	+	"@descrip@\n"		+
+</descrip>	+	"@/descrip@\n"
+
+<tag>		+	"@tag@\n"
+</tag>		+	"@/tag@\n"		+
+
+<sf>		+	"\\family sans"		+
+</sf>		+	"\\family default"	+
+
+<tt>		+	"\\family typewriter"	+
+</tt>		+	"\\family default"	+
+
+<em>		+	"\\shape italic"	+
+</em>		+	"\\shape default"	+
+
+<sc>		+	"\\shape smallcaps"	+
+</sc>		+	"\\shape default"	+
+
+<sl>		+	"\\shape slanted"	+
+</sl>		+	"\\shape default"	+
+
+<bf>		+	"\\series bold"		+
+</bf>		+	"\\series default"	+
+
+<code>		+	"\\layout Code\n"	+
+</code>
+
+<verb>		+	"@verb@\n"		+
+</verb>		+	"@/verb@"		+
+
+<tscreen>	+	"@tscreen@"		+
+</tscreen>	+	"@/tscreen@"		+
+
+<quote>		+	"\\layout Quote\n"	+
+</quote>
+
+<label>		+	"\\begin_inset LatexCommand \\label{[ID]}\n"
+			"\\end_inset \n"
+</label>
+
+<ref>		+	"\\begin_inset LatexCommand \\ref{[ID]}\n"
+			"\\end_inset\n"
+</ref>
+
+<url>		+	"\\begin_inset LatexCommand \\url\[[NAME]\]{[URL]}\n"
+			"\\end_inset\n"
+</url>
+
+<htmlurl>	+	"\\begin_inset LatexCommand \\htmlurl\[[NAME]\]{[URL]}\n"
+			"\\end_inset\n"
+</htmlurl>
+

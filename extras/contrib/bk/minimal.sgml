@@ -1,0 +1,52 @@
+<!DOCTYPE sgmltool
+         PUBLIC "-//SGML-Tools//DTD SGML-Tools v0.9//EN" >
+
+<!-- ================================================= -->
+<!--
+
+    $Id: minimal.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This is minimal.sgml, distributed with SGML-Tools.
+    It contains only required elements, and should be
+    used as a basis for other test files.
+
+    $Log: minimal.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:57  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:18:53  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments: none.
+
+                                                       -->
+<!-- ================================================= -->
+
+
+<article>
+
+<title>TEST: Minimal SGML
+<author>N.N.
+
+
+<p>
+?
+<p>
+!
+
+</article>
+
+
+<!-- ================================================= -->
+<!-- end of minimal.sgml                               -->
+<!--
+     Local Variables:
+     mode: sgml
+     End:                                              -->
+<!-- ================================================= -->

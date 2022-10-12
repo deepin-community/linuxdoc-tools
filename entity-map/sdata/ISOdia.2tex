@@ -1,0 +1,14 @@
+[acute ]	\'
+[breve ]	\u{
+[caron ]	\{caron\}
+[cedil ]	\c{
+[circ  ]	\^{}
+[dblac ]	\{dblac\}
+[die   ]	\"
+[dot   ]	\.
+[grave ]	\`
+[macr  ]	\=
+[ogon  ]	\{ogon\}
+[ring  ]	\accent23
+[tilde ]	\~{}
+[uml   ]	\"

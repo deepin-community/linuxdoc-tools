@@ -1,0 +1,114 @@
+<!DOCTYPE sgmltool
+         PUBLIC "-//SGML-Tools//DTD SGML-Tools v0.9//EN" >
+<!-- ================================================= -->
+<!--
+
+    $Id: glossary.sgml,v 1.1.1.1 2001/05/24 15:57:40 sano Exp $
+
+    This is glossary.sgml, distributed with SGML-Tools.
+    It tests and describes the glossary/description
+    element used to introduce and list keywords.
+
+    $Log: glossary.sgml,v $
+    Revision 1.1.1.1  2001/05/24 15:57:40  sano
+    linuxdoc-tools 0.96
+    This is re-imported because of cvs repository is lost
+    due to HDD trouble
+
+    Revision 0.1.0.1  2000/05/13 14:59:57  sano
+    Initial release of Linuxdoc-Tools
+
+    Revision 1.1  1997/07/09 13:18:47  cg
+    * Added contrib/bk, with a lot of work-in-progress from Bernd. (CdG)
+
+
+    Comments: none.
+
+                                                       -->
+<!-- ================================================= -->
+
+
+<article>
+
+<title>TEST: Keywords and Glossary
+<author>b. kreimeier
+<date>May 1997
+
+<sect>Keywords
+<p>
+The glossary or description element is a paragraph
+element. However, there is a matching element for
+inlined text, to mark up use of <k>keywords</k> in
+the text: <c><k></c>. This is supposed to add a
+marker for an optional global index, too.
+
+<sect>Definitions and Descriptions
+<p>
+The description element consists
+of a list of keywords, each followed
+by one or more definition paragraphs
+The glossary does not allow empty definitions.
+<define>
+<key>Key 1</key> <def>Explanation of Key 1</def>
+<key>Key 2 <def>Explanation, part A. In a lengthy explanation,
+           maybe a glossary, this could well be an entire
+           paragraph. Formattagin with LaTeX is not alway
+           perfect, e.g. a sequence of one line paragraphs
+           will have different indentation in first vs.
+           subsequent paragraphs.
+            <p>
+           Explanation, part B.  The right way to fix this,
+           of course, is changing the description environment
+           in the backend. Basically, this is a layout problem,
+           and in no way related to the DTD or SGML. The
+           default layout was chosen to match the sufficiently
+           ugly looking HTML rendering of DL elements. So there.
+</define>
+<p>
+The <c><define></c> element contains a sequence of definitions,
+each consisting of a <c><key></c> and a <c><def></c> element.
+The definitions might contain other elements.
+Lists and other elements can be used. In
+addition, descriptions could be nested.
+<define>
+<key>Key A <def>List of explanations
+            <enum>
+            <item>Definition
+            <item>Definition
+            </enum>
+<key>Key B <def>List of keywords
+            <define>
+            <key>Definition <def> Details
+            <key>Definition <def> Details
+            </define>
+</define>
+<p>
+Related references within the text should markup <k>keywords</k>
+whenever needed. Note that excessive use will bloat the
+index.
+
+<sect>Glossary
+<p>
+Currently, a glossary appendix is not supported. It could
+either be generated manually using the <c>descrip</c>
+element above, or created automatically be collecting
+all definitionsn and descriptions scattered in the text.
+For LaTeX, use of <c>makeindex</c>, a modified
+<c>theglossary</c> environment, and a modification of
+the <c>glossary</c>command to put out the actual definition
+as well are possible.
+<p>
+For HTML and other backends, even more effort would be
+necessary. A good idea might be to rely on LaTeX tools
+for assmebling the actual lists, and formatting them
+for ASCII or HTML using rather simple filters.
+
+</article>
+
+<!-- ================================================= -->
+<!-- end of glossary.sgml                                -->
+<!--
+     Local Variables:
+     mode: sgml
+     End:                                              -->
+<!-- ================================================= -->

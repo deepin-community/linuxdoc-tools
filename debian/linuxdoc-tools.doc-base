@@ -1,0 +1,19 @@
+Document: linuxdoc-tools
+Title: Linuxdoc-Tools User's Guide
+Author: Matt Welsh, Greg Hankins, Eric S. Raymond. Updated by Taketoshi Sano.
+Abstract: This document is a user's guide to the Linuxdoc-Tools formatting
+ system, a SGML-based system which allows you to produce a variety of output
+ formats. You can create plain text output (ASCII and ISO-8859-1), DVI,
+ PostScript, HTML, GNU info, LyX, and RTF output from a single document
+ source file. This guide describes Linuxdoc-Tools version 0.1.
+Section: Text
+
+Format: PDF
+Files: /usr/share/doc/linuxdoc-tools/guide.pdf
+
+Format: text
+Files: /usr/share/doc/linuxdoc-tools/guide.txt.gz
+
+Format: HTML
+Index: /usr/share/doc/linuxdoc-tools/html/guide.html
+Files: /usr/share/doc/linuxdoc-tools/html/*.html

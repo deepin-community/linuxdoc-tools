@@ -1,0 +1,95 @@
+Thu Jul 26 20:10:34 CEST 2018 Agustin Martin <agmartin@debian.org>
+
+	* Rename configure.in to configure.ac. Update files as
+          appropriate.
+
+Sat Dec  1 10:38:01 JST 2001 Taketoshi Sano <sano@debian.org>
+
+	* configure.in:
+	   - update for FHS
+	   - libdir corrected based on the suggestion from Tim Waugh
+	   - remove datadir definition since autoconf has the default
+
+Sat Sep 13 11:14:54 1997  Ken MacLeod  <ken@bitsko.slc.ut.us>
+
+	* MANIFEST: added LDextra.2tex, removed mkinstalldirs
+
+	* sdata/Makefile (SDATAFILES): added LDextra.2tex
+	(install): fixed not rm'ing ISOlat1.2tr
+
+	* sdata/LDextra.2tex: added
+
+	* config/mkinstalldirs: removed
+
+	* Makefile.in (install): replace `mkinstalldirs' with `install-sh -d'
+
+Sun May 18 20:02:39 1997  Ken MacLeod  <ken@bitsko.slc.ut.us>
+
+	* sdata/ISOdia.2tex: \~ and \^ to \~{} and \^{}
+
+Wed May 14 18:51:06 1997  Ken MacLeod  <ken@bitsko.slc.ut.us>
+
+	* sdata/LDextra.2html: change (TM) to &trade;
+
+	* sdata/LDextra.2tr: remove quot (it's in ISOnum)
+
+	* sdata/ISOnum.2html: change ' to &quot;
+
+Tue May 13 21:42:52 1997  Ken MacLeod  <ken@bitsko.slc.ut.us>
+
+	* Makefile.in (clean): added subdir sdata
+
+	* sdata/Makefile (clean): added
+
+	* sdata/LDextra.2tr: moved `cir' to ISOpub.2tr
+
+Mon May 12 20:41:17 1997  Ken MacLeod  <ken@bitsko.slc.ut.us>
+
+	* sdata/Makefile (SDATAFILES), MANIFEST, entity-map.spec: added
+	.2html files
+
+Sat May 10 13:11:08 1997  Ken MacLeod  <ken@bitsko.slc.ut.us>
+
+	* sdata/LDextra.2html, sdata/ISOtech.2html, sdata/ISOdia.2html,
+ 	sdata/ISOnum.2html: new mapping
+
+	* sdata/LDextra.2tr: added urlnam and refname
+
+Fri May  9 08:10:34 1997  Ken MacLeod  <ken@bitsko.slc.ut.us>
+
+	* sdata/ISOlat1.2ab: Aring=>AA, added `e' for ?uml
+
+Thu May  8 18:36:28 1997  Ken MacLeod  <ken@bitsko.slc.ut.us>
+
+	* MANIFEST: added ISOdia.2tr, ISOtech.2tr, LDExtra.2tr
+
+	* sdata/ISOlat1.2ab, sdata/ISOlat1.2as, sdata/ISOlat1.2tex:
+ 	changed `icirce' to `icirc'
+
+	* sdata/ISOnum.2tr: new mapping
+
+Wed May  7 20:21:17 1997  Ken MacLeod  <ken@bitsko.slc.ut.us>
+
+	* sdata/Makefile (SDATAFILES), entity-map.spec (BuildRoot): added
+	ISOdia.2tr, ISOtech.2tr
+
+	* sdata/ISOdia.2tr: new mapping
+
+	* sdata/ISOtech.2tr: new mapping
+
+	* Makefile.in (install), entity-map.spec (%files): removed
+	`/sdata' from `LIBDIR'
+
+Tue May  6 18:31:26 1997  Ken MacLeod  <ken@bitsko.slc.ut.us>
+
+	* configure.in (VERSION): added quotes
+
+	* make-dist.pl (MANIFEST.SKIP): added `\bCVS\b'
+	(configure): upcased `VERSION'
+
+	* entity-map.spec (%files): added files
+	(BuildRoot): changed from Root
+
+Sun May  4 16:38:04 1997  Ken MacLeod  <ken@bitsko.slc.ut.us>
+
+	* make-dist.pl(MANIFEST): missing newline on new entry

@@ -1,0 +1,76 @@
+[half  ]	1/2
+[frac12]	1/2
+[frac14]	1/4
+[frac34]	3/4
+[frac18]	1/8
+[frac38]	3/8
+[frac58]	5/8
+[frac78]	7/8
+[sup1  ]	^1
+[sup2  ]	^2
+[sup3  ]	^3
+[plus  ]	+
+[plusmn]	\(+-
+[lt    ]	<
+[equals]	=
+[gt    ]	>
+[divide]	/
+[times ]	\(mu
+[curren]	{curren}
+[pound ]	L
+[dollar]	$
+[cent  ]	c
+[yen   ]	Y
+[num   ]	#
+[percnt]	%
+[amp   ]	&
+[ast   ]	*
+[commat]	@
+[lsqb  ]	[
+[bsol  ]	\e
+[rsqb  ]	]
+[lcub  ]	{
+[horbar]	-
+[verbar]	\(br
+[rcub  ]	}
+[micro ]	u
+[ohm   ]	{ohm}
+[deg   ]	{deg}
+[ordm  ]	{ordm}
+[ordf  ]	{ordf}
+[sect  ]	S
+[para  ]	P
+[middot]	.
+[larr  ]	\(<-
+[rarr  ]	\(->
+[uarr  ]	{uarr}
+[darr  ]	{darr}
+[copy  ]	(C)
+[reg   ]	(R)
+[trade ]	(TM)
+[brvbar]	|
+[not   ]	~
+[sung  ]	{sung}
+[excl  ]	!
+[iexcl ]	!
+[quot  ]	\(rq
+[apos  ]	'
+[lpar  ]	(
+[rpar  ]	)
+[comma ]	,
+[lowbar]	_
+[hyphen]	-
+[period]	.
+[sol   ]	/
+[colon ]	:
+[semi  ]	;
+[quest ]	?
+[iquest]	?
+[laquo ]	<<
+[raquo ]	>>
+[lsquo ]	`
+[rsquo ]	'
+[ldquo ]	``
+[rdquo ]	''
+[nbsp  ]	\~
+[shy   ]	

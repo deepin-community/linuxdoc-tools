@@ -1,0 +1,391 @@
+
+% Minimization replacement file
+% Tags are replaced by short references. Optional opening and closing
+% tags are deleted
+% Entities are replaced by themselves.
+
+<qwertz>	+      "<!DOCTYPE QWERTZ PUBLIC \"-//GMD//DTD qwertz//EN\">\n"
+		       "<qwertz>"		+
+</qwertz>	+      "</qwertz>"		+
+
+<article>	+ 	"<article opts=\"[opts]\">"	+
+</article>	+	"</article>"	+
+
+<report>	+ 	"<report opts=\"[opts]\">"	+
+</report>	+	"</report>"		+
+
+
+<book>		+ 	"<book opts=\"[opts]\">"	+
+</book>		+	"</book>"		+
+
+
+<notes> 	+	"<notes opts=\"[opts]\">"	+
+</notes>	+	"</notes>"		+
+
+
+% Manual Pages are expected to be formatted using nroff (or groff), unless
+% they are included  as sections of other qwertz documents.
+
+<manpage>	+	"<manpage opts=\"[opts]\" title=\"[title]\"\n"
+			"sectnum=\"[sectnum]\">"	+
+</manpage>	+	"</manpage>"		+
+
+<titlepag>	+	"\n\n"
+</titlepag>	+	"\n\n"
+
+<title>		+	"<title> "
+</title>
+
+<subtitle>	+	"<subtitle> "
+</subtitle>
+
+<author>	+	"<author> "
+</author>
+
+<name>
+</name>
+
+<and>			"<and>"
+</and>
+
+<thanks>		"<thanks>"
+</thanks>
+
+<inst>		+	"<inst>"
+</inst>
+
+<newline>		"&nl"	+
+
+<label>			"<label id=\"[id]\">"
+
+
+<header>	+	"<header>"
+</header>		"</header>"	+
+
+<lhead>			"<lhead>"
+</lhead>
+
+<rhead>			"<rhead>"
+</rhead>
+
+<comment>	+	"<comment>"		+
+</comment>	+	"</comment>"		+
+
+<abstract>	+	"<abstract>"		+
+</abstract>	+	"</abstract>"		+
+
+<appendix>	+	"<appendix>"		+
+</appendix>
+
+<toc>		+	"<toc>"			+
+</toc>
+
+<lof>		+	"<lof>"			+
+</lof>
+
+<lot>		+	"<lot>"			+
+</lot>
+
+<chapt>		+	"\n\n\n<chapt> "
+</chapt>
+
+<sect>		+	"\n\n<sect> "
+</sect>
+
+<sect1>		+	"\n\n<sect1> "
+</sect1>
+
+<sect2>		+	"\n\n<sect2> "
+</sect2>
+
+<sect3>		+	"\n\n<sect3> "
+</sect3>
+
+<sect4>		+	"\n\n<sect4> "
+</sect4>
+
+<heading>
+</heading>		"\n\n"			+
+
+<p>		+	"<p>"			+
+</p>			"\n\n"			+
+
+<itemize>	+	"<itemize>"	+
+</itemize>	+	"</itemize>"		+
+
+<enum>		+	"<enum>"		+
+</enum>		+	"</enum>"		+
+
+<descrip>	+	"<descrip>"		+
+</descrip>	+	"</descrip>"		+
+
+<item>		+	"<item> "
+</item>
+
+<tag>			"<tag/"
+</tag>			"/ "
+
+<cite>			"<cite id=\"[id]\">"
+</cite>
+
+<ncite>			"<ncite id=\"[id]\" note=\"[note]\">"
+</ncite>
+
+<footnote>		"<footnote>"
+</footnote>		"</footnote>"
+
+<sq>			"\""
+</sq>			"\""
+
+<lq>		+	"<lq>"			+
+</lq>		+	"</lq>"			+
+
+<em>		 	"<em/"
+</em>			"/"
+
+<bf>			"<bf/"
+</bf>			"/"
+
+<it>			"<it/"
+</it>			"/"
+
+<sf>			"<sf/"
+</sf>			"/"
+
+<sl>			"<sl/"
+</sl>			"/"
+
+<tt>			"<tt/"
+</tt>			"/"
+
+<ref>			"<ref id=\"[id]\">"
+</ref>
+
+<pageref>		"<pageref id=\"[id]\">"
+</pageref>
+
+<x>			"<x>"
+</x>			"<\x>"
+
+<mc>			"<mc/"
+</mc>			"/"
+
+<biblio>	+	"<biblio style=\"[style]\" files=\"[files]\">" +
+</biblio>
+
+<code>		+	"<code>"		+
+</code>		+	"</code>"		+
+
+<verb>		+	"<verb>"		+
+</verb>		+	"</verb>"		+
+
+
+% theorems and such
+
+<def>		+	"<def>"
+</def>		+	"</def>"		+
+
+<prop>		+	"<prop>"
+</prop>		+	"</prop>"		+
+
+<lemma>		+	"<lemma>"
+</lemma>	+	"</lemma>"		+
+
+<coroll>	+	"<coroll>"
+</coroll>	+	"</coroll>"		+
+
+<proof>		+	"<proof>"
+</proof>	+	"</proof>"		+
+
+<theorem>	+	"<theorem>"
+</theorem>	+	"</theorem>"		+
+
+<thtag>			"<thtag/"
+</thtag>		"/"
+
+% mathematics
+
+<f>			"\["
+</f>			"\]"
+
+<dm>		+	"<dm>"			+
+</dm>		+	"</dm>"  +
+
+<eq>		+	"<eq>"			+
+</eq>		+	"</eq>"			+
+
+<fr>			"<fr>"
+</fr>			"</fr>"
+
+<nu>			"<nu>"
+</nu>
+
+<de>			"<de>"
+</de>
+
+<lim>			"<lim>"
+</lim>			"</lim>"
+
+<op>			"<op/"
+</op>			"/"
+
+<ll>			"<ll>"
+</ll>
+
+<ul>			"<ul>"
+</ul>
+
+<opd>			"<opd>"
+</opd>
+
+<pr>			"<pr>"
+</pr>			"</pr>"
+
+<in>			"<int>"
+</in>			"</int>"
+
+<sum>			"<sum>"
+</sum>			"</sum>"
+
+<root>			"<root>"
+</root>			"</root>"
+
+<ar>			"<ar>"
+</ar>			"</ar>"
+
+<arr>                   " @"		+
+</arr>
+
+<arc>                   " | "
+</arc>
+
+<sup>			"<sup/"
+</sup>			"/"
+
+<inf>			"<inf/"
+</inf>			"/"
+
+<unl>			"<unl/"
+</unl>			"/"
+
+<ovl>			"<ovl/"
+</ovl>			"/"
+
+<rf>			"<rf/"
+</rf>			"/"
+
+<v>			"<v/"
+</v>			"/"
+
+<fi>			"<fi/"
+</fi>			"/"
+
+<phr>			"<phr/"
+</phr>			"/"
+
+<tu>			"<tu>"
+</tu>
+
+% figures
+
+<figure>	+	"<figure>"			+
+</figure>	+	"</figure>"			+
+
+<eps>		+   	"<eps file=\"[file]\">"  +
+</eps>
+
+
+<ph>		+	"<ph vspace=\"[vspace]\">"	+
+</ph>
+
+<caption>	+	"<caption>"
+</caption>		"</>"			 	+
+
+% tables
+
+<table>		+ 	"<table>"	+
+</table>	+	"</table>"	+
+
+<tabular>	+	"<tabular ca=\"[ca]\">"		+
+</tabular>	+	"</tabular>"			+
+
+<rowsep>		" @"		+
+</rowsep>
+
+<colsep>		" | "
+</colsep>
+
+<hline>		+	"<hline>"	+
+</hline>
+
+% slides
+
+<slides>	+ 	"<slides>"	+
+</slides>	+	"</slides>"	+
+
+<slide>		+	"<slide>"	+
+</slide>
+
+% letters
+
+
+<letter>	+	"<letter opts=\"[opts]\">"	+
+</letter>	+	"</letter>"		+
+
+<telefax>	+	"<telefax opts=\"[opts]\">"	+
+</telefax>	+	"</telefax>"			+
+
+<opening>	+  	"<opening>"
+</opening>		""		+
+
+
+<from>		+	"<from>"
+</from>			""		+
+
+
+<to>		+	"<to>"
+</to>			""		+
+
+% first end definition of name
+
+<address>	+	"<address>"
+</address>		""		+
+
+<email>		+	"<email>"
+</email>		""	+
+
+<phone>		+	"<phone>"
+</phone>
+
+
+<fax>		+	"<fax>"
+</fax>			""		+
+
+<subject>	+	"<subject>"
+</subject>		""		+
+
+
+<sref>		+	"<sref>"
+</sref>			""		+
+
+<rref>		+	"<rref>"
+</rref>			""		+
+
+<rdate>		+	"<rdate>"
+</rdate>		""	+
+
+<closing>	+	"<closing>"
+</closing>		""		+
+
+<cc>		+	"<cc>"
+</cc>			""		+
+
+<encl>		+	"<encl>"
+</encl>			""		+
+
+<ps>		+	"<ps>"		+
+</ps>		+	""		+
+
+
+% end of min replacement file
+
